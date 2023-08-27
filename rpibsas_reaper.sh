@@ -22,7 +22,7 @@ cd
 git clone https://github.com/zynthian/zynthian-plugins.git
 echo
 cd zynthian-plugins
-sudo cp * /usr/local/lib
+sudo cp -r * /usr/local/lib
 cd
 rm -rf zynthian-plugins
 echo
