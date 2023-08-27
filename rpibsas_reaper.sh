@@ -22,7 +22,7 @@ cd
 git clone https://github.com/zynthian/zynthian-plugins.git
 echo
 cd zynthian-plugins
-sudo mv * /usr/local/lib
+sudo cp * /usr/local/lib
 cd
 rm -rf zynthian-plugins
 echo
@@ -172,7 +172,6 @@ if ((1<<32)); then
     echo
     echo
     echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
-    echo "End of Script, reboot then continue setting up from Reaper DAW GUI"
     echo
     echo "Now Reboot your Pi"
     echo
@@ -266,7 +265,7 @@ if ((1<<32)); then
     echo
     wget -c https://github.com/cfillion/reapack/releases/download/v${REAPACK}/reaper_reapack-armv7l.so
     echo
-    mv reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
+    cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
     echo
     echo "SWS S&M Extension"
     echo
@@ -285,7 +284,6 @@ if ((1<<32)); then
     sudo apt install puredata mec orac -y
     echo
     echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
-    echo "End of Script, reboot then continue setting up from Reaper DAW GUI"
     echo
     echo "Reboot the Pi"
 fi
