@@ -10,7 +10,7 @@ cd reaper_linux_aarch64
 sudo ./install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink --quiet
 rm ../reaper*.tar.xz
 rm -rf ../reaper_linux_armv7l
-ver=11.1.0
+"""ver=11.1.0
 cd
 wget -c https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_${ver}_all.deb
 sudo dpkg -i kxstudio*.deb
@@ -116,5 +116,5 @@ sudo cp Access\ Virus\ B\ \(am29f040b_4v9\).BIN /usr/local/lib/vst/
 curl https://blokas.io/apt-setup.sh | sh
 sudo apt update
 sudo apt install pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchos2midi modep -y
-sudo apt install puredata mec orac -y
+sudo apt install puredata mec orac -y"""
 echo "End of Script, reboot then continue setting up from Reaper DAW GUI"
