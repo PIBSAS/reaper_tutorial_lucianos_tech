@@ -24,6 +24,6 @@ Please connect Raspberry Pi to ethernet, for stability when you download and ins
 </p>
 
 
-Tutorial of Reaper DAW:
+# Tutorial of Reaper DAW on Raspberry Pi:
 - https://sites.google.com/view/raspberrypibuenosaires/reaper-digital-audio-workstation-en-raspberry-pi-os
 
