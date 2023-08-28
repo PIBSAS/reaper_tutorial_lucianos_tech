@@ -173,9 +173,17 @@ if ((1<<32)); then
     sudo dpkg -i DSP56300Emu*VST2.deb
     sudo dpkg -i DSP56300Emu*FX-VST2.deb
     cd
-    wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20B%20%28am29f040b_4v9%29.zip/Access%20Virus%20B%20%28am29f040b_4v9%29.BIN"
-    sudo cp Access\ Virus\ B\ \(am29f040b_4v9\).BIN /usr/local/lib/vst/
+    wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20C%20%28am29f040b_6v6%29.zip/Access%20Virus%20C%20%28am29f040b_6v6%29.BIN"
+    sudo cp Access\ Virus\ C\ \(am29f040b_6v6\).BIN /usr/local/lib/vst/
     echo
+    echo "Surge XT"
+    cd
+    git clone https://github.com/surge-synthesizer/surge.git
+    cd surge
+    git submodule update --init --recursive
+    sudo apt install -y clang
+    cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+    cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
     echo
     echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
     echo
@@ -288,6 +296,44 @@ if ((1<<32)); then
     echo
     echo "Installing PureData, Mec, ORAC"
     sudo apt install puredata mec orac -y
+    echo
+    echo "Surge"
+    echo
+    cd
+    sudo apt remove surge
+    sudo apt autoremove -y
+    git clone -b release/1.8.1 https://github.com/surge-synthesizer/surge
+    cd surge
+    git submodule update --init --recursive
+    sudo apt-get update
+    sudo apt-get install -y libgtk-3-dev
+    sudo apt-get install -y libwebkit2gtk-4.0
+    sudo apt-get install -y libwebkit2gtk-4.0-dev
+    sudo apt-get install -y libcurl4-openssl-dev
+    sudo apt-get install -y alsa
+    sudo apt-get install -y alsa-tools
+    sudo apt-get install -y libasound2-dev
+    sudo apt-get install -y libjack-dev
+    sudo apt-get install -y libfreetype6-dev
+    sudo apt-get install -y libxinerama-dev
+    sudo apt-get install -y libxcb-xinerama0
+    sudo apt-get install -y libxinerama1
+    sudo apt-get install -y x11proto-xinerama-dev
+    sudo apt-get install -y libxrandr-dev
+    sudo apt-get install -y libgl1-mesa-dev
+    sudo apt-get install -y libxcursor-dev
+    sudo apt-get install -y libxcursor1
+    sudo apt-get install -y libxcb-cursor-dev
+    sudo apt-get install -y libxcb-cursor0
+    sudo apt-get install -y --fix-missing
+    sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
+    cd
+    cd surge
+    ./build-linux.sh build
+    echo
+    sudo ./build-linux.sh install
+    rm -rf ../surge
+    cd
     echo
     echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
     echo
