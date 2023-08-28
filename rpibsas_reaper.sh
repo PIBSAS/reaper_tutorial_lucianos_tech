@@ -1,5 +1,11 @@
 #! /bin/bash
+#########################################################################################################################
+#################################/////RASPBERRY PI BUENOS AIRES/////#####################################################
+#########################################################################################################################
+echo
 echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will take some time, so connect Ethernet Cable!"
+echo
+#Versions
 REAPER=682
 KX=11.1.0
 LSP=1.2.10
@@ -7,6 +13,7 @@ X42=0.6.5
 CMAKE=3.27.4
 REAPACK=1.2.4.3
 DSP=1.2.30
+echo
 echo "First the common install for any architecture OS"
 echo
 echo "Adding KXStudio Repository to the OS"
@@ -15,7 +22,8 @@ cd
 wget -c https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_${KX}_all.deb
 sudo dpkg -i kxstudio*.deb
 rm kxstudio-repos_${KX}_all.deb
-sudo apt update
+echo
+echo "KXStudio Repo Added"
 echo
 echo "Adding ZynthianOS Plugins"
 cd
@@ -26,6 +34,7 @@ sudo cp -r * /usr/local/lib
 cd
 rm -rf zynthian-plugins
 echo
+echo "ZynthianOS Plugins Installed"
 echo
 echo "Compile and install CMake requiered by Stochas"
 sudo apt update
@@ -42,15 +51,25 @@ echo
 rm -rf $HOME/cmake*/
 rm $HOME/cmake*.gz
 echo
+echo "CMAKE compiled"
+echo
 echo "Adding Ninjas 2 Plugins"
 echo
 cd
 sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
+echo
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
+echo
 cd ninjas2
+echo
 make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
+echo
 sudo make install
+echo
 rm -rf ../ninjas2
+echo
+echo "Ninjas 2 Installed"
+echo
 cd
 echo
 echo "Getting Samplicity Samples and save to Music Folder I will make one folder if you are not  in English OS"
@@ -59,7 +78,10 @@ wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-
 unzip Sampli*.zip
 rm Sampli*.zip
 mv Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1 Music/
+echo
+echo
 echo "Now depending on your OS architecture will install the rest"
+echo
 if ((1<<32)); then
     ARCH=64
     cd
@@ -74,7 +96,7 @@ if ((1<<32)); then
     cd reaper_linux_aarch64
     sudo ./install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink --quiet
     echo
-    echo "Clean"
+    echo "REAPER Installed"
     echo
     rm ../reaper*.tar.xz
     rm -rf ../reaper_linux_aarch64
@@ -85,40 +107,65 @@ if ((1<<32)); then
     sleep  10
     sudo pkill reaper
     echo
-    echo "Install Plugins"
+    echo "Install Plugins various"
     sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lsp-plugins-vst lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix-lv2 guitarix-ladspa geonkick eq10q drmr caps-lv2 calf-plugins bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2
     echo
     echo "LSP Plugins"
     echo
+    echo "VST2"
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-Linux-aarch64.tar.gz
     tar -xzvf lsp-plugins-vst*.tar.gz
     cd lsp-plugins-vst2-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
+    echo
+    echo "VST2 Installed"
+    echo
+    echo
+    echo "LV2"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-lv2-${LSP}-Linux-aarch64.tar.gz
     tar -xzvf lsp-plugins-lv2*.tar.gz
     cd lsp-plugins-lv2-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
+    echo
+    echo "LV2 Installed"
+    echo
+    echo
+    echo "JACK"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-jack-${LSP}-Linux-aarch64.tar.gz
     tar -xzvf lsp-plugins-jack*.tar.gz
     cd lsp-plugins-jack-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
+    echo
+    echo "JACK Installed"
+    echo
+    echo
+    echo "LADSPA"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-ladspa-${LSP}-Linux-aarch64.tar.gz
     tar -xzvf lsp-plugins-ladspa*.tar.gz
     cd lsp-plugins-ladspa-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
+    echo
+    echo "LADSPA Installed"
+    echo
+    echo
+    echo "CLAP"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-clap-${LSP}-Linux-aarch64.tar.gz
     tar -xzvf lsp-plugins-clap*.tar.gz
     cd lsp-plugins-clap-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
+    echo
+    echo "CLAP Installed"
+    echo
     cd
-    echo
-    echo "Clean"
-    echo
     rm -rf lsp*
     echo
     echo "X42 Plugins"
@@ -127,23 +174,34 @@ if ((1<<32)); then
     wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-arm64.tar.gz
     tar -xzvf x42*.tar.gz
     cd x42-compressor
-    ./install-lv2.sh
+    yes | ./install-lv2.sh
     rm -rf ../x42*
+    echo
+    echo "X42 Installed"
+    echo
     cd
     echo
     echo "Compille and Install Stochas"
     echo
     cd
     sudo apt update
+    echo
     sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
+    echo
     git clone https://github.com/surge-synthesizer/stochas.git
+    echo
     cd stochas/
+    echo
     git submodule update --depth 1 --init --recursive
+    echo
     export SVER=`cat VERSION`
     export GH=`git log -1 --format=%h`
     echo "Version ${SVER} hash ${GH}"
     cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+    echo
     cmake --build build --config Release
+    echo
+    mkdir $HOME/.vst3
     cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
     rm -rf $HOME/stochas
     cd
@@ -166,7 +224,7 @@ if ((1<<32)); then
     rm sws*
     cd
     echo
-    echo "DSP53600 Access Virus B"
+    echo "DSP53600 Access Virus C"
     cd
     wget -c https://futurenoize.com/dsp56300/builds/master/DSP56300Emu-${DSP}-Linux_aarch64-Osirus-VST2.deb
     wget -c https://futurenoize.com/dsp56300/builds/master/DSP56300Emu-${DSP}-Linux_aarch64-OsirusFX-VST2.deb
@@ -176,7 +234,7 @@ if ((1<<32)); then
     wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20C%20%28am29f040b_6v6%29.zip/Access%20Virus%20C%20%28am29f040b_6v6%29.BIN"
     sudo cp Access\ Virus\ C\ \(am29f040b_6v6\).BIN /usr/local/lib/vst/
     echo
-    echo "Surge XT"
+    echo "Surge XT This will take a lot of time"
     cd
     git clone https://github.com/surge-synthesizer/surge.git
     cd surge
@@ -184,6 +242,12 @@ if ((1<<32)); then
     sudo apt install -y clang
     cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
     cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
+    echo
+    cd $HOME/surge/ignore/s13clang
+    echo
+    sudo cmake --install .
+    echo
+    echo "Surge XT Plugins installed"
     echo
     echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
     echo
@@ -203,44 +267,75 @@ if ((1<<32)); then
     cd reaper_linux_armv7l
     sudo ./install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink --quiet
     echo
-    echo "Clean"
+    echo "REAPER Installed"
     echo
     rm ../reaper*.tar.xz
     rm -rf ../reaper_linux_armv7l
+    echo
     echo "Install Plugins"
+    echo
     sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms petri-foo adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lsp-plugins-vst lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins gxplugins-data guitarix-lv2 guitarix-ladspa geonkick eq10q drmr caps-lv2 calf-plugins bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger
     cd
     echo
     echo "LSP Plugins"
     echo
-    cd
+    echo
+    echo "VST2"
+    echo
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
     tar -xzvf lsp-plugins-vst*.tar.gz
     cd lsp-plugins-vst2-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
+    echo
+    echo "VST2 Installed"
+    echo
+    echo
+    echo "LV2"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-Linux-arm32.tar.gz
     tar -xzvf lsp-plugins-lv2*.tar.gz
     cd lsp-plugins-lv2-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
+    echo
+    echo "LV2 Installed"
+    echo
+    echo
+    echo "JACK"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}}/Linux-armv7a/lsp-plugins-jack-${LSP}-Linux-arm32.tar.gz
     tar -xzvf lsp-plugins-jack*.tar.gz
     cd lsp-plugins-jack-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
+    echo
+    echo "JACK Installed"
+    echo
+    echo
+    echo "LADSPA"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-Linux-arm32.tar.gz
     tar -xzvf lsp-plugins-ladspa*.tar.gz
     cd lsp-plugins-ladspa-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
+    echo
+    echo "LADSPA Installed"
+    echo
+    echo
+    echo "CLAP"
+    echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-Linux-arm32.tar.gz
     tar -xzvf lsp-plugins-clap*.tar.gz
     cd lsp-plugins-clap-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
+    echo
+    echo "CLAP Installed"
+    echo
     cd
     echo
-    echo "Clean"
+    echo "LSP Installed"
     echo
     rm -rf lsp*
     echo
@@ -250,9 +345,11 @@ if ((1<<32)); then
     wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-armhf.tar.gz
     tar -xzvf x42*.tar.gz
     cd x42-compressor
-    ./install-lv2.sh
+    yes | ./install-lv2.sh
     rm -rf ../x42*
     cd
+    echo
+    echo "X42 Installed"
     echo
     echo "Compille and Install Stochas"
     echo
@@ -297,7 +394,7 @@ if ((1<<32)); then
     echo "Installing PureData, Mec, ORAC"
     sudo apt install puredata mec orac -y
     echo
-    echo "Surge"
+    echo "Surge 1.8.1"
     echo
     cd
     sudo apt remove surge
@@ -333,6 +430,7 @@ if ((1<<32)); then
     echo
     sudo ./build-linux.sh install
     rm -rf ../surge
+    echo "Surge Installed"
     cd
     echo
     echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
