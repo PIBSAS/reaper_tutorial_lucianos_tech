@@ -75,6 +75,13 @@ echo
 echo "REAPER Installed"
 echo
 echo
+echo "Open then close Reaper to get the new Folders created in the first run"
+echo
+reaper &
+sleep  10
+sudo pkill reaper
+echo
+echo
 echo "###############################"
 echo "##### Ninjas 2 Standalone #####"
 echo "###############################"
