@@ -5,12 +5,17 @@ An script shell for all the installations and compiles of the Reaper DAW Tutoria
 <img src="https://raw.githubusercontent.com/Luciano2018/RetroPieBios/master/logov3.png" alt="Raspberry Pi Buenos Aires" width="400" height="500">
 </p>
 
-# How can i run it?:
+# How can i run it? On Pi OS 64bit:
 ```
 curl -sSL https://raw.githubusercontent.com/Luciano2018/reaper_tutorial_rpibsas/main/rpibsas_reaper.sh | bash
 ```
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
+
+# How can i run it? On Pi OS 32bit:
+```
+curl -sSL https://raw.githubusercontent.com/Luciano2018/reaper_tutorial_rpibsas/main/rpibsas_reaperarmhf.sh | bash
+```
 
 <h1 align="center"> Invite a Coffee</h1>
 
