@@ -108,6 +108,7 @@ if ((1<<32)); then
     sudo pkill reaper
     echo
     echo "Install Plugins various"
+    echo
     sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lsp-plugins-vst lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix-lv2 guitarix-ladspa geonkick eq10q drmr caps-lv2 calf-plugins bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2
     echo
     echo "LSP Plugins"
@@ -115,50 +116,51 @@ if ((1<<32)); then
     echo "VST2"
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-Linux-aarch64.tar.gz
+    echo
     tar -xzvf lsp-plugins-vst*.tar.gz
     cd lsp-plugins-vst2-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
     echo
     echo "VST2 Installed"
     echo
-    echo
     echo "LV2"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-lv2-${LSP}-Linux-aarch64.tar.gz
+    echo
     tar -xzvf lsp-plugins-lv2*.tar.gz
     cd lsp-plugins-lv2-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
     echo
     echo "LV2 Installed"
     echo
-    echo
     echo "JACK"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-jack-${LSP}-Linux-aarch64.tar.gz
+    echo
     tar -xzvf lsp-plugins-jack*.tar.gz
     cd lsp-plugins-jack-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
     echo
     echo "JACK Installed"
     echo
-    echo
     echo "LADSPA"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-ladspa-${LSP}-Linux-aarch64.tar.gz
+    echo
     tar -xzvf lsp-plugins-ladspa*.tar.gz
     cd lsp-plugins-ladspa-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
     echo
     echo "LADSPA Installed"
     echo
-    echo
     echo "CLAP"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-clap-${LSP}-Linux-aarch64.tar.gz
+    echo
     tar -xzvf lsp-plugins-clap*.tar.gz
     cd lsp-plugins-clap-${LSP}-Linux-aarch64/
     sudo cp -r usr/* /usr
@@ -172,6 +174,7 @@ if ((1<<32)); then
     echo
     cd
     wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-arm64.tar.gz
+    echo
     tar -xzvf x42*.tar.gz
     cd x42-compressor
     yes | ./install-lv2.sh
@@ -253,7 +256,7 @@ if ((1<<32)); then
     echo
     echo "Now Reboot your Pi"
     echo
- else
+else
     ARCH=32 #32-bit architecture
     cd
     rm reaper*.tar.xz
@@ -279,54 +282,54 @@ if ((1<<32)); then
     echo
     echo "LSP Plugins"
     echo
-    echo
     echo "VST2"
     echo
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
+    echo
     tar -xzvf lsp-plugins-vst*.tar.gz
     cd lsp-plugins-vst2-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
     echo
     echo "VST2 Installed"
     echo
-    echo
     echo "LV2"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-Linux-arm32.tar.gz
+    echo
     tar -xzvf lsp-plugins-lv2*.tar.gz
     cd lsp-plugins-lv2-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
     echo
     echo "LV2 Installed"
     echo
-    echo
     echo "JACK"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}}/Linux-armv7a/lsp-plugins-jack-${LSP}-Linux-arm32.tar.gz
+    echo
     tar -xzvf lsp-plugins-jack*.tar.gz
     cd lsp-plugins-jack-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
     echo
     echo "JACK Installed"
     echo
-    echo
     echo "LADSPA"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-Linux-arm32.tar.gz
+    echo
     tar -xzvf lsp-plugins-ladspa*.tar.gz
     cd lsp-plugins-ladspa-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
     echo
     echo "LADSPA Installed"
     echo
-    echo
     echo "CLAP"
     echo
     cd
     wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-Linux-arm32.tar.gz
+    echo
     tar -xzvf lsp-plugins-clap*.tar.gz
     cd lsp-plugins-clap-${LSP}-Linux-arm32/
     sudo cp -r usr/* /usr
@@ -343,6 +346,7 @@ if ((1<<32)); then
     echo
     cd
     wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-armhf.tar.gz
+    echo
     tar -xzvf x42*.tar.gz
     cd x42-compressor
     yes | ./install-lv2.sh
@@ -356,6 +360,7 @@ if ((1<<32)); then
     cd
     sudo apt update
     sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
+    echo
     git clone https://github.com/surge-synthesizer/stochas.git
     cd stochas/
     git submodule update --depth 1 --init --recursive
@@ -382,16 +387,20 @@ if ((1<<32)); then
     echo
     cd $HOME/.config/REAPER/
     wget -c https://sws-extension.org/download/featured/sws-2.12.1.3-Linux-armv7l.tar.xz
+    echo
     tar -Jxvf sws*.tar.xz
     rm sws*
     cd
     echo
     echo "Adding PatchboxOS Repo"
+    echo
     curl https://blokas.io/apt-setup.sh | sh
     sudo apt update
+    echo
     sudo apt install pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchos2midi modep -y
     echo
     echo "Installing PureData, Mec, ORAC"
+    echo
     sudo apt install puredata mec orac -y
     echo
     echo "Surge 1.8.1"
