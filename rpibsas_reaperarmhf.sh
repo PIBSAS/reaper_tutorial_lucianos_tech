@@ -40,7 +40,7 @@ echo "##### Installing MODEP PiSound #####"
 echo "####################################"
 echo
 sudo apt update
-sudo apt install pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchosc2midi modep -y
+sudo apt install -y pisound pisound-btn pisound-ctl pisound-ctl-scripts-common pisound-ctl-scripts-puredata pisound-ctl-scripts-system modep modep-browsepy modep-btn-scripts modep-common modep-ctl-scripts modep-demo-content modep-fluidsynth modep-lv2-amsynth modep-lv2-artyfx modep-lv2-bolliedelay modep-lv2-calf modep-lv2-caps modep-lv2-dpf-plugins modep-lv2-fat1 modep-lv2-fil4 modep-lv2-fluidplug modep-lv2-fomp modep-lv2-freaked modep-lv2-guitarix modep-lv2-gx-slowgear modep-lv2-gx-switchless-wah modep-lv2-infamousplugins modep-lv2-invada-studio modep-lv2-mclk modep-lv2-mda modep-lv2-midifilter modep-lv2-midigen modep-lv2-mod-distortion modep-lv2-mod-pitchshifter modep-lv2-mod-utilities modep-lv2-mtc modep-lv2-rkrlv2 modep-lv2-setbfree modep-lv2-shiroplugins modep-lv2-sooperlooper modep-lv2-stepseq modep-lv2-tap modep-lv2-tinygain modep-lv2-triceratops modep-lv2-tuna modep-lv2-xfade modep-lv2-zam-plugins modep-mod-host modep-mod-midi-merger modep-mod-ui modep-touchosc2midi
 echo
 echo
 echo "##########################################"
