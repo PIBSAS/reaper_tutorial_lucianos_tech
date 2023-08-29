@@ -15,47 +15,6 @@ CMAKE=3.27.4
 REAPACK=1.2.4.3
 DSP=1.2.30
 echo
-echo
-echo "First the common install for architecture OS"
-echo
-echo "##########################################"
-echo "## Adding KXStudio Repository to the OS ##"
-echo "##########################################"
-echo
-cd
-wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
-sudo dpkg -i kxstudio*.deb
-rm kxstudio-repos_${KX}_all.deb
-echo
-echo "KXStudio Repo Added"
-echo
-echo "##################################"
-echo "##### Adding PatchboxOS Repo #####"
-echo "##################################"
-echo
-curl https://blokas.io/apt-setup.sh | sh
-echo
-echo "####################################"
-echo "##### Installing MODEP PiSound #####"
-echo "####################################"
-echo
-sudo apt update
-sudo apt install -y pisound pisound-btn pisound-ctl pisound-ctl-scripts-common pisound-ctl-scripts-puredata pisound-ctl-scripts-system modep modep-browsepy modep-btn-scripts modep-common modep-ctl-scripts modep-demo-content modep-fluidsynth modep-lv2-amsynth modep-lv2-artyfx modep-lv2-bolliedelay modep-lv2-calf modep-lv2-caps modep-lv2-dpf-plugins modep-lv2-fat1 modep-lv2-fil4 modep-lv2-fluidplug modep-lv2-fomp modep-lv2-freaked modep-lv2-guitarix modep-lv2-gx-slowgear modep-lv2-gx-switchless-wah modep-lv2-infamousplugins modep-lv2-invada-studio modep-lv2-mclk modep-lv2-mda modep-lv2-midifilter modep-lv2-midigen modep-lv2-mod-distortion modep-lv2-mod-pitchshifter modep-lv2-mod-utilities modep-lv2-mtc modep-lv2-rkrlv2 modep-lv2-setbfree modep-lv2-shiroplugins modep-lv2-sooperlooper modep-lv2-stepseq modep-lv2-tap modep-lv2-tinygain modep-lv2-triceratops modep-lv2-tuna modep-lv2-xfade modep-lv2-zam-plugins modep-mod-host modep-mod-midi-merger modep-mod-ui modep-touchosc2midi
-echo
-echo
-echo "##########################################"
-echo "####### Adding ZynthianOS Plugins ########"
-echo "##########################################"
-cd
-git clone https://github.com/zynthian/zynthian-plugins.git
-echo
-cd zynthian-plugins
-sudo cp -r * /usr/local/lib
-cd
-rm -rf zynthian-plugins
-echo
-echo "ZynthianOS Plugins Installed"
-echo
 echo "########################################"
 echo "##### Install Reaper DAW for armhf #####"
 echo "########################################"
@@ -84,11 +43,20 @@ sleep  10
 sudo pkill reaper
 echo
 echo
-echo "###############################"
-echo "##### Ninjas 2 Standalone #####"
-echo "###############################"
 echo
-sudo apt install -y libjack-dev
+echo "First the common install for architecture OS"
+echo
+echo "##########################################"
+echo "## Adding KXStudio Repository to the OS ##"
+echo "##########################################"
+echo
+cd
+wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
+sudo dpkg -i kxstudio*.deb
+rm kxstudio-repos_${KX}_all.deb
+sudo apt update
+echo
+echo "KXStudio Repo Added"
 echo
 echo
 echo "#####################################"
@@ -97,13 +65,21 @@ echo "#####################################"
 echo
 sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms petri-foo adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lsp-plugins-vst lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins gxplugins-data guitarix-lv2 guitarix-ladspa geonkick eq10q drmr caps-lv2 calf-plugins bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger
 echo
-echo "##########################################"
-echo "##### Installing PureData, Mec, ORAC #####"
-echo "##########################################"
 echo
-sudo apt install puredata mec orac -y
 echo
+echo "##########################################"
+echo "####### Adding ZynthianOS Plugins ########"
+echo "##########################################"
 cd
+git clone https://github.com/zynthian/zynthian-plugins.git
+echo
+cd zynthian-plugins
+sudo cp -r * /usr/local/lib
+cd
+rm -rf zynthian-plugins
+echo
+echo "ZynthianOS Plugins Installed"
+echo
 echo
 echo "#################################"
 echo "########## LSP Plugins ##########"
@@ -113,6 +89,7 @@ echo "################"
 echo "##### VST2 #####"
 echo "################"
 echo
+cd
 wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
 echo
 tar -xzvf lsp-plugins-vst*.tar.gz
@@ -179,6 +156,51 @@ echo
 echo "LSP Installed"
 echo
 echo
+echo
+echo "#######################"
+echo "##### Surge 1.8.1 #####"
+echo "#######################"
+echo
+cd
+sudo apt remove surge
+sudo apt autoremove -y
+git clone -b release/1.8.1 https://github.com/surge-synthesizer/surge
+cd surge
+git submodule update --init --recursive
+sudo apt-get update
+sudo apt-get install -y libgtk-3-dev
+sudo apt-get install -y libwebkit2gtk-4.0
+sudo apt-get install -y libwebkit2gtk-4.0-dev
+sudo apt-get install -y libcurl4-openssl-dev
+sudo apt-get install -y alsa
+sudo apt-get install -y alsa-tools
+sudo apt-get install -y libasound2-dev
+sudo apt-get install -y libjack-dev
+sudo apt-get install -y libfreetype6-dev
+sudo apt-get install -y libxinerama-dev
+sudo apt-get install -y libxcb-xinerama0
+sudo apt-get install -y libxinerama1
+sudo apt-get install -y x11proto-xinerama-dev
+sudo apt-get install -y libxrandr-dev
+sudo apt-get install -y libgl1-mesa-dev
+sudo apt-get install -y libxcursor-dev
+sudo apt-get install -y libxcursor1
+sudo apt-get install -y libxcb-cursor-dev
+sudo apt-get install -y libxcb-cursor0
+sudo apt-get install -y --fix-missing
+sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
+cd
+cd surge
+./build-linux.sh build
+echo
+sudo ./build-linux.sh install
+rm -rf ../surge
+cd
+echo
+echo "Surge Installed"
+echo
+echo
+echo
 echo "#######################"
 echo "##### X42 Plugins #####"
 echo "#######################"
@@ -193,6 +215,7 @@ rm -rf ../x42*
 cd
 echo
 echo "X42 Installed"
+echo
 echo
 echo
 echo "##########################################################"
@@ -234,6 +257,16 @@ rm -rf $HOME/stochas
 cd
 echo
 echo "Stochas Installed"
+echo
+echo
+echo
+echo "###############################"
+echo "##### Ninjas 2 Standalone #####"
+echo "###############################"
+echo
+sudo apt install -y libjack-dev
+echo
+echo
 echo
 echo "##########################################"
 echo "######## Compile Ninjas 2 Plugins ########"
@@ -278,47 +311,26 @@ echo
 echo "SWS S&M Extension Installed"
 echo
 echo
-echo "#######################"
-echo "##### Surge 1.8.1 #####"
-echo "#######################"
+echo "##################################"
+echo "##### Adding PatchboxOS Repo #####"
+echo "##################################"
 echo
-cd
-sudo apt remove surge
-sudo apt autoremove -y
-git clone -b release/1.8.1 https://github.com/surge-synthesizer/surge
-cd surge
-git submodule update --init --recursive
-sudo apt-get update
-sudo apt-get install -y libgtk-3-dev
-sudo apt-get install -y libwebkit2gtk-4.0
-sudo apt-get install -y libwebkit2gtk-4.0-dev
-sudo apt-get install -y libcurl4-openssl-dev
-sudo apt-get install -y alsa
-sudo apt-get install -y alsa-tools
-sudo apt-get install -y libasound2-dev
-sudo apt-get install -y libjack-dev
-sudo apt-get install -y libfreetype6-dev
-sudo apt-get install -y libxinerama-dev
-sudo apt-get install -y libxcb-xinerama0
-sudo apt-get install -y libxinerama1
-sudo apt-get install -y x11proto-xinerama-dev
-sudo apt-get install -y libxrandr-dev
-sudo apt-get install -y libgl1-mesa-dev
-sudo apt-get install -y libxcursor-dev
-sudo apt-get install -y libxcursor1
-sudo apt-get install -y libxcb-cursor-dev
-sudo apt-get install -y libxcb-cursor0
-sudo apt-get install -y --fix-missing
-sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
-cd
-cd surge
-./build-linux.sh build
+curl https://blokas.io/apt-setup.sh | sh
 echo
-sudo ./build-linux.sh install
-rm -rf ../surge
-cd
+echo "####################################"
+echo "##### Installing MODEP PiSound #####"
+echo "####################################"
 echo
-echo "Surge Installed"
+sudo apt update
+sudo apt install -y pisound pisound-btn pisound-ctl pisound-ctl-scripts-common pisound-ctl-scripts-puredata pisound-ctl-scripts-system modep modep-browsepy modep-btn-scripts modep-common modep-ctl-scripts modep-demo-content modep-fluidsynth modep-lv2-amsynth modep-lv2-artyfx modep-lv2-bolliedelay modep-lv2-calf modep-lv2-caps modep-lv2-dpf-plugins modep-lv2-fat1 modep-lv2-fil4 modep-lv2-fluidplug modep-lv2-fomp modep-lv2-freaked modep-lv2-guitarix modep-lv2-gx-slowgear modep-lv2-gx-switchless-wah modep-lv2-infamousplugins modep-lv2-invada-studio modep-lv2-mclk modep-lv2-mda modep-lv2-midifilter modep-lv2-midigen modep-lv2-mod-distortion modep-lv2-mod-pitchshifter modep-lv2-mod-utilities modep-lv2-mtc modep-lv2-rkrlv2 modep-lv2-setbfree modep-lv2-shiroplugins modep-lv2-sooperlooper modep-lv2-stepseq modep-lv2-tap modep-lv2-tinygain modep-lv2-triceratops modep-lv2-tuna modep-lv2-xfade modep-lv2-zam-plugins modep-mod-host modep-mod-midi-merger modep-mod-ui modep-touchosc2midi
+echo
+echo
+echo "##########################################"
+echo "##### Installing PureData, Mec, ORAC #####"
+echo "##########################################"
+echo
+sudo apt install puredata mec orac -y
+echo
 echo
 echo
 echo "####################################################################################################################"
