@@ -34,12 +34,14 @@ echo "##### Adding PatchboxOS Repo #####"
 echo "##################################"
 echo
 curl https://blokas.io/apt-setup.sh | sh
-sudo apt update
 echo
 echo "####################################"
 echo "##### Installing MODEP PiSound #####"
 echo "####################################"
-sudo apt install -y pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchos2midi modep
+echo
+sudo apt update
+sudo apt install pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchos2midi modep -y
+echo
 echo
 echo "##########################################"
 echo "####### Adding ZynthianOS Plugins ########"
