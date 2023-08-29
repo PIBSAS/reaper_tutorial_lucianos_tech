@@ -40,7 +40,7 @@ echo "##### Installing MODEP PiSound #####"
 echo "####################################"
 echo
 sudo apt update
-sudo apt install pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchos2midi modep -y
+sudo apt install pisound-ctl modep-ctl-scripts modep-btn-scripts modep-touchosc2midi modep -y
 echo
 echo
 echo "##########################################"
