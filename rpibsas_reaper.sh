@@ -18,78 +18,6 @@ echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
 echo
-echo "##########################################"
-echo "## Adding KXStudio Repository to the OS ##"
-echo "##########################################"
-cd
-wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
-sudo dpkg -i kxstudio*.deb
-rm kxstudio-repos_${KX}_all.deb
-echo
-echo "KXStudio Repo Added"
-echo
-echo "##########################################"
-echo "####### Adding ZynthianOS Plugins ########"
-echo "##########################################"
-echo
-cd
-git clone https://github.com/zynthian/zynthian-plugins.git
-echo
-cd zynthian-plugins
-sudo cp -r * /usr/local/lib
-cd
-rm -rf zynthian-plugins
-echo
-echo "ZynthianOS Plugins Installed"
-echo
-echo "##########################################################"
-echo "##### Compile and install CMake requiered by Stochas #####"
-echo "##########################################################"
-sudo apt update
-sudo apt install -y libssl-dev
-wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
-tar -xf cmake*.tar.gz
-cd cmake*/
-./bootstrap
-gmake
-sudo make install
-echo
-echo "Clean"
-echo
-rm -rf $HOME/cmake*/
-rm $HOME/cmake*.gz
-echo
-echo "CMAKE compiled"
-echo
-echo "###############################"
-echo "##### Ninjas 2 Standalone #####"
-echo "###############################"
-echo
-sudo apt install -y libjack-jackd2-dev
-echo
-echo
-echo "##########################################"
-echo "######## Compile Ninjas 2 Plugins ########"
-echo "##########################################"
-echo
-cd
-sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
-echo
-git clone --recursive https://github.com/rghvdberg/ninjas2.git
-echo
-cd ninjas2
-echo
-make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
-echo
-sudo make install
-echo
-rm -rf ../ninjas2
-cd
-echo
-echo "Ninjas 2 Installed"
-echo
-echo
-echo
 echo "########################################"
 echo "##### Install Reaper DAW for armhf #####"
 echo "########################################"
@@ -117,11 +45,40 @@ sleep  10
 sudo pkill reaper
 echo
 echo
+echo "##########################################"
+echo "## Adding KXStudio Repository to the OS ##"
+echo "##########################################"
+cd
+wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
+sudo dpkg -i kxstudio*.deb
+rm kxstudio-repos_${KX}_all.deb
+sudo apt update
+echo
+echo "KXStudio Repo Added"
+echo
+echo
 echo "#####################################"
 echo "########## Install Plugins ##########"
 echo "#####################################"
 echo
 sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lsp-plugins-vst lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix-lv2 guitarix-ladspa geonkick eq10q drmr caps-lv2 calf-plugins bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2
+sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+echo
+echo
+echo
+echo "##########################################"
+echo "####### Adding ZynthianOS Plugins ########"
+echo "##########################################"
+echo
+cd
+git clone https://github.com/zynthian/zynthian-plugins.git
+echo
+cd zynthian-plugins
+sudo cp -r * /usr/local/lib
+cd
+rm -rf zynthian-plugins
+echo
+echo "ZynthianOS Plugins Installed"
 echo
 echo
 echo "#################################"
@@ -207,6 +164,30 @@ echo
 echo "LSP Installed"
 echo
 echo
+echo
+echo "#################################################"
+echo "##### Surge XT This will take a lot of time #####"
+echo "#################################################"
+echo
+cd
+git clone https://github.com/surge-synthesizer/surge.git
+cd surge
+git submodule update --init --recursive
+sudo apt install -y clang
+cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
+echo
+cd
+cd surge
+cd ignore
+cd s13clang
+echo
+sudo cmake --install .
+echo
+echo "Surge XT Plugins installed"
+echo
+echo
+echo
 echo "#######################"
 echo "##### X42 Plugins #####"
 echo "#######################"
@@ -219,10 +200,29 @@ tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
 rm -rf ../x42*
+cd
 echo
 echo "X42 Installed"
 echo
-cd
+echo
+echo "##########################################################"
+echo "##### Compile and install CMake requiered by Stochas #####"
+echo "##########################################################"
+sudo apt update
+sudo apt install -y libssl-dev
+wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
+tar -xf cmake*.tar.gz
+cd cmake*/
+./bootstrap
+gmake
+sudo make install
+echo
+echo "Clean"
+echo
+rm -rf $HOME/cmake*/
+rm $HOME/cmake*.gz
+echo
+echo "CMAKE compiled"
 echo
 echo
 echo "########################################"
@@ -253,15 +253,45 @@ cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
 rm -rf $HOME/stochas
 cd
 echo
+echo "Stochas Installed"
+echo
+echo
+echo "###############################"
+echo "##### Ninjas 2 Standalone #####"
+echo "###############################"
+echo
+sudo apt install -y libjack-jackd2-dev
+echo
+echo
+echo "##########################################"
+echo "######## Compile Ninjas 2 Plugins ########"
+echo "##########################################"
+echo
+cd
+sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
+echo
+git clone --recursive https://github.com/rghvdberg/ninjas2.git
+echo
+cd ninjas2
+echo
+make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
+echo
+sudo make install
+echo
+rm -rf ../ninjas2
+cd
+echo
+echo "Ninjas 2 Installed"
+echo
 echo
 echo "###################"
 echo "##### ReaPack #####"
 echo "###################"
 echo
-echo
 cd
 wget -c https://github.com/cfillion/reapack/releases/download/v${REAPACK}/reaper_reapack-aarch64.so
-mv reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
+cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
+rm reaper_reapack*.so
 echo
 echo
 echo "#############################"
@@ -278,6 +308,7 @@ echo
 echo "###################################"
 echo "##### DSP53600 Access Virus C #####"
 echo "###################################"
+echo
 cd
 wget -c https://futurenoize.com/dsp56300/builds/master/DSP56300Emu-${DSP}-Linux_aarch64-Osirus-VST2.deb
 wget -c https://futurenoize.com/dsp56300/builds/master/DSP56300Emu-${DSP}-Linux_aarch64-OsirusFX-VST2.deb
@@ -285,28 +316,11 @@ sudo dpkg -i DSP56300Emu*VST2.deb
 sudo dpkg -i DSP56300Emu*FX-VST2.deb
 cd
 wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20C%20%28am29f040b_6v6%29.zip/Access%20Virus%20C%20%28am29f040b_6v6%29.BIN"
-sudo cp Access\ Virus\ C\ \(am29f040b_6v6\).BIN /usr/local/lib/vst/
+sudo cp "Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
+rm "Access Virus C (am29f040b_6v6).BIN"
+cd
 echo
 echo "DSP53600 Emulator Installed"
-echo
-echo
-echo "#################################################"
-echo "##### Surge XT This will take a lot of time #####"
-echo "#################################################"
-echo
-cd
-git clone https://github.com/surge-synthesizer/surge.git
-cd surge
-git submodule update --init --recursive
-sudo apt install -y clang
-cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
-echo
-cd $HOME/surge/ignore/s13clang
-echo
-sudo cmake --install .
-echo
-echo "Surge XT Plugins installed"
 echo
 echo
 echo "####################################################################################################################"
