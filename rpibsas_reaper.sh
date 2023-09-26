@@ -11,6 +11,13 @@ REAPER=682
 KX=11.1.0
 LSP=1.2.10
 X42=0.6.6
+AVL=0.7.2
+GMS=0.5.3
+MFC=0.7.3
+MAP=0.4.4
+STEP=0.6.13
+SETBFREE=0.8.12-5
+SCOPE=0.9.10
 CMAKE=3.27.6
 REAPACK=1.2.4.3
 DSP=1.2.30
@@ -198,6 +205,76 @@ wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-arm64.tar.gz
 echo
 tar -xzvf x42*.tar.gz
 cd x42-compressor
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "AVL Drums"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "General MIDI Synth"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-gmsynth-v${GMS}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "MIDI Filter"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "Rule Based MIDI Filter"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "Step Sequencer"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${STEP}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "SetBfree"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/setBfree-v${SETBFREE}-arm64.tar.gz
+tar -xzvf set*.tar.gz
+cd set*/
+yes | ./install-lv2.sh
+rm -rf ../set*
+cd
+echo
+echo "X42 Oscilloscope"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
