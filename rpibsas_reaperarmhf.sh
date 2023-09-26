@@ -213,6 +213,77 @@ cd x42-compressor
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
+
+echo
+echo "AVL Drums"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "General MIDI Synth"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-gmsynth-v${GMS}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "MIDI Filter"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "Rule Based MIDI Filter"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "Step Sequencer"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${STEP}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "SetBfree"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/setBfree-v${SETBFREE}-armhf.tar.gz
+tar -xzvf set*.tar.gz
+cd set*/
+yes | ./install-lv2.sh
+rm -rf ../set*
+cd
+echo
+echo "X42 Oscilloscope"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
 echo
 echo "X42 Installed"
 echo
