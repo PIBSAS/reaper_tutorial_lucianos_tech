@@ -230,7 +230,6 @@ cd x42-compressor
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
-
 echo
 echo "AVL Drums"
 echo
@@ -292,10 +291,110 @@ yes | ./install-lv2.sh
 rm -rf ../set*
 cd
 echo
+echo "X42 Digital Peak Limiter"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Auto Tune"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Zero Config Latency Convolver"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Phase Rotate"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHASE}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
 echo "X42 Oscilloscope"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Mixer Trigger Preprocessor"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIXTRIX}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Spectogram for Geeks"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SPECTR}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Test Signal Generator"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Delayline Artificial Latency"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NODELAY}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Balance"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-armhf.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Stereo Routing"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
