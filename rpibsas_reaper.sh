@@ -17,7 +17,17 @@ MFC=0.7.3
 MAP=0.4.4
 STEP=0.6.13
 SETBFREE=0.8.12-5
+DPL=0.6.6
+TUNE=0.8.7
+ZERO=0.7.1
+PHASE=0.6.5
 SCOPE=0.9.10
+MIXTRIX=0.4.10
+SPECTR=0.6.5
+TSG=0.6.5
+NODELAY=0.6.3
+BAL=0.6.10
+STR=0.2.3
 CMAKE=3.27.6
 REAPACK=1.2.4.3
 DSP=1.2.30
@@ -269,10 +279,110 @@ yes | ./install-lv2.sh
 rm -rf ../set*
 cd
 echo
+echo "X42 Digital Peak Limiter"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Auto Tune"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Zero Config Latency Convolver"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Phase Rotate"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHASE}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
 echo "X42 Oscilloscope"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Mixer Trigger Preprocessor"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIXTRIX}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Spectogram for Geeks"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SPECTR}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Test Signal Generator"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Delayline Artificial Latency"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NODELAY}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Balance"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-arm64.tar.gz
+tar -xzvf x42*.tar.gz
+cd x42*/
+yes | ./install-lv2.sh
+rm -rf ../x42*
+cd
+echo
+echo "X42 Stereo Routing"
+echo
+cd
+wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-arm64.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
