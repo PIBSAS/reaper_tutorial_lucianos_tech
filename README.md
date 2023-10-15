@@ -12,6 +12,14 @@ curl -sSL https://raw.githubusercontent.com/Luciano2018/reaper_tutorial_rpibsas/
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
 
+# How can i run it? On Pi OS 64bit Bookworm:
+```
+curl -sSL https://raw.githubusercontent.com/Luciano2018/reaper_tutorial_rpibsas/main/rpibsas_reaper_bookworm.sh | bash
+```
+
+Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
+
+
 # How can i run it? On Pi OS 32bit:
 ```
 curl -sSL https://raw.githubusercontent.com/Luciano2018/reaper_tutorial_rpibsas/main/rpibsas_reaperarmhf.sh | bash
