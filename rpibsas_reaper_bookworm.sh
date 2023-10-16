@@ -82,7 +82,7 @@ sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynadd
 sudo apt install -y avldrums.lv2
 sudo apt install -y avldrums.lv2-soundfont
 sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
-sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2
+sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2
 sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
 echo
 echo
