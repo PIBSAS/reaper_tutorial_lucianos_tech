@@ -451,12 +451,25 @@ echo
 export SVER=`cat VERSION`
 export GH=`git log -1 --format=%h`
 echo "Version ${SVER} hash ${GH}"
+echo
+sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+echo
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
 echo
 cmake --build build --config Release
 echo
+cd build
+echo
+sudo make install
+echo
+mkdir $HOME/.clap
+echo
 mkdir $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+echo
+cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
+echo
+sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
 rm -rf $HOME/stochas
 cd
 echo
