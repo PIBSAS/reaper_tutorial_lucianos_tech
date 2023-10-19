@@ -7,7 +7,7 @@ echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will tak
 echo
 ARCH=32 #32-bit architecture
 #Versions
-REAPER=683
+REAPER=7001
 KX=11.1.0
 LSP=1.2.12
 X42=0.6.6
@@ -38,7 +38,7 @@ echo "########################################"
 cd
 rm reaper*.tar.xz
 rm -rf reaper_linux_armv7l
-wget -c https://www.reaper.fm/files/6.x/reaper${REAPER}_linux_armv7l.tar.xz
+wget -c https://www.reaper.fm/files/7.x/reaper${REAPER}_linux_armv7l.tar.xz
 echo
 echo "Untar"
 echo
