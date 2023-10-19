@@ -431,18 +431,19 @@ echo "##### Compile and install CMake requiered by Stochas #####"
 echo "##########################################################"
 sudo apt update
 sudo apt install -y libssl-dev
-wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
-tar -xf cmake*.tar.gz
-cd cmake*/
-./bootstrap
-gmake
-sudo make install
+#wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
+#tar -xf cmake*.tar.gz
+#cd cmake*/
+#./bootstrap
+#gmake
+#sudo make install
+#echo
+#echo "Clean"
+#echo
+#rm -rf $HOME/cmake*/
+#rm $HOME/cmake*.gz
 echo
-echo "Clean"
-echo
-rm -rf $HOME/cmake*/
-rm $HOME/cmake*.gz
-echo
+sudo apt install -y cmake
 echo "CMAKE compiled"
 echo
 echo
