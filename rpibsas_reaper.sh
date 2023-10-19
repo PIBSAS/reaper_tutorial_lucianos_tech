@@ -35,9 +35,9 @@ echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
 echo
-echo "########################################"
-echo "##### Install Reaper DAW for armhf #####"
-echo "########################################"
+echo "##########################################"
+echo "##### Install Reaper DAW for aarch64 #####"
+echo "##########################################"
 cd
 rm reaper*.tar.xz
 rm -rf reaper_linux_aarch64
