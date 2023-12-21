@@ -38,5 +38,5 @@ curl -sSL https://raw.githubusercontent.com/Luciano2018/reaper_tutorial_rpibsas/
 
 
 # Tutorial of Reaper DAW on Raspberry Pi:
-- https://sites.google.com/view/raspberrypibuenosaires/reaper-digital-audio-workstation-en-raspberry-pi-os
+- https://sites.google.com/view/raspberrypibuenosaires/reaper-digital-audio-workstation
 
