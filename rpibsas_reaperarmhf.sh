@@ -7,9 +7,9 @@ echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will tak
 echo
 ARCH=32 #32-bit architecture
 #Versions
-REAPER=706
+REAPER=707
 KX=11.1.0
-LSP=1.2.13
+LSP=1.2.14
 X42=0.6.6
 AVL=0.7.2
 GMS=0.6.0
@@ -28,7 +28,7 @@ TSG=0.6.5
 NODELAY=0.6.3
 BAL=0.6.10
 STR=0.2.3
-CMAKE=3.28.0
+CMAKE=3.28.1
 REAPACK=1.2.4.3
 DSP=1.2.30
 echo
@@ -116,10 +116,10 @@ echo "##### VST2 #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-BSD-arm32.tar.gz
 echo
 tar -xzvf lsp-plugins-vst*.tar.gz
-cd lsp-plugins-vst2-${LSP}-Linux-arm32/
+cd lsp-plugins-vst2-${LSP}-BSD-arm32/
 sudo cp -r usr/* /usr
 echo
 echo "VST2 Installed"
@@ -129,10 +129,10 @@ echo "##### LV2 #####"
 echo "###############"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-Linux-arm32.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-BSD-arm32.tar.gz
 echo
 tar -xzvf lsp-plugins-lv2*.tar.gz
-cd lsp-plugins-lv2-${LSP}-Linux-arm32/
+cd lsp-plugins-lv2-${LSP}-BSD-arm32/
 sudo cp -r usr/* /usr
 echo
 echo "LV2 Installed"
@@ -142,10 +142,10 @@ echo "##### JACK #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}}/Linux-armv7a/lsp-plugins-jack-${LSP}-Linux-arm32.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}}/Linux-armv7a/lsp-plugins-jack-${LSP}-BSD-arm32.tar.gz
 echo
 tar -xzvf lsp-plugins-jack*.tar.gz
-cd lsp-plugins-jack-${LSP}-Linux-arm32/
+cd lsp-plugins-jack-${LSP}-BSD-arm32/
 sudo cp -r usr/* /usr
 echo
 echo "JACK Installed"
@@ -155,10 +155,10 @@ echo "##### LADSPA #####"
 echo "##################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-Linux-arm32.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-BSD-arm32.tar.gz
 echo
 tar -xzvf lsp-plugins-ladspa*.tar.gz
-cd lsp-plugins-ladspa-${LSP}-Linux-arm32/
+cd lsp-plugins-ladspa-${LSP}-BSD-arm32/
 sudo cp -r usr/* /usr
 echo
 echo "LADSPA Installed"
@@ -168,10 +168,10 @@ echo "##### CLAP #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-Linux-arm32.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-BSD-arm32.tar.gz
 echo
 tar -xzvf lsp-plugins-clap*.tar.gz
-cd lsp-plugins-clap-${LSP}-Linux-arm32/
+cd lsp-plugins-clap-${LSP}-BSD-arm32/
 sudo cp -r usr/* /usr
 echo
 echo "CLAP Installed"
