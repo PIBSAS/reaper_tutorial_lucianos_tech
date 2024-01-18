@@ -232,6 +232,7 @@ sudo apt install -y clang
 cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
 echo
+cd $HOME/surge/ignore/s13clang
 echo
 sudo make install
 echo
