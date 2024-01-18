@@ -205,7 +205,7 @@ echo "##### Surge XT This will take a lot of time #####"
 echo "#################################################"
 echo
 cd
-sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
+sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
 sudo apt-get install -y libgtk-3-dev
 sudo apt-get install -y libwebkit2gtk-4.0
 sudo apt-get install -y libwebkit2gtk-4.0-dev
@@ -225,6 +225,7 @@ sudo apt-get install -y libxcursor-dev
 sudo apt-get install -y libxcursor1
 sudo apt-get install -y libxcb-cursor-dev
 sudo apt-get install -y libxcb-cursor0
+sudo apt-get install -y qjackctl meterbridge jack-tools
 sudo apt-get install -y --fix-missing
 git clone https://github.com/surge-synthesizer/surge.git
 cd surge
