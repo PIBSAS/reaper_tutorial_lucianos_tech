@@ -245,10 +245,9 @@ echo "Surge XT Plugins installed"
 echo
 echo
 echo
-echo "#######################"
+echo "##########################################################"
 echo "##### X42 Plugins #####"
-echo "#######################"
-echo
+echo "##########################################################"
 echo
 cd
 wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-arm64.tar.gz
@@ -259,7 +258,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "AVL Drums"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-arm64.tar.gz
@@ -269,7 +270,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "General MIDI Synth"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-gmsynth-v${GMS}-arm64.tar.gz
@@ -279,7 +282,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "MIDI Filter"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-arm64.tar.gz
@@ -289,7 +294,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "Rule Based MIDI Filter"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-arm64.tar.gz
@@ -299,7 +306,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "Step Sequencer"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${STEP}-arm64.tar.gz
@@ -309,7 +318,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "SetBfree"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/setBfree-v${SETBFREE}-arm64.tar.gz
@@ -319,7 +330,9 @@ yes | ./install-lv2.sh
 rm -rf ../set*
 cd
 echo
+echo "##########################################################"
 echo "X42 Digital Peak Limiter"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-arm64.tar.gz
@@ -329,7 +342,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Auto Tune"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-arm64.tar.gz
@@ -339,7 +354,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Zero Config Latency Convolver"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-arm64.tar.gz
@@ -349,7 +366,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Phase Rotate"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHASE}-arm64.tar.gz
@@ -359,7 +378,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Oscilloscope"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-arm64.tar.gz
@@ -369,7 +390,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Mixer Trigger Preprocessor"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIXTRIX}-arm64.tar.gz
@@ -379,7 +402,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Spectogram for Geeks"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SPECTR}-arm64.tar.gz
@@ -389,7 +414,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Test Signal Generator"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-arm64.tar.gz
@@ -399,7 +426,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Delayline Artificial Latency"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NODELAY}-arm64.tar.gz
@@ -409,7 +438,9 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
+echo "##########################################################"
 echo "X42 Balance"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-arm64.tar.gz
@@ -418,8 +449,9 @@ cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
-echo
+echo "##########################################################"
 echo "X42 Stereo Routing"
+echo "##########################################################"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-arm64.tar.gz
@@ -433,24 +465,12 @@ echo "X42 Installed"
 echo
 echo
 echo "##########################################################"
-echo "##### Compile and install CMake requiered by Stochas #####"
+echo "##### Dependencies requiered by Stochas #####"
 echo "##########################################################"
 sudo apt update
 sudo apt install -y libssl-dev
-#wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
-#tar -xf cmake*.tar.gz
-#cd cmake*/
-#./bootstrap
-#gmake
-#sudo make install
-#echo
-#echo "Clean"
-#echo
-#rm -rf $HOME/cmake*/
-#rm $HOME/cmake*.gz
 echo
 sudo apt install -y cmake
-echo "CMAKE compiled"
 echo
 echo
 echo "########################################"
@@ -576,5 +596,5 @@ echo "Samples Downloaded"
 echo
 echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
 echo
-echo "Now Reboot your Pi"
+echo "Now Reboot your Pi or go to menu and look for Reaper"
 echo
