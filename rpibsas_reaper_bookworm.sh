@@ -31,6 +31,8 @@ STR=0.2.3
 CMAKE=3.28.1
 REAPACK=1.2.4.3
 DSP=1.2.30
+RENO=Renoise_3_4_3
+SUN=2.1.1c
 echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
@@ -594,7 +596,41 @@ mv "Samplicity M7 Main - 02 - Wave, 32 bit, 48 Khz, v1.1"/ Music/
 echo
 echo "Samples Downloaded"
 echo
+echo "###############################################"
+echo "############## Renois Demo ####################"
+echo "###############################################"
+cd
+wget -c https://files.renoise.com/demo/${RENO}_Demo_Linux_arm64.tar.gz
+tar -xvzf Renoise*64.tar.gz
+rm Reno*.tar.gz
+cd Renoise*arm64
+sudo ./install.sh
+echo "Renoise Demo installed"
+echo
+echo "###############################################"
+echo "############## SunVox #########################"
+echo "###############################################"
+echo
+cd
+wget -c https://warmplace.ru/soft/sunvox/sunvox-${SUN}.zip
+unzip sunvox*.zip
+rm sunvox*.zip
+cd sunvox/sunvox/
+rm -rf wince macos linux_x* linux_arm_a* windows_x*
+echo "You still have to do a desktop shortcut"
+echo
+echo "###############################################"
+echo "############## BeSpoke ########################"
+echo "###############################################"
+echo
+echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
+curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
+sudo apt update
+sudo apt install -y bespokesynth
+echo
 echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
 echo
-echo "Now Reboot your Pi or go to menu and look for Reaper"
+echo "Now Reboot your Pi to take effects changes"
+echo
+sudo reboot
 echo
