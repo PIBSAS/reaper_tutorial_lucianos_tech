@@ -498,7 +498,7 @@ echo "#############################"
 echo
 echo
 cd $HOME/.config/REAPER/
-wget -c https://sws-extension.org/download/featured/sws-2.12.1.3-Linux-aarch64.tar.xz
+wget -c https://sws-extension.org/download/pre-release/sws-2.14.0.0-Linux-aarch64-8a12353a.tar.xz
 tar -Jxvf sws*.tar.xz
 rm sws*
 cd
