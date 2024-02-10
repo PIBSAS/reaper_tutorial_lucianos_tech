@@ -607,6 +607,16 @@ cd Renoise*arm64
 sudo ./install.sh
 echo "Renoise Demo installed"
 echo
+echo
+echo "###############################################"
+echo "############## Bespoke DAW ####################"
+echo "###############################################"
+echo
+echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
+curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
+sudo apt update
+sudo apt install -y bespokesynth
+echo
 echo "###############################################"
 echo "############## SunVox #########################"
 echo "###############################################"
@@ -619,14 +629,6 @@ cd sunvox/sunvox/
 rm -rf wince macos linux_x* linux_arm_a* windows_x*
 echo "You still have to do a desktop shortcut"
 echo
-echo "###############################################"
-echo "############## BeSpoke ########################"
-echo "###############################################"
-echo
-echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
-curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
-sudo apt update
-sudo apt install -y bespokesynth
 echo
 echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
 echo
