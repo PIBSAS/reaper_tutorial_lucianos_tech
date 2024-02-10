@@ -30,7 +30,7 @@ BAL=0.6.10
 STR=0.2.3
 CMAKE=3.28.3
 REAPACK=1.2.4.4
-DSP=1.2.30
+DSP=1.2.36
 echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
