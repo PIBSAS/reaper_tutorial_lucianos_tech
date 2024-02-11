@@ -7,7 +7,7 @@ echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will tak
 echo
 ARCH=32 #32-bit architecture
 #Versions
-REAPER=710
+REAPER=711
 KX=11.1.0
 LSP=1.2.14
 X42=0.6.6
