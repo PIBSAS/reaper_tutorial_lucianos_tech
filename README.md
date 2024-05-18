@@ -5,7 +5,7 @@ An script shell for all the installations and compiles of the Reaper DAW Tutoria
 <img src="https://raw.githubusercontent.com/PIBSAS/RetroPieBios/master/logov3.png" alt="Raspberry Pi Buenos Aires" width="400" height="500">
 </p>
 
-# How can i run it? On Pi OS 64bit:
+# How can i run it? On Pi OS Buster/Bullseye 64bit:
 ```
 curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaper_Buster_Bullseye_64bit.sh | bash
 ```
