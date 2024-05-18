@@ -2,53 +2,63 @@
 #########################################################################################################################
 #################################/////RASPBERRY PI BUENOS AIRES/////#####################################################
 #########################################################################################################################
+# Repositorio: Reaper Tutorial 2024
+# Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/raspberrypibuenosaires/)
+# License: http://creativecommons.org/licenses/by-sa/4.0/
+#########################################################################################################################
+#########################################################################################################################
 echo
 echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will take some time, so connect Ethernet Cable!"
 echo
 ARCH=32 #32-bit architecture
 #Versions
-REAPER=711
+#REAPER=711
 KX=11.1.0
-LSP=1.2.14
-X42=0.6.6
+LSP=1.2.15
+X42=0.6.6-1
 AVL=0.7.2
 GMS=0.6.0
 MFC=0.7.3
 MAP=0.4.4
 STEP=0.6.13
-SETBFREE=0.8.12-5
+SBF=0.8.12-5
 DPL=0.6.6
 TUNE=0.8.7
 ZERO=0.7.1
-PHASE=0.6.5
-SCOPE=0.9.10
-MIXTRIX=0.4.10
-SPECTR=0.6.5
+PHR=0.6.5
+SCP=0.9.10
+MIX=0.4.10
+SFC=0.6.5
 TSG=0.6.5
-NODELAY=0.6.3
-BAL=0.6.10
+NDL=0.6.3
+BAL=0.6.10-1
 STR=0.2.3
-CMAKE=3.28.3
-REAPACK=1.2.4.4
-DSP=1.2.30
+CMAKE=3.29.3
+REAPACK=1.2.4.5
+SWS=sws-2.14.0.1-Linux-armv7l-216638bb
+#DSP=1.3.14
+##RENO=Renoise_3_4_3
+##SUN=2.1.1c
 echo
 echo "########################################"
 echo "##### Install Reaper DAW for armhf #####"
 echo "########################################"
 cd
-rm reaper*.tar.xz
-rm -rf reaper_linux_armv7l
-wget -c https://www.reaper.fm/files/7.x/reaper${REAPER}_linux_armv7l.tar.xz
+sudo apt install -y wget curl grep git xz-utils
+echo
+cd
+rm -rf reaper*
+web="https://www.reaper.fm/download.php" && last=$(curl -s ${web} | grep -oE 'files/7.x/reaper[0-9]+_linux_armv7l\.tar\.xz') && down="https://www.reaper.fm/${last}" && wget "${down}"
 echo
 echo "Untar"
 echo
 tar -Jxvf reaper*.tar.xz
 echo
-cd reaper_linux_armv7l
+cd reaper_*
 sudo ./install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink --quiet
 echo
 rm ../reaper*.tar.xz
-rm -rf ../reaper_linux_armv7l
+rm -rf ../reaper_linux*
 echo
 echo "REAPER Installed"
 echo
@@ -90,6 +100,11 @@ echo "#####################################"
 echo
 sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms petri-foo adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger
 echo
+echo
+echo "####################################################"
+echo "########## Sequencer Megababy Nandy's Mod ##########"
+echo "####################################################"
+echo
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
 echo
 echo
@@ -116,24 +131,41 @@ echo "##### VST2 #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-BSD-arm32.tar.gz
-echo
-tar -xzvf lsp-plugins-vst*.tar.gz
-cd lsp-plugins-vst2-${LSP}-BSD-arm32/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-vst2-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "VST2 Installed"
+echo
+echo
+echo "################"
+echo "##### VST3 #####"
+echo "################"
+echo
+cd
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst3-${LSP}-Linux-arm32.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-vst3-${LSP}*/
+sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
+echo
+echo "VST3 Installed"
 echo
 echo "###############"
 echo "##### LV2 #####"
 echo "###############"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-BSD-arm32.tar.gz
-echo
-tar -xzvf lsp-plugins-lv2*.tar.gz
-cd lsp-plugins-lv2-${LSP}-BSD-arm32/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-Linux-arm32.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-lv2-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "LV2 Installed"
 echo
@@ -142,11 +174,12 @@ echo "##### JACK #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}}/Linux-armv7a/lsp-plugins-jack-${LSP}-BSD-arm32.tar.gz
-echo
-tar -xzvf lsp-plugins-jack*.tar.gz
-cd lsp-plugins-jack-${LSP}-BSD-arm32/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-jack-${LSP}-Linux-arm32.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-jack-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "JACK Installed"
 echo
@@ -155,11 +188,12 @@ echo "##### LADSPA #####"
 echo "##################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-BSD-arm32.tar.gz
-echo
-tar -xzvf lsp-plugins-ladspa*.tar.gz
-cd lsp-plugins-ladspa-${LSP}-BSD-arm32/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-Linux-arm32.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-ladspa-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "LADSPA Installed"
 echo
@@ -168,18 +202,17 @@ echo "##### CLAP #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-BSD-arm32.tar.gz
-echo
-tar -xzvf lsp-plugins-clap*.tar.gz
-cd lsp-plugins-clap-${LSP}-BSD-arm32/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-Linux-arm32.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-clap-${LSP}*/
 sudo cp -r usr/* /usr
-echo
-echo "CLAP Installed"
-echo
 cd
 rm -rf lsp*
 echo
-echo "LSP Installed"
+echo "CLAP Installed"
+echo
+echo
+echo "LSP Plugins Installed"
 echo
 echo
 echo
@@ -231,9 +264,11 @@ echo "#######################"
 echo "##### X42 Plugins #####"
 echo "#######################"
 echo
+echo
+echo "X42 Compressor"
+echo
 cd
 wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-armhf.tar.gz
-echo
 tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
@@ -245,7 +280,7 @@ echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
-cd x42*/
+cd x42-compressor
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
@@ -260,7 +295,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "MIDI Filter"
+echo "MIDI Filter Collection"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-armhf.tar.gz
@@ -276,7 +311,7 @@ cd
 wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
-yes | ./install-lv2.sh
+yes | ./install-lv2.s
 rm -rf ../x42*
 cd
 echo
@@ -293,14 +328,14 @@ echo
 echo "SetBfree"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/setBfree-v${SETBFREE}-armhf.tar.gz
+wget -c https://x42-plugins.com/x42/linux/setBfree-v${SBF}-armhf.tar.gz
 tar -xzvf set*.tar.gz
 cd set*/
 yes | ./install-lv2.sh
 rm -rf ../set*
 cd
 echo
-echo "X42 Digital Peak Limiter"
+echo "Digital Peak Limiter"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-armhf.tar.gz
@@ -310,7 +345,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Auto Tune"
+echo "Auto Tune"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-armhf.tar.gz
@@ -320,7 +355,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Zero Config Latency Convolver"
+echo "Zero Config Latency Convolver"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-armhf.tar.gz
@@ -330,47 +365,47 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Phase Rotate"
+echo "Phase Rotate"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHASE}-armhf.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHR}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Oscilloscope"
+echo "Oscilloscope"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-armhf.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCP}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Mixer Trigger Preprocessor"
+echo "Mixer Trigger Preprocessor"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIXTRIX}-armhf.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIX}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Spectogram for Geeks"
+echo "Spectogram for Geeks"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SPECTR}-armhf.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SFC}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Test Signal Generator"
+echo "Test Signal Generator"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-armhf.tar.gz
@@ -380,17 +415,17 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Delayline Artificial Latency"
+echo "Delayline Artificial Latency"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NODELAY}-armhf.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NDL}-armhf.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Balance"
+echo "Balance"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-armhf.tar.gz
@@ -400,7 +435,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Stereo Routing"
+echo "Stereo Routing"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-armhf.tar.gz
@@ -410,7 +445,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Installed"
+echo "X42 Plugins Installed"
 echo
 echo
 echo
@@ -432,9 +467,9 @@ echo
 echo "CMake compiled"
 echo
 echo
-echo "########################################"
-echo "##### Compille and Install Stochas #####"
-echo "########################################"
+echo "#######################################"
+echo "##### Compile and Install Stochas #####"
+echo "#######################################"
 echo
 cd
 sudo apt update
@@ -455,13 +490,11 @@ echo
 echo "Stochas Installed"
 echo
 echo
-echo
 echo "###############################"
 echo "##### Ninjas 2 Standalone #####"
 echo "###############################"
 echo
 sudo apt install -y libjack-dev
-echo
 echo
 echo
 echo "##########################################"
@@ -492,13 +525,14 @@ echo
 wget -c https://github.com/cfillion/reapack/releases/download/v${REAPACK}/reaper_reapack-armv7l.so
 echo
 cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
+rm reaper_reapack*.so
 echo
 echo "#############################"
 echo "##### SWS S&M Extension #####"
 echo "#############################"
 echo
 cd $HOME/.config/REAPER/
-wget -c https://sws-extension.org/download/pre-release/sws-2.14.0.0-Linux-armv7l-8a12353a.tar.xz
+wget -c https://sws-extension.org/download/pre-release/${SWS}.tar.xz
 echo
 tar -Jxvf sws*.tar.xz
 rm sws*
