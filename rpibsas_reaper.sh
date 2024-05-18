@@ -2,15 +2,20 @@
 #########################################################################################################################
 #################################/////RASPBERRY PI BUENOS AIRES/////#####################################################
 #########################################################################################################################
+# Repositorio: Reaper Tutorial 2024
+# Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/raspberrypibuenosaires/)
+# License: http://creativecommons.org/licenses/by-sa/4.0/
+#########################################################################################################################
+#########################################################################################################################
 echo
 echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will take some time, so connect Ethernet Cable!"
 echo
 ARCH=64
 #Versions
-REAPER=711
+#REAPER=711
 KX=11.1.0
-LSP=1.2.14
-X42=0.6.6
+LSP=1.2.15
+X42=0.6.6-1
 AVL=0.7.2
 GMS=0.6.0
 MFC=0.7.3
@@ -26,34 +31,37 @@ MIXTRIX=0.4.10
 SPECTR=0.6.5
 TSG=0.6.5
 NODELAY=0.6.3
-BAL=0.6.10
+BAL=0.6.10-1
 STR=0.2.3
-CMAKE=3.28.3
-REAPACK=1.2.4.4
-DSP=1.2.36
+CMAKE=3.29.3
+REAPACK=1.2.4.5
+SWS=sws-2.14.0.1-Linux-aarch64-216638bb
+DSP=1.3.14
 echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
+sudo apt install -y wget curl grep git xz-utils
 echo
 echo "##########################################"
 echo "##### Install Reaper DAW for aarch64 #####"
 echo "##########################################"
 cd
-rm reaper*.tar.xz
+rm reaper*
 rm -rf reaper_linux_aarch64
-wget -c https://www.reaper.fm/files/7.x/reaper${REAPER}_linux_aarch64.tar.xz
+web="https://www.reaper.fm/download.php" && last=$(curl -s ${web} | grep -oE 'files/7.x/reaper[0-9]+_linux_aarch64\.tar\.xz') && down="https://www.reaper.fm/${last}" && wget "${down}"
+#wget -c https://www.reaper.fm/files/7.x/reaper${REAPER}_linux_aarch64.tar.xz
 echo
 echo "Untar"
 echo
 tar -Jxvf reaper*.tar.xz
 echo
-cd reaper_linux_aarch64
+cd reaper_*
 sudo ./install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink --quiet
 echo
 rm ../reaper*.tar.xz
-rm -rf ../reaper_linux_aarch64
+rm -rf ../reaper_linux*
 echo
-echo "REAPER Installed"
+echo "Latest REAPER Version Installed"
 echo
 echo "Open then close Reaper to get the new Folders created in the first run"
 echo
@@ -118,13 +126,30 @@ echo "##### VST2 #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-BSD-aarch64.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-Linux-aarch64.tar.gz
 echo
-tar -xzvf lsp-plugins-vst*.tar.gz
-cd lsp-plugins-vst2-${LSP}-BSD-aarch64/
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-vst2-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "VST2 Installed"
+echo
+echo
+echo "################"
+echo "##### VST3 #####"
+echo "################"
+echo
+cd
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst3-${LSP}-Linux-aarch64.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-vst3-${LSP}*/
+sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
+echo
+echo "VST3 Installed"
 echo
 echo
 echo "###############"
@@ -133,11 +158,13 @@ echo "###############"
 echo
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-lv2-${LSP}-BSD-aarch64.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-lv2-${LSP}-Linux-aarch64.tar.gz
 echo
-tar -xzvf lsp-plugins-lv2*.tar.gz
-cd lsp-plugins-lv2-${LSP}-BSD-aarch64/
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-lv2-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "LV2 Installed"
 echo
@@ -148,11 +175,13 @@ echo "################"
 echo
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-jack-${LSP}-BSD-aarch64.tar.gz
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-jack-${LSP}-Linux-aarch64.tar.gz
 echo
-tar -xzvf lsp-plugins-jack*.tar.gz
-cd lsp-plugins-jack-${LSP}-BSD-aarch64/
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-jack-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "JACK Installed"
 echo
@@ -163,11 +192,12 @@ echo "##################"
 echo
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-ladspa-${LSP}-BSD-aarch64.tar.gz
-echo
-tar -xzvf lsp-plugins-ladspa*.tar.gz
-cd lsp-plugins-ladspa-${LSP}-BSD-aarch64/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-ladspa-${LSP}-Linux-aarch64.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-ladspa-${LSP}*/
 sudo cp -r usr/* /usr
+cd
+rm -rf lsp*
 echo
 echo "LADSPA Installed"
 echo
@@ -178,18 +208,16 @@ echo "################"
 echo
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-clap-${LSP}-BSD-aarch64.tar.gz
-echo
-tar -xzvf lsp-plugins-clap*.tar.gz
-cd lsp-plugins-clap-${LSP}-BSD-aarch64/
+wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-clap-${LSP}-Linux-aarch64.tar.gz
+tar -xzvf lsp*.tar.gz
+cd lsp-plugins-clap-${LSP}*/
 sudo cp -r usr/* /usr
-echo
-echo "CLAP Installed"
-echo
 cd
 rm -rf lsp*
 echo
-echo "LSP Installed"
+echo "CLAP Installed"
+echo
+echo "All LSP Plugins Installed"
 echo
 echo
 echo
@@ -197,6 +225,8 @@ echo "#################################################"
 echo "##### Surge XT This will take a lot of time #####"
 echo "#################################################"
 echo
+cd
+sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
 cd
 git clone https://github.com/surge-synthesizer/surge.git
 cd surge
@@ -215,15 +245,14 @@ echo
 echo "Surge XT Plugins installed"
 echo
 echo
-echo
 echo "#######################"
 echo "##### X42 Plugins #####"
 echo "#######################"
 echo
+echo "X42 Compressor"
 echo
 cd
 wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-arm64.tar.gz
-echo
 tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
@@ -250,7 +279,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "MIDI Filter"
+echo "MIDI Filter Collection"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-arm64.tar.gz
@@ -283,14 +312,14 @@ echo
 echo "SetBfree"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/setBfree-v${SETBFREE}-arm64.tar.gz
+wget -c https://x42-plugins.com/x42/linux/setBfree-v${SBF}-arm64.tar.gz
 tar -xzvf set*.tar.gz
 cd set*/
 yes | ./install-lv2.sh
 rm -rf ../set*
 cd
 echo
-echo "X42 Digital Peak Limiter"
+echo "Digital Peak Limiter"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-arm64.tar.gz
@@ -300,7 +329,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Auto Tune"
+echo "Auto Tune"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-arm64.tar.gz
@@ -310,7 +339,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Zero Config Latency Convolver"
+echo "Zero Config Latency Convolver"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-arm64.tar.gz
@@ -320,47 +349,47 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Phase Rotate"
+echo "Phase Rotate"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHASE}-arm64.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHR}-arm64.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Oscilloscope"
+echo "Oscilloscope"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCOPE}-arm64.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCP}-arm64.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Mixer Trigger Preprocessor"
+echo "Mixer Trigger Preprocessor"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIXTRIX}-arm64.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIX}-arm64.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Spectogram for Geeks"
+echo "Spectogram for Geeks"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SPECTR}-arm64.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SFC}-arm64.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Test Signal Generator"
+echo "Test Signal Generator"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-arm64.tar.gz
@@ -370,17 +399,17 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Delayline Artificial Latency"
+echo "Delayline Artificial Latency"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NODELAY}-arm64.tar.gz
+wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NDL}-arm64.tar.gz
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Balance"
+echo "Balance"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-arm64.tar.gz
@@ -390,7 +419,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Stereo Routing"
+echo "Stereo Routing"
 echo
 cd
 wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-arm64.tar.gz
@@ -400,7 +429,7 @@ yes | ./install-lv2.sh
 rm -rf ../x42*
 cd
 echo
-echo "X42 Installed"
+echo "X42 Plugins Installed"
 echo
 echo
 echo "##########################################################"
@@ -498,7 +527,7 @@ echo "#############################"
 echo
 echo
 cd $HOME/.config/REAPER/
-wget -c https://sws-extension.org/download/pre-release/sws-2.14.0.0-Linux-aarch64-8a12353a.tar.xz
+wget -c "https://www.sws-extension.org/download/pre-release/${SWS}.tar.xz"
 tar -Jxvf sws*.tar.xz
 rm sws*
 cd
@@ -508,8 +537,8 @@ echo "##### DSP53600 Access Virus C #####"
 echo "###################################"
 echo
 cd
-wget -c https://futurenoize.com/dsp56300/builds/master/DSP56300Emu-${DSP}-Linux_aarch64-Osirus-VST2.deb
-wget -c https://futurenoize.com/dsp56300/builds/master/DSP56300Emu-${DSP}-Linux_aarch64-OsirusFX-VST2.deb
+wget -c https://futurenoize.com/dsp56300/builds/osirus/DSP56300Emu-${DSP}-Linux_aarch64-Osirus-VST2.deb
+wget -c https://futurenoize.com/dsp56300/builds/osirus/DSP56300Emu-${DSP}-Linux_aarch64-OsirusFX-VST2.deb
 sudo dpkg -i DSP56300Emu*VST2.deb
 sudo dpkg -i DSP56300Emu*FX-VST2.deb
 cd
@@ -521,7 +550,7 @@ echo "DSP53600 Emulator Installed"
 echo
 echo
 echo "####################################################################################################################"
-echo "##### Getting Samplicity Samples and save to Music Folder I will make one folder if you are not  in English OS #####"
+echo "##### Getting Samplicity Samples and save to Music Folder It will make one folder if you are not  in English OS #####"
 echo "####################################################################################################################"
 mkdir Music
 wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1.zip
