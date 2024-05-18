@@ -2,12 +2,17 @@
 #########################################################################################################################
 #################################/////RASPBERRY PI BUENOS AIRES/////#####################################################
 #########################################################################################################################
+# Repositorio: Reaper Tutorial 2024
+# Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/raspberrypibuenosaires/)
+# License: http://creativecommons.org/licenses/by-sa/4.0/
+#########################################################################################################################
+#########################################################################################################################
 echo
 echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will take some time, so connect Ethernet Cable!"
 echo
 ARCH=64
 #Versions
-REAPER=711
+#REAPER=711
 KX=11.1.0
 LSP=1.2.14
 X42=0.6.6
