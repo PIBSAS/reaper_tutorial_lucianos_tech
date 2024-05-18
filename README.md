@@ -7,7 +7,7 @@ An script shell for all the installations and compiles of the Reaper DAW Tutoria
 
 # How can i run it? On Pi OS 64bit:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaper.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaper_Buster_Bullseye_64bit.sh | bash
 ```
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
