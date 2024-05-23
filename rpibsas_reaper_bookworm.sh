@@ -12,9 +12,8 @@ echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will tak
 echo
 ARCH=64
 #Versions
-#REAPER=711
 KX=11.1.0
-LSP=1.2.15
+LSP=1.2.16
 X42=0.6.6-1
 AVL=0.7.2
 GMS=0.6.0
