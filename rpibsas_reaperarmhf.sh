@@ -13,7 +13,7 @@ echo
 ARCH=32 #32-bit architecture
 #Versions
 KX=11.1.0
-LSP=1.2.15
+LSP=1.2.16
 X42=0.6.6-1
 AVL=0.7.2
 GMS=0.6.0
