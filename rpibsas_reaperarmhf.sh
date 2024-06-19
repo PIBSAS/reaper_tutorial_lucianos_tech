@@ -12,29 +12,29 @@ echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will tak
 echo
 ARCH=32 #32-bit architecture
 #Versions
-KX=11.1.0
-LSP=1.2.16
-X42=0.6.6-1
-AVL=0.7.2
-GMS=0.6.0
-MFC=0.7.3
-MAP=0.4.4
-STEP=0.6.13
-SBF=0.8.12-5
-DPL=0.6.6
-TUNE=0.8.7
-ZERO=0.7.1
-PHR=0.6.5
-SCP=0.9.10
-MIX=0.4.10
-SFC=0.6.5
-TSG=0.6.5
-NDL=0.6.3
-BAL=0.6.10-1
-STR=0.2.3
-CMAKE=3.29.3
-REAPACK=1.2.4.5
-SWS=sws-2.14.0.1-Linux-armv7l-216638bb
+#KX=11.1.0
+#LSP=1.2.16
+#X42=0.6.6-1
+#AVL=0.7.2
+#GMS=0.6.0
+#MFC=0.7.3
+#MAP=0.4.4
+#STEP=0.6.13
+#SBF=0.8.12-5
+#DPL=0.6.6
+#TUNE=0.8.7
+#ZERO=0.7.1
+#PHR=0.6.5
+#SCP=0.9.10
+#MIX=0.4.10
+#SFC=0.6.5
+#TSG=0.6.5
+#NDL=0.6.3
+#BAL=0.6.10-1
+#STR=0.2.3
+#CMAKE=3.29.3
+#REAPACK=1.2.4.5
+#SWS=sws-2.14.0.1-Linux-armv7l-216638bb
 #DSP=1.3.14
 ##RENO=Renoise_3_4_3
 ##SUN=2.1.1c
@@ -85,9 +85,17 @@ echo "## Adding KXStudio Repository to the OS ##"
 echo "##########################################"
 echo
 cd
-wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
+#wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
+#sudo dpkg -i kxstudio*.deb
+#rm kxstudio-repos_${KX}_all.deb
+#sudo apt update
+url="https://kx.studio/Repositories" ; \
+curl -sSL "$url" > p.html ; \
+download=$(awk -F'"' '/kxstudio-repos_[0-9.]*_all.deb/ {print $2}' p.html) ; \
+wget -c "${download}"
+rm p.html
 sudo dpkg -i kxstudio*.deb
-rm kxstudio-repos_${KX}_all.deb
+rm kxstudio*.deb
 sudo apt update
 echo
 echo "KXStudio Repo Added"
@@ -130,7 +138,10 @@ echo "##### VST2 #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst2-${LSP}-Linux-arm32.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-vst2-${latest_version}-Linux-arm32.tar.gz"
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-vst2-${LSP}*/
 sudo cp -r usr/* /usr
@@ -145,7 +156,10 @@ echo "##### VST3 #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst3-${LSP}-Linux-arm32.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-vst3-${LSP}-Linux-arm32.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-vst3-${latest_version}-Linux-arm32.tar.gz"
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-vst3-${LSP}*/
 sudo cp -r usr/* /usr
@@ -159,7 +173,10 @@ echo "##### LV2 #####"
 echo "###############"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-Linux-arm32.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-lv2-${LSP}-Linux-arm32.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-lv2-${latest_version}-Linux-arm32.tar.gz"
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-lv2-${LSP}*/
 sudo cp -r usr/* /usr
@@ -173,7 +190,10 @@ echo "##### JACK #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-jack-${LSP}-Linux-arm32.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-jack-${LSP}-Linux-arm32.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-jack-${latest_version}-Linux-arm32.tar.gz"
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-jack-${LSP}*/
 sudo cp -r usr/* /usr
@@ -187,7 +207,10 @@ echo "##### LADSPA #####"
 echo "##################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-Linux-arm32.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-ladspa-${LSP}-Linux-arm32.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-ladspa-${latest_version}-Linux-arm32.tar.gz"
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-ladspa-${LSP}*/
 sudo cp -r usr/* /usr
@@ -201,7 +224,10 @@ echo "##### CLAP #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-Linux-arm32.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-armv7a/lsp-plugins-clap-${LSP}-Linux-arm32.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-clap-${latest_version}-Linux-arm32.tar.gz"
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-clap-${LSP}*/
 sudo cp -r usr/* /usr
@@ -267,7 +293,10 @@ echo
 echo "X42 Compressor"
 echo
 cd
-wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-armhf.tar.gz
+#wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-compressor-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-compressor-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
@@ -277,7 +306,10 @@ echo
 echo "AVL Drums"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-avldrums-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-avldrums-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
@@ -287,7 +319,10 @@ echo
 echo "General MIDI Synth"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-gmsynth-v${GMS}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-gmsynth-v${GMS}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-gmsynth-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-gmsynth-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -297,7 +332,10 @@ echo
 echo "MIDI Filter Collection"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-midifilter-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-midifilter-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -307,7 +345,10 @@ echo
 echo "Rule Based MIDI Filter"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-midimap-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-midimap-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.s
@@ -317,7 +358,10 @@ echo
 echo "Step Sequencer"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${STEP}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${STEP}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-stepseq-8x8-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -327,7 +371,10 @@ echo
 echo "SetBfree"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/setBfree-v${SBF}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/setBfree-v${SBF}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'setBfree-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/setBfree-v${latest_version}-armhf.tar.gz"
 tar -xzvf set*.tar.gz
 cd set*/
 yes | ./install-lv2.sh
@@ -337,7 +384,10 @@ echo
 echo "Digital Peak Limiter"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-limiter-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-limiter-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -347,7 +397,10 @@ echo
 echo "Auto Tune"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-autotune-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-autotune-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -357,7 +410,10 @@ echo
 echo "Zero Config Latency Convolver"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-zconvolver-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-zconvolver-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -367,7 +423,10 @@ echo
 echo "Phase Rotate"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHR}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHR}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-phaserotate-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-phaserotate-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -377,7 +436,10 @@ echo
 echo "Oscilloscope"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCP}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCP}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-scope-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-scope-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -387,7 +449,10 @@ echo
 echo "Mixer Trigger Preprocessor"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIX}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIX}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-mixtrix-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-mixtrix-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -397,7 +462,10 @@ echo
 echo "Spectogram for Geeks"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SFC}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SFC}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-spectra-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-spectra-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -407,7 +475,10 @@ echo
 echo "Test Signal Generator"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-testsignal-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-testsignal-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -417,7 +488,10 @@ echo
 echo "Delayline Artificial Latency"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NDL}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NDL}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-nodelay-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-nodelay-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -427,7 +501,10 @@ echo
 echo "Balance"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-balance-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-balance-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -437,7 +514,10 @@ echo
 echo "Stereo Routing"
 echo
 cd
-wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-armhf.tar.gz
+#wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-armhf.tar.gz
+url="https://x42-plugins.com/x42/linux/"
+latest_version=$(curl -sSL $url | grep -o 'x42-stereoroute-v[0-9.]*-armhf.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+wget -c "https://x42-plugins.com/x42/linux/x42-stereoroute-v${latest_version}-armhf.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -453,7 +533,10 @@ echo "##### Compile and install CMake requiered by Stochas #####"
 echo "##########################################################"
 sudo apt update
 sudo apt install -y libssl-dev
-wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
+#wget -c https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz
+url="https://github.com/Kitware/CMake/releases/latest/" ; \
+CMAKE=$(curl -sSL $url | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
+wget -c "https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}.tar.gz"
 tar -xf cmake*.tar.gz
 cd cmake*/
 ./bootstrap
@@ -521,7 +604,10 @@ echo "###################"
 echo "##### ReaPack #####"
 echo "###################"
 echo
-wget -c https://github.com/cfillion/reapack/releases/download/v${REAPACK}/reaper_reapack-armv7l.so
+#wget -c https://github.com/cfillion/reapack/releases/download/v${REAPACK}/reaper_reapack-armv7l.so
+url="https://github.com/cfillion/reapack/releases/latest/" ; \
+latest_version=$(curl -sSL $url | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
+wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-armv7l.so"
 echo
 cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
 rm reaper_reapack*.so
@@ -531,7 +617,12 @@ echo "##### SWS S&M Extension #####"
 echo "#############################"
 echo
 cd $HOME/.config/REAPER/
-wget -c https://sws-extension.org/download/pre-release/${SWS}.tar.xz
+#wget -c https://sws-extension.org/download/pre-release/${SWS}.tar.xz
+url="https://www.sws-extension.org/download/pre-release/" ; \
+html_content=$(curl -sSL "$url") \
+download=$(echo "$html_content" | grep -m 1 -oE '<a href="([^"]+\.tar\.xz)">sws-[0-9.]+-Linux-armv7l-[0-9a-f]+\.tar\.xz</a>' | sed -E 's/<a href="([^"]+)".*/\1/')  ; \
+full_url="${url}${download}" ; \
+wget -c "${full_url}"
 echo
 tar -Jxvf sws*.tar.xz
 rm sws*
