@@ -79,10 +79,19 @@ echo
 echo "##########################################"
 echo "## Adding KXStudio Repository to the OS ##"
 echo "##########################################"
+#cd
+#wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
+#sudo dpkg -i kxstudio*.deb
+#rm kxstudio-repos_${KX}_all.deb
+#sudo apt update
 cd
-wget -c https://launchpad.net/~kxstudio-debian/+archive/ubuntu/kxstudio/+files/kxstudio-repos_${KX}_all.deb
+url="https://kx.studio/Repositories" ; \
+curl -sSL "$url" > p.html ; \
+download=$(awk -F'"' '/kxstudio-repos_[0-9.]*_all.deb/ {print $2}' p.html) ; \
+wget -c "${download}"
+rm p.html
 sudo dpkg -i kxstudio*.deb
-rm kxstudio-repos_${KX}_all.deb
+rm kxstudio*.deb
 sudo apt update
 echo
 echo "KXStudio Repo Added"
@@ -125,7 +134,10 @@ echo "##### VST2 #####"
 echo "################"
 echo
 cd
-wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-Linux-aarch64.tar.gz
+#wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-Linux-aarch64.tar.gz
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-vst2-${latest_version}-Linux-aarch64.tar.gz"
 echo
 tar -xzvf lsp*.tar.gz
 cd lsp-plugins-vst2-${LSP}*/
