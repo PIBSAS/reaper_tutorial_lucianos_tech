@@ -129,28 +129,47 @@ echo "#################################"
 echo "########## LSP Plugins ##########"
 echo "#################################"
 echo
-echo "################"
-echo "##### VST2 #####"
-echo "################"
-echo#cd
+#echo "################"
+#echo "##### VST2 #####"
+#echo "################"
+#echo
+#cd
 #wget -c https://sourceforge.net/projects/lsp-plugins/files/lsp-plugins/${LSP}/Linux-aarch64/lsp-plugins-vst2-${LSP}-Linux-aarch64.tar.gz
 #tar -xzvf lsp*.tar.gz
 #cd lsp-plugins-vst2-${LSP}*/
 #sudo cp -r usr/* /usr
 #cd
 #rm -rf lsp*
+#cd
+#url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+#latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+#wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-vst2-${latest_version}-Linux-aarch64.tar.gz"
+#tar -xzvf lsp*.tar.gz
+#cd lsp-plugins-vst2*/
+#sudo cp -r usr/* /usr
+#cd
+#rm -rf lsp*
 cd
 url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
 latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
-wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-vst2-${latest_version}-Linux-aarch64.tar.gz"
-tar -xzvf lsp*.tar.gz
-cd lsp-plugins-vst2*/
-sudo cp -r usr/* /usr
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-${latest_version}-Linux-aarch64.7z"
+https://github.com/lsp-plugins/lsp-plugins/releases/download/1.2.17/lsp-plugins-1.2.17-Linux-aarch64.7z
+7za x lsp*.7z
+cd lsp-plugins-*/
+sudo cp -r VST2/* /usr/lib/vst/
+sudo cp -r VST3/* /usr/lib/vst3/
+sudo cp -r LV2/* /usr/lib/lv2/
+sudo mkdir /usr/lib/ladspa /usr/lib/clap
+sudo cp -r LADSPA/* /usr/lib/ladspa/
+sudo cp -r CLAP/* /usr/lib/clap/
+sudo cp -r JACK/* /
+sudo cp -r GStreamer/* /
 cd
 rm -rf lsp*
 echo
-echo "VST2 Installed"
+echo "LSP Plugins Installed"
 echo
+<<LSP
 echo
 echo "################"
 echo "##### VST3 #####"
@@ -274,6 +293,7 @@ rm -rf lsp*
 echo
 echo "CLAP Installed"
 echo
+LSP
 echo
 echo "All LSP Plugins Installed"
 echo
