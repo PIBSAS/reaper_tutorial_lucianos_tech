@@ -39,6 +39,12 @@ ARCH=32 #32-bit architecture
 ##RENO=Renoise_3_4_3
 ##SUN=2.1.1c
 echo
+Echo "########################################"
+echo "##### Requirements for armhf #####"
+echo "########################################"
+sudo apt install -y wget curl grep git xz-utils sed awk p7zip-full
+echo
+echo
 echo "########################################"
 echo "##### Install Reaper DAW for armhf #####"
 echo "########################################"
@@ -133,6 +139,24 @@ echo "#################################"
 echo "########## LSP Plugins ##########"
 echo "#################################"
 echo
+cd
+url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
+latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-${latest_version}-Linux-arm32.7z"
+7za x lsp*.7z
+cd lsp-plugins-*/
+sudo cp -r VST2/* /usr/lib/vst/
+sudo cp -r VST3/* /usr/lib/vst3/
+sudo cp -r LV2/* /usr/lib/lv2/
+sudo mkdir /usr/lib/ladspa /usr/lib/clap
+sudo cp -r LADSPA/* /usr/lib/ladspa/
+sudo cp -r CLAP/* /usr/lib/clap/
+sudo cp -r JACK/* /
+sudo cp -r GStreamer/* /
+cd
+rm -rf lsp*
+echo
+<<LSP
 echo "################"
 echo "##### VST2 #####"
 echo "################"
@@ -236,6 +260,7 @@ rm -rf lsp*
 echo
 echo "CLAP Installed"
 echo
+LSP
 echo
 echo "LSP Plugins Installed"
 echo
