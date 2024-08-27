@@ -36,7 +36,7 @@ ARCH=64
 #REAPACK=1.2.4.5
 #SWS=sws-2.14.0.1-Linux-aarch64-216638bb
 #DSP=1.3.14
-RENO=Renoise_3_4_3
+RENO=Renoise_3_4_4
 SUN=2.1.1c
 echo
 echo "First the common install for Pi OS $ARCH bit"
