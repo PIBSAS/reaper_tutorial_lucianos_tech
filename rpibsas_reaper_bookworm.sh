@@ -41,7 +41,7 @@ SUN=2.1.1c
 echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
-sudo apt install -y wget curl grep git xz-utils sed awk p7zip-full
+sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full
 echo
 echo "##########################################"
 echo "##### Install Reaper DAW for aarch64 #####"
