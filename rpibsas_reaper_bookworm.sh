@@ -58,7 +58,7 @@ echo "## Adding KXStudio Repository to the OS ##"
 echo "##########################################"
 cd
 url="https://kx.studio/Repositories" ; \
-curl -sSL "$url" > p.html ; \
+curl -sSL "${url}" > p.html ; \
 download=$(awk -F'"' '/kxstudio-repos_[0-9.]*_all.deb/ {print $2}' p.html) ; \
 wget -c "${download}"
 rm p.html
@@ -114,7 +114,7 @@ echo "#################################"
 echo
 cd
 url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
-latest_version=$(curl -sSL $url | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
+latest_version=$(curl -sSL ${url} | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
 wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-${latest_version}-Linux-aarch64.7z"
 https://github.com/lsp-plugins/lsp-plugins/releases/download/1.2.17/lsp-plugins-1.2.17-Linux-aarch64.7z
 7za x lsp*.7z
@@ -340,7 +340,7 @@ echo "##########################################################"
 echo
 cd
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-scope-v[0-9.]*-arm64.tar.gz\|x42-scope-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+latest_version=$(curl -sSL ${url} | grep -o 'x42-scope-v[0-9.]*-arm64.tar.gz\|x42-scope-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
 wget -c "${url}x42-scope-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
@@ -523,7 +523,7 @@ echo "###################"
 echo
 cd
 url="https://github.com/cfillion/reapack/releases/latest/" ; \
-latest_version=$(curl -sSL $url | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
+latest_version=$(curl -sSL ${url} | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
 wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-aarch64.so"
 cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
 rm reaper_reapack*.so
@@ -536,7 +536,7 @@ echo
 echo
 cd $HOME/.config/REAPER/
 url="https://www.sws-extension.org/download/pre-release/" ; \
-html_content=$(curl -sSL "$url") ; \
+html_content=$(curl -sSL "${url}") ; \
 download=$(echo "$html_content" | grep -m 1 -oE '<a href="([^"]+\.tar\.xz)">sws-[0-9.]+-Linux-aarch64-[0-9a-f]+\.tar\.xz</a>' | sed -E 's/<a href="([^"]+)".*/\1/')  ; \
 full_url="${url}${download}" ; \
 wget -c "${full_url}"
@@ -551,10 +551,10 @@ echo
 echo "CLAP"
 cd
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*CLAP.deb
 sudo dpkg -i DSP56300Emu*FX-CLAP.deb
@@ -563,10 +563,10 @@ echo
 echo "LV2"
 cd
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-LV2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*LV2.deb
 sudo dpkg -i DSP56300Emu*FX-LV2.deb
@@ -575,10 +575,10 @@ echo
 echo "VST2"
 cd
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST2.deb
 sudo dpkg -i DSP56300Emu*FX-VST2.deb
@@ -587,10 +587,10 @@ echo
 echo "VST3"
 cd
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
-latest_deb=$(curl -s "$URL" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
