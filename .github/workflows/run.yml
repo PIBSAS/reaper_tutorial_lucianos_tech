@@ -24,7 +24,7 @@ jobs:
           echo "Running Bookworm 32-bit Script"
           ./rpibsas_reaperarmhf.sh > bookworm_32_output.txt 2>&1
           echo "Versions and errors for Bookworm 32-bit" > results_armhf.txt
-          echo "-----" >> results.txt
+          echo "-----" >> results_armhf.txt
           cat bookworm_32_output.txt >> results_armhf.txt
 
       - name: Run Bullseye 64-bit Script
@@ -33,7 +33,7 @@ jobs:
           echo "Running Bullseye 64-bit Script"
           ./rpibsas_reaper_Buster_Bullseye_64bit.sh > rpibsas_reaper_Buster_Bullseye_64bit_output.txt 2>&1
           echo "Versions and errors for Buste and Bullseye 64-bit" >> results_bullseye_64.txt
-          echo "-----" >> results.txt
+          echo "-----" >> results_bullseye_64.txt
           cat rpibsas_reaper_Buster_Bullseye_64bit_output.txt >> results_bullseye_64.txt
 
       - name: Run Bookworm 64-bit Script
@@ -42,13 +42,13 @@ jobs:
           echo "Running Bookworm 64-bit Script"
           ./rpibsas_reaper_bookworm.sh > rpibsas_reaper_bookworm_output.txt 2>&1
           echo "Versions and errors for Bookworm 64-bit" >> results_bookworm.txt
-          echo "-----" >> results.txt
+          echo "-----" >> results_bookworm.txt
           cat rpibsas_reaper_bookworm_output.txt >> results_bookworm.txt
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag: ${{ github.ref }}  # Usa el tag que activó el flujo de trabajo
-          files: *.txt
+          files: ./*.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
