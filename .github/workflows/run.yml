@@ -1,0 +1,54 @@
+name: Run Raspberry Pi Scripts
+
+on:
+  push:
+    tags:
+      - 'v*'  # Esto ejecutará el flujo de trabajo cuando hagas un push de un tag que comience con 'v'.
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest  # Usa un runner de Ubuntu para ejecutar los scripts.
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Run Bookworm 32-bit Script
+        id: bookworm_32
+        run: |
+          echo "Running Bookworm 32-bit Script"
+          ./rpibsas_reaperarmhf.sh > bookworm_32_output.txt 2>&1
+          echo "Versions and errors for Bookworm 32-bit" > results_armhf.txt
+          echo "-----" >> results.txt
+          cat bookworm_32_output.txt >> results_armhf.txt
+
+      - name: Run Bullseye 64-bit Script
+        id: bullseye_64
+        run: |
+          echo "Running Bullseye 64-bit Script"
+          ./rpibsas_reaper_Buster_Bullseye_64bit.sh > rpibsas_reaper_Buster_Bullseye_64bit_output.txt 2>&1
+          echo "Versions and errors for Buste and Bullseye 64-bit" >> results_bullseye_64.txt
+          echo "-----" >> results.txt
+          cat rpibsas_reaper_Buster_Bullseye_64bit_output.txt >> results_bullseye_64.txt
+
+      - name: Run Bookworm 64-bit Script
+        id: bookworm_64
+        run: |
+          echo "Running Bookworm 64-bit Script"
+          ./rpibsas_reaper_bookworm.sh > rpibsas_reaper_bookworm_output.txt 2>&1
+          echo "Versions and errors for Bookworm 64-bit" >> results_bookworm.txt
+          echo "-----" >> results.txt
+          cat rpibsas_reaper_bookworm_output.txt >> results_bookworm.txt
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag: ${{ github.ref }}  # Usa el tag que activó el flujo de trabajo
+          files: *.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
