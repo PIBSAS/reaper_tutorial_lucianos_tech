@@ -363,10 +363,11 @@ echo "##########################################################"
 echo
 echo "X42 Compressor"
 cd
-#wget -c http://x42-plugins.com/x42/linux/x42-compressor-v${X42}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-compressor-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-compressor-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-compressor-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-compressor-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-compressor-v[0-9.]*-arm64.tar.gz\|x42-compressor-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-compressor-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
@@ -378,10 +379,11 @@ echo "AVL Drums"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-avldrums-v${AVL}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-avldrums-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-avldrums-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-avldrums-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-avldrums-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-avldrums-v[0-9.]*-arm64.tar.gz\|x42-avldrums-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-avldrums-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -395,8 +397,10 @@ echo
 cd
 #wget -c https://x42-plugins.com/x42/linux/x42-gmsynth-v${GMS}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-gmsynth-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-gmsynth-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-gmsynth-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-gmsynth-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-gmsynth-v[0-9.]*-arm64.tar.gz\|x42-gmsynth-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-gmsynth-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -410,8 +414,10 @@ echo
 cd
 #wget -c https://x42-plugins.com/x42/linux/x42-midifilter-v${MFC}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-midifilter-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-midifilter-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-midifilter-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-midifilter-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-midifilter-v[0-9.]*-arm64.tar.gz\|x42-midifilter-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-midifilter-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -423,10 +429,11 @@ echo "Rule Based MIDI Filter"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-midimap-v${MAP}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-midimap-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-midimap-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-midimap-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-midimap-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-midimap-v[0-9.]*-arm64.tar.gz\|x42-midimap-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-midimap-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -438,10 +445,11 @@ echo "Step Sequencer"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${STEP}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-stepseq-8x8-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-stepseq-8x8-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-stepseq-8x8-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-stepseq-8x8-v[0-9.]*-arm64.tar.gz\|x42-stepseq-8x8-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-stepseq-8x8-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -453,10 +461,11 @@ echo "SetBfree"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/setBfree-v${SBF}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'setBfree-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/setBfree-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'setBfree-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/setBfree-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'setBfree-v[0-9.]*-arm64.tar.gz\|setBfree-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}setBfree-v${latest_version}-arm64.tar.gz"
 tar -xzvf set*.tar.gz
 cd set*/
 yes | ./install-lv2.sh
@@ -468,10 +477,11 @@ echo "Digital Peak Limiter"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-limiter-v${DPL}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-limiter-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-limiter-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-limiter-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-limiter-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-limiter-v[0-9.]*-arm64.tar.gz\|x42-limiter-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-limiter-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -483,10 +493,11 @@ echo "Auto Tune"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-autotune-v${TUNE}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-autotune-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-autotune-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-autotune-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-autotune-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-autotune-v[0-9.]*-arm64.tar.gz\|x42-autotune-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-autotune-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -498,10 +509,11 @@ echo "Zero Config Latency Convolver"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-zconvolver-v${ZERO}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-zconvolver-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-zconvolver-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-zconvolver-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-zconvolver-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-zconvolver-v[0-9.]*-arm64.tar.gz\|x42-zconvolver-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-zconvolver-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -513,10 +525,11 @@ echo "Phase Rotate"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-phaserotate-v${PHR}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-phaserotate-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-phaserotate-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-phaserotate-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-phaserotate-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-phaserotate-v[0-9.]*-arm64.tar.gz\|x42-phaserotate-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-phaserotate-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -528,10 +541,11 @@ echo "Oscilloscope"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-scope-v${SCP}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-scope-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-scope-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-scope-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-scope-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL $url | grep -o 'x42-scope-v[0-9.]*-arm64.tar.gz\|x42-scope-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-scope-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -543,10 +557,11 @@ echo "Mixer Trigger Preprocessor"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-mixtrix-v${MIX}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-mixtrix-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-mixtrix-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-mixtrix-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-mixtrix-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-mixtrix-v[0-9.]*-arm64.tar.gz\|x42-mixtrix-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-mixtrix-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -558,10 +573,11 @@ echo "Spectogram for Geeks"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-spectra-v${SFC}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-spectra-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-spectra-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-spectra-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-spectra-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-spectra-v[0-9.]*-arm64.tar.gz\|x42-spectra-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-spectra-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -573,10 +589,11 @@ echo "Test Signal Generator"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-testsignal-v${TSG}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-testsignal-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-testsignal-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-testsignal-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-testsignal-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-testsignal-v[0-9.]*-arm64.tar.gz\|x42-testsignal-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-testsignal-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -588,10 +605,11 @@ echo "Delayline Artificial Latency"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-nodelay-v${NDL}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-nodelay-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-nodelay-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-nodelay-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-nodelay-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-nodelay-v[0-9.]*-arm64.tar.gz\|x42-nodelay-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-nodelay-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -603,10 +621,11 @@ echo "Balance"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-balance-v${BAL}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-balance-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-balance-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-balance-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-balance-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-balance-v[0-9.]*-arm64.tar.gz\|x42-balance-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-balance-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
@@ -619,10 +638,11 @@ echo "Stereo Routing"
 echo "##########################################################"
 echo
 cd
-#wget -c https://x42-plugins.com/x42/linux/x42-stereoroute-v${STR}-arm64.tar.gz
 url="https://x42-plugins.com/x42/linux/"
-latest_version=$(curl -sSL $url | grep -o 'x42-stereoroute-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
-wget -c "https://x42-plugins.com/x42/linux/x42-stereoroute-v${latest_version}-arm64.tar.gz"
+#latest_version=$(curl -sSL $url | grep -o 'x42-stereoroute-v[0-9.]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*' | sort -V | tail -n 1)
+#wget -c "https://x42-plugins.com/x42/linux/x42-stereoroute-v${latest_version}-arm64.tar.gz"
+latest_version=$(curl -sSL ${url} | grep -o 'x42-stereoroute-v[0-9.]*-arm64.tar.gz\|x42-stereoroute-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
+wget -c "${url}x42-stereoroute-v${latest_version}-arm64.tar.gz"
 tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
