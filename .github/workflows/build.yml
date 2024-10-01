@@ -3,8 +3,9 @@ name: Run Raspberry Pi Scripts
 on:
   push:
     tags:
-      - 'v*'  # Esto ejecutará el flujo de trabajo cuando hagas un push de un tag que comience con 'v'.
-
+      - 'v*'
+  workflow_dispatch:
+  
 permissions:
   contents: write
 
