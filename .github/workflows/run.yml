@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'  # Esto ejecutará el flujo de trabajo cuando hagas un push de un tag que comience con 'v'.
 
+permissions:
+  contents: write
+
 jobs:
   run-scripts:
     runs-on: ubuntu-latest  # Usa un runner de Ubuntu para ejecutar los scripts.
