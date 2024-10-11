@@ -3,12 +3,12 @@
 #################################/////RASPBERRY PI BUENOS AIRES/////#####################################################
 #########################################################################################################################
 # Repositorio: Reaper Tutorial 2024
-# Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/raspberrypibuenosaires/)
+# Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/lucianostech/)
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
 echo
-echo "Start Reaper Tutorial Install from Raspberry Pi Buenos Aires this will take some time, so connect Ethernet Cable!"
+echo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
 echo
 ARCH=64
 RENO=Renoise_3_4_4
