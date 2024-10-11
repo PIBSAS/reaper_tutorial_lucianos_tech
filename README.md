@@ -1,8 +1,8 @@
-# REAPER DAW Tutorial Raspberry Pi Buenos Aires
+# REAPER DAW Tutorial Luciano's tech
 An script shell for all the installations and compiles of the Reaper DAW Tutorial, you will need to make some setup manually in the Reaper UI, keep that on mind! Or don't be lazy and just copy and paste from my website haha joke! 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/PIBSAS/RetroPieBios/master/logov3.png" alt="Raspberry Pi Buenos Aires" width="400" height="500">
+<img src="https://raw.githubusercontent.com/PIBSAS/RetroPieBios/master/logov3.png" alt="Luciano's tech" width="400" height="500">
 </p>
 
 # How can i run it? On Pi OS Buster/Bullseye 64bit:
@@ -38,5 +38,5 @@ curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/
 
 
 # Tutorial of Reaper DAW on Raspberry Pi:
-- https://sites.google.com/view/raspberrypibuenosaires/reaper-digital-audio-workstation
+- https://sites.google.com/view/lucianostech/reaper-digital-audio-workstation
 
