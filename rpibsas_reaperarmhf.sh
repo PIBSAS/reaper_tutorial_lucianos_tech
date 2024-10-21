@@ -530,6 +530,14 @@ unzip Sampli*.zip
 rm Sampli*.zip
 mv "Samplicity M7 Main - 02 - Wave, 32 bit, 48 Khz, v1.1"/ Music/
 echo
+cd
+mkdir Music/
+mkdir Music/Bricasti
+wget -c "https://cdn.samplicity.com/downloads/Samplicity%20-%20Bricasti%20IRs%20version%202023-10.zip"
+unzip Sampli*.zip
+rm Sampli*.zip
+mv "Samplicity - Bricasti IRs version 2023-10"*/ Music/Bricasti/
+echo
 echo
 echo "Samples Downloaded"
 echo
