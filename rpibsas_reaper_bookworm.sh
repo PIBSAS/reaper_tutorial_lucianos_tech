@@ -1,9 +1,9 @@
 #! /bin/bash
 #########################################################################################################################
-#################################/////RASPBERRY PI BUENOS AIRES/////#####################################################
+#################################/////LUCIANO'S TECH/////#####################################################
 #########################################################################################################################
 # Repositorio: Reaper Tutorial 2024
-# Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/lucianostech/)
+# Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
@@ -623,15 +623,17 @@ mv "Samplicity - Bricasti IRs version 2023-10"*/ Music/Bricasti/
 echo
 echo "Samples Downloaded"
 echo
-echo "###############################################"
-echo "############## Renois Demo ####################"
-echo "###############################################"
+echo "####################################################################################################################"
+echo "############################################### Renoise DAW Demo ###################################################"
+echo "####################################################################################################################"
+echo
 cd
-wget -c https://files.renoise.com/demo/${RENO}_Demo_Linux_arm64.tar.gz
-tar -xvzf Renoise*64.tar.gz
+wget $(curl -s https://www.renoise.com/download | grep -o 'https://files.renoise.com/demo/Renoise_[^"]*_Demo_Linux_arm64.tar.gz' | head -n 1)
+tar -xvzf Renoise*arm64.tar.gz
 rm Reno*.tar.gz
 cd Renoise*arm64
 sudo ./install.sh
+echo
 echo "Renoise Demo installed"
 echo
 echo
