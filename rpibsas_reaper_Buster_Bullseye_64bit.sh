@@ -580,9 +580,9 @@ echo
 echo "DSP53600 Emulator Installed"
 echo
 echo
-echo "####################################################################################################################"
+echo "#####################################################################################################################"
 echo "##### Getting Samplicity Samples and save to Music Folder It will make one folder if you are not  in English OS #####"
-echo "####################################################################################################################"
+echo "#####################################################################################################################"
 mkdir Music
 wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1.zip
 unzip Sampli*.zip
@@ -598,6 +598,17 @@ rm Sampli*.zip
 mv "Samplicity - Bricasti IRs version 2023-10"*/ Music/Bricasti/
 echo
 echo "Samples Downloaded"
+echo
+echo "####################################################################################################################"
+echo "############################################### Renoise DAW Demo ###################################################"
+echo "####################################################################################################################"
+echo
+cd
+wget $(curl -s https://www.renoise.com/download | grep -o 'https://files.renoise.com/demo/Renoise_[^"]*_Demo_Linux_arm64.tar.gz' | head -n 1)
+tar -xvzf Renoise*arm64.tar.gz
+rm Reno*.tar.gz
+cd Renoise*arm64
+sudo ./install.sh
 echo
 echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
 echo
