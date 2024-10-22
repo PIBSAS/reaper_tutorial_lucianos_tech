@@ -541,6 +541,16 @@ echo
 echo
 echo "Samples Downloaded"
 echo
+echo "####################################################################################################################"
+echo "############################################ Renoise Demo ##########################################################"
+echo "####################################################################################################################"
+cd
+wget $(curl -s https://www.renoise.com/download | grep -o 'https://files.renoise.com/demo/Renoise_[^"]*_Demo_Linux_armhf.tar.gz' | head -n 1)
+tar -xvzf Renoise*armhf.tar.gz
+rm Reno*.tar.gz
+cd Renoise*armhf
+sudo ./install.sh
+echo
 echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
 echo
 echo "Reboot the Pi"
