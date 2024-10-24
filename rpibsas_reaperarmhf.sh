@@ -524,11 +524,12 @@ echo
 echo "####################################################################################################################"
 echo "##### Getting Samplicity Samples and save to Music Folder I will make one folder if you are not  in English OS #####"
 echo "####################################################################################################################"
-mkdir Music
-wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1.zip
-unzip Sampli*.zip
-rm Sampli*.zip
-mv "Samplicity M7 Main - 02 - Wave, 32 bit, 48 Khz, v1.1"/ Music/
+#mkdir Music
+#wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1.zip
+#unzip Sampli*.zip
+#rm Sampli*.zip
+#mv "Samplicity M7 Main - 02 - Wave, 32 bit, 48 Khz, v1.1"/ Music/
+curl -sSL https://raw.githubusercontent.com/PIBSAS/samp/main/get.sh | bash
 echo
 cd
 mkdir Music/
