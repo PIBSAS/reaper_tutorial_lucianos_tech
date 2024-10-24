@@ -14,7 +14,7 @@ ARCH=64
 echo
 echo "First the common install for Pi OS $ARCH bit"
 echo
-sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full
+sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
 echo
 echo "##########################################"
 echo "##### Install Reaper DAW for aarch64 #####"
@@ -573,7 +573,10 @@ echo
 #sudo dpkg -i DSP56300Emu*VST2.deb
 #sudo dpkg -i DSP56300Emu*FX-VST2.deb
 cd
-wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20C%20%28am29f040b_6v6%29.zip/Access%20Virus%20C%20%28am29f040b_6v6%29.BIN"
+#wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20C%20%28am29f040b_6v6%29.zip/Access%20Virus%20C%20%28am29f040b_6v6%29.BIN"
+wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/Access Virus C (am29f040b_6v6).zip"
+unzip "Access Virus C (am29f040b_6v6).zip"
+rm "Access Virus C (am29f040b_6v6).zip"
 sudo cp "Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
 cd
 echo
