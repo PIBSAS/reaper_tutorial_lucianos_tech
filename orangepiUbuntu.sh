@@ -45,13 +45,82 @@ titulo() {
 echo
 titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
 echo
-ARCH=64
 RENO=Renoise_3_4_4
 SUN=2.1.1c
 echo
 titulo "First the common install for $(uname -m) bit"
 echo
-sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
+echo
+titulo "Adding KXStudio Repository to the OS"
+echo
+cd
+url="https://kx.studio/Repositories" ; \
+curl -sSL "${url}" > p.html ; \
+download=$(awk -F'"' '/kxstudio-repos_[0-9.]*_all.deb/ {print $2}' p.html) ; \
+wget -c "${download}"
+rm p.html
+sudo dpkg -i kxstudio*.deb
+rm kxstudio*.deb
+sudo apt update
+echo
+titulo "KXStudio Repo Added"
+echo
+echo
+titulo "Install Plugins"
+echo
+packages=(
+    wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev
+    libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor0 libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxcb-xinerama0
+    libxrandr-dev libxinerama-dev libxinerama1 libxcursor-dev libasound2-dev libjack-jackd2-dev cmake libssl-dev clang 
+    libgtk-3-dev libwebkit2gtk-4.1-0 libwebkit2gtk-4.1-dev libcurl4-openssl-dev alsa alsa-tools libfreetype6-dev  
+    x11proto-xinerama-dev libgl1-mesa-dev qjackctl meterbridge jack-tools libxcursor1 libx11-dev libsndfile1-dev libsamplerate0-dev
+    vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst
+    wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi
+    carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3
+    phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2
+    zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins
+    tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter
+    linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp
+    drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2
+    dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1
+    synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2
+    noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder
+    kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins
+    guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer
+    blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst
+    cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst avldrums.lv2 avldrums.lv2-soundfont
+    invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop 
+    blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins 
+    tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter 
+    jmeters jnoise klick qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 
+    freewheeling horgand muse nama gxtuner sox sweep terminatorx ghostess whysynth
+)
+echo
+sudo apt install -y "${packages[@]}"
+sudo apt-get install -y --fix-missing
+#sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst 
+#sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install qjackctl qjackrcd qpwgraph
+#sudo apt install -y avldrums.lv2
+#sudo apt install -y avldrums.lv2-soundfont
+#sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
+#sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter jmeters jnoise klick meterbridge qjackctl qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 freewheeling horgand muse nama gxtuner sox sweep terminatorx
+echo
+#sudo apt install -y pipewire-jack tuxguitar-synth-lv2
+echo
+#sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+echo
+#sudo apt install -y ghostess whysynth
+echo
+#req=(
+#    wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev
+#    libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev
+#    libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake libssl-dev clang
+#)
+echo
+#sudo apt install -y "${req[@]}"
+echo
+echo
+#sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
 echo
 titulo "Install Reaper DAW for $(uname -m)"
 cd
@@ -87,55 +156,6 @@ echo
 sed -i '/^fxdenorm=1.*/i clap_path_linux-aarch64=/usr/local/lib/clap;/usr/lib/clap;$HOME/.clap;%CLAP_PATH%;/lib/clap;/usr/local/lib/clap;' $HOME/.config/REAPER/reaper.ini
 echo
 echo
-titulo "Adding KXStudio Repository to the OS"
-echo
-cd
-url="https://kx.studio/Repositories" ; \
-curl -sSL "${url}" > p.html ; \
-download=$(awk -F'"' '/kxstudio-repos_[0-9.]*_all.deb/ {print $2}' p.html) ; \
-wget -c "${download}"
-rm p.html
-sudo dpkg -i kxstudio*.deb
-rm kxstudio*.deb
-sudo apt update
-echo
-titulo "KXStudio Repo Added"
-echo
-echo
-titulo "Install Plugins"
-echo
-packages=(
-    vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst
-    wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi
-    carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3
-    phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2
-    zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins
-    tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter
-    linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp
-    drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2
-    dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1
-    synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2
-    noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder
-    kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins
-    guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer
-    blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst
-    cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst
-)
-echo
-sudo apt install -y "${packages[@]}"
-#sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst 
-#sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install qjackctl qjackrcd qpwgraph
-sudo apt install -y avldrums.lv2
-sudo apt install -y avldrums.lv2-soundfont
-sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
-sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter jmeters jnoise klick meterbridge qjackctl qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 freewheeling horgand muse nama gxtuner sox sweep terminatorx
-echo
-sudo apt install -y pipewire-jack tuxguitar-synth-lv2
-echo
-sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
-echo
-sudo apt install -y ghostess whysynth
-echo
 titulo "Secuencer Megababy Nandy's Mod"
 echo
 wget "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/sequencer_megababy_nandy_mod" -P $HOME/.config/REAPER/Effects/midi/
@@ -159,7 +179,6 @@ cd
 url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
 latest_version=$(curl -sSL ${url} | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
 wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-${latest_version}-Linux-aarch64.7z"
-https://github.com/lsp-plugins/lsp-plugins/releases/download/1.2.17/lsp-plugins-1.2.17-Linux-aarch64.7z
 7za x lsp*.7z
 cd lsp-plugins-*/
 sudo cp -r VST2/* /usr/lib/vst/
@@ -178,32 +197,42 @@ echo
 titulo "Surge XT This will take a lot of time"
 echo
 cd
-sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
-sudo apt-get install -y libgtk-3-dev
-sudo apt-get install -y libwebkit2gtk-4.0
-sudo apt-get install -y libwebkit2gtk-4.0-dev
-sudo apt-get install -y libcurl4-openssl-dev
-sudo apt-get install -y alsa
-sudo apt-get install -y alsa-tools
-sudo apt-get install -y libasound2-dev
-sudo apt-get install -y libjack-dev
-sudo apt-get install -y libfreetype6-dev
-sudo apt-get install -y libxinerama-dev
-sudo apt-get install -y libxcb-xinerama0
-sudo apt-get install -y libxinerama1
-sudo apt-get install -y x11proto-xinerama-dev
-sudo apt-get install -y libxrandr-dev
-sudo apt-get install -y libgl1-mesa-dev
-sudo apt-get install -y libxcursor-dev
-sudo apt-get install -y libxcursor1
-sudo apt-get install -y libxcb-cursor-dev
-sudo apt-get install -y libxcb-cursor0
-sudo apt-get install -y qjackctl meterbridge jack-tools
-sudo apt-get install -y --fix-missing
+#surge=(
+#    build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev
+#    libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev
+#    libjack-jackd2-dev cmake libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev
+#    alsa alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1
+#    x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcb-cursor0 qjackctl meterbridge jack-tools clang
+#)
+echo
+#sudo apt install -y "${surge[@]}"
+echo
+#sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+#sudo apt-get install -y libgtk-3-dev
+#sudo apt-get install -y libwebkit2gtk-4.0
+#sudo apt-get install -y libwebkit2gtk-4.0-dev
+#sudo apt-get install -y libcurl4-openssl-dev
+#sudo apt-get install -y alsa
+#sudo apt-get install -y alsa-tools
+#sudo apt-get install -y libasound2-dev
+#sudo apt-get install -y libjack-dev
+#sudo apt-get install -y libfreetype6-dev
+#sudo apt-get install -y libxinerama-dev
+#sudo apt-get install -y libxcb-xinerama0
+#sudo apt-get install -y libxinerama1
+#sudo apt-get install -y x11proto-xinerama-dev
+#sudo apt-get install -y libxrandr-dev
+#sudo apt-get install -y libgl1-mesa-dev
+#sudo apt-get install -y libxcursor-dev
+#sudo apt-get install -y libxcursor1
+#sudo apt-get install -y libxcb-cursor-dev
+#sudo apt-get install -y libxcb-cursor0
+#sudo apt-get install -y qjackctl meterbridge jack-tools
+#sudo apt-get install -y --fix-missing
 git clone https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
-sudo apt install -y clang
+#sudo apt install -y clang
 cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
 echo
@@ -438,14 +467,14 @@ echo
 echo
 titulo "Dependencies requiered by Stochas"
 echo
-sudo apt install -y libssl-dev cmake
+#sudo apt install -y libssl-dev cmake
 echo
 echo
 titulo "Compille and Install Stochas"
 echo
 cd
 echo
-sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
+#sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
 echo
 git clone https://github.com/surge-synthesizer/stochas.git
 echo
@@ -483,13 +512,13 @@ echo
 echo
 titulo "Ninjas 2 Standalone"
 echo
-sudo apt install -y libjack-jackd2-dev
+#sudo apt install -y libjack-jackd2-dev
 echo
 echo
 titulo "Compile Ninjas 2 Plugins"
 echo
 cd
-sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
+#sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
 echo
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 echo
