@@ -10,16 +10,15 @@
 echo
 echo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
 echo
-ARCH=32 #32-bit architecture
 echo
 Echo "########################################"
-echo "##### Requirements for armhf #####"
+echo "##### Requirements for $(uname -m) #####"
 echo "########################################"
 sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full
 echo
 echo
 echo "########################################"
-echo "##### Install Reaper DAW for armhf #####"
+echo "##### Install Reaper DAW for $(uname -m) #####"
 echo "########################################"
 cd
 sudo apt install -y wget curl grep git xz-utils
@@ -552,6 +551,6 @@ rm Reno*.tar.gz
 cd Renoise*armhf
 sudo ./install.sh
 echo
-echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
+echo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
 echo
 echo "Reboot the Pi"
