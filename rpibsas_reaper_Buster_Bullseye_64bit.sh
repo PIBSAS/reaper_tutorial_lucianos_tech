@@ -10,14 +10,13 @@
 echo
 echo "Start Reaper Tutorial Install from luciano's tech this will take some time, so connect Ethernet Cable!"
 echo
-ARCH=64
 echo
-echo "First the common install for Pi OS $ARCH bit"
+echo "First the common install for Pi OS $(uname -m) bit"
 echo
 sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
 echo
 echo "##########################################"
-echo "##### Install Reaper DAW for aarch64 #####"
+echo "##### Install Reaper DAW for $(uname -) #####"
 echo "##########################################"
 cd
 rm reaper*
@@ -104,7 +103,6 @@ cd
 url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
 latest_version=$(curl -sSL ${url} | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
 wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-${latest_version}-Linux-aarch64.7z"
-https://github.com/lsp-plugins/lsp-plugins/releases/download/1.2.17/lsp-plugins-1.2.17-Linux-aarch64.7z
 7za x lsp*.7z
 cd lsp-plugins-*/
 sudo cp -r VST2/* /usr/lib/vst/
