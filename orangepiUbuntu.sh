@@ -501,28 +501,6 @@ sudo ./install.sh
 echo
 titulo "Renoise Demo installed"
 echo
-titulo "Bespoke DAW"
-echo
-echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
-curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
-sudo apt update
-sudo apt install bespokesynth
-#echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
-#curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
-#sudo apt update
-#sudo apt install -y bespokesynth
-echo
-titulo "SunVox"
-echo
-cd
-wget -c https://warmplace.ru/soft/sunvox/sunvox-${SUN}.zip
-unzip sunvox*.zip
-rm sunvox*.zip
-cd sunvox/sunvox/
-rm -rf wince macos linux_x* linux_arm_a* windows_x*
-titulo "You still have to do a desktop shortcut"
-echo
-echo
 titulo "Surge XT This will take a lot of time"
 echo
 cd
