@@ -25,6 +25,14 @@ Please connect Raspberry Pi to ethernet, for stability when you download and ins
 curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaperarmhf.sh | bash
 ```
 
+# How can i run it? On Orange Pi 5 Plus, Ubuntu OS 64bit:
+```
+sudo apt install -y curl
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/orangepiUbuntu.sh | bash
+```
+
+Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
+
 <h1 align="center"> Invite a Coffee</h1>
 
 <p align="center">
