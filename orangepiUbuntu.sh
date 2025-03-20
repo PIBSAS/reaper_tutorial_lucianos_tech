@@ -88,7 +88,7 @@ packages=(
     kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins
     guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer
     blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst
-    cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst avldrums.lv2 avldrums.lv2-soundfont
+    cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst avldrums.lv2 avldrums.lv2-data
     invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop 
     blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins 
     tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter 
@@ -193,57 +193,6 @@ cd
 rm -rf lsp*
 echo
 titulo "LSP Plugins Installed"
-echo
-titulo "Surge XT This will take a lot of time"
-echo
-cd
-#surge=(
-#    build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev
-#    libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev
-#    libjack-jackd2-dev cmake libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev
-#    alsa alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1
-#    x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcb-cursor0 qjackctl meterbridge jack-tools clang
-#)
-echo
-#sudo apt install -y "${surge[@]}"
-echo
-#sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
-#sudo apt-get install -y libgtk-3-dev
-#sudo apt-get install -y libwebkit2gtk-4.0
-#sudo apt-get install -y libwebkit2gtk-4.0-dev
-#sudo apt-get install -y libcurl4-openssl-dev
-#sudo apt-get install -y alsa
-#sudo apt-get install -y alsa-tools
-#sudo apt-get install -y libasound2-dev
-#sudo apt-get install -y libjack-dev
-#sudo apt-get install -y libfreetype6-dev
-#sudo apt-get install -y libxinerama-dev
-#sudo apt-get install -y libxcb-xinerama0
-#sudo apt-get install -y libxinerama1
-#sudo apt-get install -y x11proto-xinerama-dev
-#sudo apt-get install -y libxrandr-dev
-#sudo apt-get install -y libgl1-mesa-dev
-#sudo apt-get install -y libxcursor-dev
-#sudo apt-get install -y libxcursor1
-#sudo apt-get install -y libxcb-cursor-dev
-#sudo apt-get install -y libxcb-cursor0
-#sudo apt-get install -y qjackctl meterbridge jack-tools
-#sudo apt-get install -y --fix-missing
-git clone https://github.com/surge-synthesizer/surge.git
-cd surge
-git submodule update --init --recursive
-#sudo apt install -y clang
-cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
-echo
-cd
-cd surge
-cd ignore
-cd s13clang
-echo
-sudo make install
-echo
-titulo "Surge XT Plugins installed"
 echo
 titulo "X42 Plugins"
 echo
@@ -465,74 +414,6 @@ echo
 titulo "X42 Plugins Installed"
 echo
 echo
-titulo "Dependencies requiered by Stochas"
-echo
-#sudo apt install -y libssl-dev cmake
-echo
-echo
-titulo "Compille and Install Stochas"
-echo
-cd
-echo
-#sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
-echo
-git clone https://github.com/surge-synthesizer/stochas.git
-echo
-cd stochas/
-echo
-git submodule update --depth 1 --init --recursive
-echo
-export SVER=`cat VERSION`
-export GH=`git log -1 --format=%h`
-echo "Version ${SVER} hash ${GH}"
-echo
-sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
-echo
-cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
-echo
-cmake --build build --config Release
-echo
-cd build
-echo
-sudo make install
-echo
-mkdir $HOME/.clap
-echo
-mkdir $HOME/.vst3
-cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
-echo
-cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
-echo
-sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
-rm -rf $HOME/stochas
-cd
-echo
-titulo "Stochas Installed"
-echo
-echo
-titulo "Ninjas 2 Standalone"
-echo
-#sudo apt install -y libjack-jackd2-dev
-echo
-echo
-titulo "Compile Ninjas 2 Plugins"
-echo
-cd
-#sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
-echo
-git clone --recursive https://github.com/rghvdberg/ninjas2.git
-echo
-cd ninjas2
-echo
-make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
-echo
-sudo make install
-echo
-rm -rf ../ninjas2
-cd
-echo
-titulo "Ninjas 2 Installed"
-echo
 titulo "ReaPack"
 echo
 cd
@@ -665,6 +546,125 @@ cd sunvox/sunvox/
 rm -rf wince macos linux_x* linux_arm_a* windows_x*
 titulo "You still have to do a desktop shortcut"
 echo
+echo
+titulo "Surge XT This will take a lot of time"
+echo
+cd
+#surge=(
+#    build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev
+#    libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev
+#    libjack-jackd2-dev cmake libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev
+#    alsa alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1
+#    x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcb-cursor0 qjackctl meterbridge jack-tools clang
+#)
+echo
+#sudo apt install -y "${surge[@]}"
+echo
+#sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+#sudo apt-get install -y libgtk-3-dev
+#sudo apt-get install -y libwebkit2gtk-4.0
+#sudo apt-get install -y libwebkit2gtk-4.0-dev
+#sudo apt-get install -y libcurl4-openssl-dev
+#sudo apt-get install -y alsa
+#sudo apt-get install -y alsa-tools
+#sudo apt-get install -y libasound2-dev
+#sudo apt-get install -y libjack-dev
+#sudo apt-get install -y libfreetype6-dev
+#sudo apt-get install -y libxinerama-dev
+#sudo apt-get install -y libxcb-xinerama0
+#sudo apt-get install -y libxinerama1
+#sudo apt-get install -y x11proto-xinerama-dev
+#sudo apt-get install -y libxrandr-dev
+#sudo apt-get install -y libgl1-mesa-dev
+#sudo apt-get install -y libxcursor-dev
+#sudo apt-get install -y libxcursor1
+#sudo apt-get install -y libxcb-cursor-dev
+#sudo apt-get install -y libxcb-cursor0
+#sudo apt-get install -y qjackctl meterbridge jack-tools
+#sudo apt-get install -y --fix-missing
+git clone https://github.com/surge-synthesizer/surge.git
+cd surge
+git submodule update --init --recursive
+#sudo apt install -y clang
+cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
+echo
+cd
+cd surge
+cd ignore
+cd s13clang
+echo
+sudo make install
+echo
+titulo "Surge XT Plugins installed"
+echo
+echo
+titulo "Dependencies requiered by Stochas"
+echo
+#sudo apt install -y libssl-dev cmake
+echo
+titulo "Compille and Install Stochas"
+echo
+cd
+echo
+#sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
+echo
+git clone https://github.com/surge-synthesizer/stochas.git
+echo
+cd stochas/
+echo
+git submodule update --depth 1 --init --recursive
+echo
+export SVER=`cat VERSION`
+export GH=`git log -1 --format=%h`
+echo "Version ${SVER} hash ${GH}"
+echo
+sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+echo
+cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+echo
+cmake --build build --config Release
+echo
+cd build
+echo
+sudo make install
+echo
+mkdir $HOME/.clap
+echo
+mkdir $HOME/.vst3
+cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+echo
+cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
+echo
+sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
+rm -rf $HOME/stochas
+cd
+echo
+titulo "Stochas Installed"
+echo
+echo
+titulo "Ninjas 2 Standalone"
+echo
+#sudo apt install -y libjack-jackd2-dev
+echo
+echo
+titulo "Compile Ninjas 2 Plugins"
+echo
+cd
+#sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
+echo
+git clone --recursive https://github.com/rghvdberg/ninjas2.git
+echo
+cd ninjas2
+echo
+make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
+echo
+sudo make install
+echo
+rm -rf ../ninjas2
+cd
+echo
+titulo "Ninjas 2 Installed"
 echo
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
 echo
