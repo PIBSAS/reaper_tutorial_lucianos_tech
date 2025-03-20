@@ -98,29 +98,6 @@ packages=(
 echo
 sudo apt install -y "${packages[@]}"
 sudo apt-get install -y --fix-missing
-#sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst 
-#sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install qjackctl qjackrcd qpwgraph
-#sudo apt install -y avldrums.lv2
-#sudo apt install -y avldrums.lv2-soundfont
-#sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
-#sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter jmeters jnoise klick meterbridge qjackctl qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 freewheeling horgand muse nama gxtuner sox sweep terminatorx
-echo
-#sudo apt install -y pipewire-jack tuxguitar-synth-lv2
-echo
-#sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
-echo
-#sudo apt install -y ghostess whysynth
-echo
-#req=(
-#    wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev
-#    libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev
-#    libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake libssl-dev clang
-#)
-echo
-#sudo apt install -y "${req[@]}"
-echo
-echo
-#sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
 echo
 titulo "Install Reaper DAW for $(uname -m)"
 cd
@@ -147,7 +124,7 @@ reaper &
 sleep  10
 sudo pkill reaper
 echo
-titulo"Adding Plugins Paths"
+titulo "Adding Plugins Paths"
 echo
 sed -i 's!vstpath=!vstpath=$HOME/.vst;$HOME/.vst3;/lib/vst;/lib/vst3;/lib/lxvst;/usr/lib/vst;/usr/lib/vst3;/usr/lib/lxvst;/usr/local/lib/vst;/usr/local/lib/vst3;/usr/lib/lxvst;/lib/vst/carla.vst/;!' $HOME/.config/REAPER/reaper.ini
 echo
@@ -501,11 +478,6 @@ titulo "DSP53600 Emulator Installed"
 echo
 titulo "Getting Samplicity Samples and save to Music Folder I will make one folder if you are not in English OS"
 echo
-#mkdir Music
-#wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1.zip
-#unzip Sampli*.zip
-#rm Sampli*.zip
-#mv "Samplicity M7 Main - 02 - Wave, 32 bit, 48 Khz, v1.1"/ Music/
 curl -sSL https://raw.githubusercontent.com/PIBSAS/samp/main/get.sh | bash
 echo
 cd
@@ -531,10 +503,14 @@ titulo "Renoise Demo installed"
 echo
 titulo "Bespoke DAW"
 echo
-echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
-curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
+echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
+curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
 sudo apt update
-sudo apt install -y bespokesynth
+sudo apt install bespokesynth
+#echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
+#curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
+#sudo apt update
+#sudo apt install -y bespokesynth
 echo
 titulo "SunVox"
 echo
@@ -550,42 +526,9 @@ echo
 titulo "Surge XT This will take a lot of time"
 echo
 cd
-#surge=(
-#    build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev
-#    libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev
-#    libjack-jackd2-dev cmake libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev
-#    alsa alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1
-#    x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcb-cursor0 qjackctl meterbridge jack-tools clang
-#)
-echo
-#sudo apt install -y "${surge[@]}"
-echo
-#sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
-#sudo apt-get install -y libgtk-3-dev
-#sudo apt-get install -y libwebkit2gtk-4.0
-#sudo apt-get install -y libwebkit2gtk-4.0-dev
-#sudo apt-get install -y libcurl4-openssl-dev
-#sudo apt-get install -y alsa
-#sudo apt-get install -y alsa-tools
-#sudo apt-get install -y libasound2-dev
-#sudo apt-get install -y libjack-dev
-#sudo apt-get install -y libfreetype6-dev
-#sudo apt-get install -y libxinerama-dev
-#sudo apt-get install -y libxcb-xinerama0
-#sudo apt-get install -y libxinerama1
-#sudo apt-get install -y x11proto-xinerama-dev
-#sudo apt-get install -y libxrandr-dev
-#sudo apt-get install -y libgl1-mesa-dev
-#sudo apt-get install -y libxcursor-dev
-#sudo apt-get install -y libxcursor1
-#sudo apt-get install -y libxcb-cursor-dev
-#sudo apt-get install -y libxcb-cursor0
-#sudo apt-get install -y qjackctl meterbridge jack-tools
-#sudo apt-get install -y --fix-missing
 git clone https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
-#sudo apt install -y clang
 cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
 echo
@@ -598,16 +541,9 @@ sudo make install
 echo
 titulo "Surge XT Plugins installed"
 echo
-echo
-titulo "Dependencies requiered by Stochas"
-echo
-#sudo apt install -y libssl-dev cmake
-echo
 titulo "Compille and Install Stochas"
 echo
 cd
-echo
-#sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
 echo
 git clone https://github.com/surge-synthesizer/stochas.git
 echo
@@ -645,14 +581,9 @@ echo
 echo
 titulo "Ninjas 2 Standalone"
 echo
-#sudo apt install -y libjack-jackd2-dev
-echo
-echo
 titulo "Compile Ninjas 2 Plugins"
 echo
 cd
-#sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
-echo
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 echo
 cd ninjas2
