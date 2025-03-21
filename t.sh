@@ -15,7 +15,7 @@ USUARIO=$(whoami)
 SUDOERS_TEMP_FILE="/etc/sudoers.d/temp_nopasswd"
 
 # Agregar permisos temporales
-echo "$USUARIO ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/make" | sudo tee "$SUDOERS_TEMP_FILE" > /dev/null
+echo "$USUARIO ALL=(ALL) NOPASSWD: ALL" | sudo tee "$SUDOERS_TEMP_FILE" > /dev/null
 
 echo "Se han concedido permisos de sudo sin contraseña temporalmente."
 
