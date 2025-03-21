@@ -8,6 +8,9 @@
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
+USUARIO=$(whoami)
+SUDOERS_TEMP_FILE="/etc/sudoers.d/temp_nopasswd"
+echo "$USUARIO ALL=(ALL) NOPASSWD: ALL" | sudo tee "$SUDOERS_TEMP_FILE" > /dev/null
 titulo() {
     local texto="$1"
     local longitud=120  # Longitud total de la línea
@@ -39,6 +42,7 @@ titulo() {
     echo "$linea"
     echo
 }
+titulo "Adding temp sudoers so the script dont ask you for password again, when script ends, will revert this step"
 titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
 RENO=Renoise_3_4_4
 SUN=2.1.1c
@@ -423,5 +427,7 @@ rm -rf ../ninjas2
 cd
 titulo "Ninjas 2 Installed"
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
+titulo "Reverting sudoers temp file, please make sure reboot..."
+sudo rm -f "$SUDOERS_TEMP_FILE"
 titulo "Now Reboot to take effects changes"
 sudo reboot
