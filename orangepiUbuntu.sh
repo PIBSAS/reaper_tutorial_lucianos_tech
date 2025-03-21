@@ -161,7 +161,6 @@ cd lsp-plugins-*/
 sudo cp -r VST2/* /usr/lib/vst/
 sudo cp -r VST3/* /usr/lib/vst3/
 sudo cp -r LV2/* /usr/lib/lv2/
-sudo mkdir /usr/lib/ladspa /usr/lib/clap
 sudo cp -r LADSPA/* /usr/lib/ladspa/
 sudo cp -r CLAP/* /usr/lib/clap/
 sudo cp -r JACK/* /
@@ -418,10 +417,10 @@ echo
 titulo "CLAP"
 echo
 cd
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*CLAP.deb
@@ -431,10 +430,10 @@ echo
 titulo "LV2"
 echo
 cd
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*LV2.deb
@@ -444,10 +443,10 @@ echo
 titulo "VST2"
 echo
 cd
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST2.deb
@@ -457,10 +456,10 @@ echo
 titulo "VST3"
 echo
 cd
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
-URL="https://futurenoize.com/dsp56300/builds/osirus/" ; \
+URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
