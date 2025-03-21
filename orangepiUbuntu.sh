@@ -13,28 +13,20 @@ SUDOERS_TEMP_FILE="/etc/sudoers.d/temp_nopasswd"
 echo "$USUARIO ALL=(ALL) NOPASSWD: ALL" | sudo tee "$SUDOERS_TEMP_FILE" > /dev/null
 titulo() {
     local texto="$1"
-    local longitud=120  # Longitud total de la línea
-
-    # Calcular la cantidad de '#' en los extremos
-    local num_hash=$(( (longitud - ${#texto} - 4) / 2 ))  # 4 por los dos espacios antes y después del título
-
-    # Ajustar si el título es demasiado largo
+    local longitud=120
+    local num_hash=$(( (longitud - ${#texto} - 4) / 2 ))
+    
     if (( num_hash < 0 )); then
         num_hash=0
     fi
 
-    # Generar los '#' en los extremos
     local hashes=$(printf '#%.0s' $(seq 1 $num_hash))
-
-    # Construir la línea central asegurando que tenga exactamente 100 caracteres
     local titulo_formateado="${hashes}  ${texto}  ${hashes}"
 
-    # Si la línea es menor a 100 caracteres, completar con un '#'
     while [ ${#titulo_formateado} -lt $longitud ]; do
         titulo_formateado+='#'
     done
 
-    # Generar la línea superior e inferior
     local linea=$(printf '#%.0s' $(seq 1 $longitud))
     echo
     echo "$linea"
