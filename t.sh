@@ -9,9 +9,16 @@
 #########################################################################################################################
 #########################################################################################################################
 # Solicitar permisos de sudo (mantiene la sesión activa)
-echo "Solicitando permisos de sudo..."
-sudo -v
-echo
+USUARIO=$(whoami)
+
+# Nombre del archivo de configuración en sudoers.d
+SUDOERS_TEMP_FILE="/etc/sudoers.d/temp_nopasswd"
+
+# Agregar permisos temporales
+echo "$USUARIO ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/make" | sudo tee "$SUDOERS_TEMP_FILE" > /dev/null
+
+echo "Se han concedido permisos de sudo sin contraseña temporalmente."
+
 titulo() {
     local texto="$1"
     local longitud=120  # Longitud total de la línea
@@ -45,7 +52,7 @@ titulo() {
 
 # Ejemplo de uso:
 # titulo "Hola"
-
+: <<'FIN'
 echo
 titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
 echo
@@ -71,7 +78,7 @@ titulo "KXStudio Repo Added"
 echo
 echo
 titulo "Install Plugins"
-echo
+FIN
 packages=(
     wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev
     libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor0 libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxcb-xinerama0
@@ -104,6 +111,7 @@ echo "jackd jackd/tweak_rt_limits boolean true" | sudo debconf-set-selections
 sudo apt install -y "${packages[@]}"
 sudo apt-get install -y --fix-missing
 echo
+: <<'FIN'
 titulo "Install Reaper DAW for $(uname -m)"
 cd
 rm reaper*
@@ -523,6 +531,7 @@ echo
 sudo make install
 echo
 titulo "Surge XT Plugins installed"
+FIN
 echo
 titulo "Compille and Install Stochas"
 echo
@@ -582,6 +591,11 @@ titulo "Ninjas 2 Installed"
 echo
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
 echo
+# Revertir los cambios al finalizar el script
+echo "Revirtiendo permisos de sudo..."
+sudo rm -f "$SUDOERS_TEMP_FILE"
+
+echo "Permisos revertidos. Fin del script."
 titulo "Now Reboot to take effects changes"
 echo
 sudo reboot
