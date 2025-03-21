@@ -381,12 +381,12 @@ git clone https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
 cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-cmake --build ignore/s13clang --target surge-xt_Standalone --parallel 3
+cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
 cd
 cd surge
 cd ignore
 cd s13clang
-sudo make install
+sudo make install -j$(nproc)
 titulo "Surge XT Plugins installed"
 titulo "Compille and Install Stochas"
 cd
@@ -398,9 +398,9 @@ export GH=`git log -1 --format=%h`
 echo "Version ${SVER} hash ${GH}"
 sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
-cmake --build build --config Release
+cmake --build build --config Release -- -j$(nproc)
 cd build
-sudo make install
+sudo make install -j$(nproc)
 mkdir $HOME/.clap
 mkdir $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
@@ -414,7 +414,7 @@ cd
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
 make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
-sudo make install
+sudo make install -j$(nproc)
 rm -rf ../ninjas2
 cd
 titulo "Ninjas 2 Installed"
@@ -422,4 +422,4 @@ titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugin
 titulo "Reverting sudoers temp file, please make sure reboot..."
 sudo rm -f "$SUDOERS_TEMP_FILE"
 titulo "Now Reboot to take effects changes"
-sudo reboot
+reboot
