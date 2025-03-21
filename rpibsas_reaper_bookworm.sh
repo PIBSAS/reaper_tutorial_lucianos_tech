@@ -2,59 +2,62 @@
 #########################################################################################################################
 ############################################/////LUCIANO'S TECH/////#####################################################
 #########################################################################################################################
-# Repositorio: Reaper Tutorial 2024
+# Repositorio: Reaper Tutorial 2025
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
-echo
-echo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
-echo
+titulo() {
+    local texto="$1"
+    local longitud=120
+    local num_hash=$(( (longitud - ${#texto} - 4) / 2 ))
+
+    if (( num_hash < 0 )); then
+        num_hash=0
+    fi
+
+    local hashes=$(printf '#%.0s' $(seq 1 $num_hash))
+    local titulo_formateado="${hashes}  ${texto}  ${hashes}"
+
+    while [ ${#titulo_formateado} -lt $longitud ]; do
+        titulo_formateado+='#'
+    done
+
+    local linea=$(printf '#%.0s' $(seq 1 $longitud))
+    echo
+    echo "$linea"
+    echo "$titulo_formateado"
+    echo "$linea"
+    echo
+}
+titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
 RENO=Renoise_3_4_4
 SUN=2.1.1c
-echo
-echo "First the common install for Pi OS $(uname -m) bit"
-echo
+titulo "First the common install for Pi OS $(uname -m) bit"
 sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
-echo
-echo "##########################################"
-echo "##### Install Reaper DAW for $(uname -m) #####"
-echo "##########################################"
+titulo "Install Reaper DAW for $(uname -m)"
 cd
 rm reaper*
 rm -rf reaper_linux_aarch64
 web="https://www.reaper.fm/download.php" && last=$(curl -s ${web} | grep -oE 'files/7.x/reaper[0-9]+_linux_aarch64\.tar\.xz') && down="https://www.reaper.fm/${last}" && wget "${down}"
-echo
 echo "Untar"
-echo
 tar -Jxvf reaper*.tar.xz
-echo
 cd reaper_*
 sudo ./install-reaper.sh --install /opt --integrate-desktop --usr-local-bin-symlink --quiet
-echo
 rm ../reaper*.tar.xz
 rm -rf ../reaper_linux*
-echo
-echo "REAPER Installed"
-echo
-echo "Open then close Reaper to get the new Folders created in the first run"
-echo
+titulo "REAPER Installed"
+titulo "Open then close Reaper to get the new Folders created in the first run"
 reaper &
 sleep  10
 sudo pkill reaper
-echo
-echo "Adding Plugins Paths"
-echo
+titulo "Adding Plugins Paths"
 sed -i 's!vstpath=!vstpath=$HOME/.vst;$HOME/.vst3;/lib/vst;/lib/vst3;/lib/lxvst;/usr/lib/vst;/usr/lib/vst3;/usr/lib/lxvst;/usr/local/lib/vst;/usr/local/lib/vst3;/usr/lib/lxvst;/lib/vst/carla.vst/;!' $HOME/.config/REAPER/reaper.ini
 echo
 sed -i 's!lv2path_linux=!lv2path_linux=/usr/lib/lv2;/usr/local/lib/lv2;$HOME/.lv2;/lib/lv2;/usr/modep/lv2;!' $HOME/.config/REAPER/reaper.ini
 echo
 sed -i '/^fxdenorm=1.*/i clap_path_linux-aarch64=/usr/local/lib/clap;/usr/lib/clap;$HOME/.clap;%CLAP_PATH%;/lib/clap;/usr/local/lib/clap;' $HOME/.config/REAPER/reaper.ini
-echo
-echo
-echo "##########################################"
-echo "## Adding KXStudio Repository to the OS ##"
-echo "##########################################"
+titulo "Adding KXStudio Repository to the OS"
 cd
 url="https://kx.studio/Repositories" ; \
 curl -sSL "${url}" > p.html ; \
@@ -64,54 +67,28 @@ rm p.html
 sudo dpkg -i kxstudio*.deb
 rm kxstudio*.deb
 sudo apt update
-echo
-echo "KXStudio Repo Added"
-echo
-echo
-echo "#####################################"
-echo "########## Install Plugins ##########"
-echo "#####################################"
-echo
+titulo "KXStudio Repo Added"
+titulo "Install Plugins"
 sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger iem-plugin-suite-vst cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst 
 sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install qjackctl qjackrcd qpwgraph
 sudo apt install -y avldrums.lv2
 sudo apt install -y avldrums.lv2-soundfont
 sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
 sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter jmeters jnoise klick meterbridge qjackctl qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 freewheeling horgand muse nama gxtuner sox sweep terminatorx
-echo
 sudo apt install -y pipewire-jack tuxguitar-synth-lv2
-echo
 sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
-echo
 sudo apt install -y ghostess whysynth
-echo
-echo "###############################################"
-echo "####### Secuencer Megababy Nandy's Mod ########"
-echo "###############################################"
-echo
+titulo "Sequencer Megababy Nandy's Mod"
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
-echo
-echo
-echo "##########################################"
-echo "####### Adding ZynthianOS Plugins ########"
-echo "##########################################"
-echo
+titulo "Adding ZynthianOS Plugins"
 cd
 git clone https://github.com/zynthian/zynthian-plugins.git
-echo
 cd zynthian-plugins
 sudo cp -r * /usr/local/lib
 cd
 rm -rf zynthian-plugins
-echo
-echo "ZynthianOS Plugins Installed"
-echo
-echo
-echo "#################################"
-echo "########## LSP Plugins ##########"
-echo "#################################"
-echo
-cd
+titulo "ZynthianOS Plugins Installed"
+titulo "LSP Plugins"
 url="https://github.com/lsp-plugins/lsp-plugins/releases/latest" ; \
 latest_version=$(curl -sSL ${url} | grep -oP '\/lsp-plugins\/lsp-plugins\/releases\/tag\/\K[0-9.]+' | head -n 1 | tr -d '\n') ; \
 wget "https://github.com/lsp-plugins/lsp-plugins/releases/download/${latest_version}/lsp-plugins-${latest_version}-Linux-aarch64.7z"
@@ -127,16 +104,8 @@ sudo cp -r JACK/* /
 sudo cp -r GStreamer/* /
 cd
 rm -rf lsp*
-echo
-echo
-echo "LSP Plugins Installed"
-echo
-echo
-echo "#################################################"
-echo "##### Surge XT This will take a lot of time #####"
-echo "#################################################"
-echo
-cd
+titulo "LSP Plugins Installed"
+titulo "Surge XT. This will take a lot of time"
 sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
 sudo apt-get install -y libgtk-3-dev
 sudo apt-get install -y libwebkit2gtk-4.0
@@ -170,18 +139,10 @@ cd
 cd surge
 cd ignore
 cd s13clang
-echo
 sudo make install
-echo
-echo "Surge XT Plugins installed"
-echo
-echo
-echo
-echo "##########################################################"
-echo "##### X42 Plugins #####"
-echo "##########################################################"
-echo
-echo "X42 Compressor"
+titulo "Surge XT Plugins installed"
+titulo "X42 Plugins"
+titulo "X42 Compressor"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-compressor-v[0-9.]*-arm64.tar.gz\|x42-compressor-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -190,12 +151,7 @@ tar -xzvf x42*.tar.gz
 cd x42-compressor
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "AVL Drums"
-echo "##########################################################"
-echo
+titulo "AVL Drums"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-avldrums-v[0-9.]*-arm64.tar.gz\|x42-avldrums-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -204,12 +160,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "General MIDI Synth"
-echo "##########################################################"
-echo
+titulo "General MIDI Synth"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-gmsynth-v[0-9.]*-arm64.tar.gz\|x42-gmsynth-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -218,12 +169,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "MIDI Filter Collection"
-echo "##########################################################"
-echo
+titulo "MIDI Filter Collection"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-midifilter-v[0-9.]*-arm64.tar.gz\|x42-midifilter-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -232,12 +178,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Rule Based MIDI Filter"
-echo "##########################################################"
-echo
+titulo "Rule Based MIDI Filter"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-midimap-v[0-9.]*-arm64.tar.gz\|x42-midimap-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -246,12 +187,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Step Sequencer"
-echo "##########################################################"
-echo
+titulo "Step Sequencer"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-stepseq-8x8-v[0-9.]*-arm64.tar.gz\|x42-stepseq-8x8-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -260,12 +196,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "SetBfree"
-echo "##########################################################"
-echo
+titulo "SetBfree"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'setBfree-v[0-9.]*-arm64.tar.gz\|setBfree-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -274,12 +205,7 @@ tar -xzvf set*.tar.gz
 cd set*/
 yes | ./install-lv2.sh
 rm -rf ../set*
-cd
-echo
-echo "##########################################################"
-echo "Digital Peak Limiter"
-echo "##########################################################"
-echo
+titulo "Digital Peak Limiter"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-limiter-v[0-9.]*-arm64.tar.gz\|x42-limiter-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -288,12 +214,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Auto Tune"
-echo "##########################################################"
-echo
+titulo "Auto Tune"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-autotune-v[0-9.]*-arm64.tar.gz\|x42-autotune-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -302,12 +223,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Zero Config Latency Convolver"
-echo "##########################################################"
-echo
+titulo "Zero Config Latency Convolver"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-zconvolver-v[0-9.]*-arm64.tar.gz\|x42-zconvolver-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -316,12 +232,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Phase Rotate"
-echo "##########################################################"
-echo
+titulo "Phase Rotate"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-phaserotate-v[0-9.]*-arm64.tar.gz\|x42-phaserotate-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -330,12 +241,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Oscilloscope"
-echo "##########################################################"
-echo
+titulo "Oscilloscope"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-scope-v[0-9.]*-arm64.tar.gz\|x42-scope-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -344,12 +250,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Mixer Trigger Preprocessor"
-echo "##########################################################"
-echo
+titulo "Mixer Trigger Preprocessor"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-mixtrix-v[0-9.]*-arm64.tar.gz\|x42-mixtrix-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -358,12 +259,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Spectogram for Geeks"
-echo "##########################################################"
-echo
+titulo "Spectogram for Geeks"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-spectra-v[0-9.]*-arm64.tar.gz\|x42-spectra-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -372,12 +268,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Test Signal Generator"
-echo "##########################################################"
-echo
+titulo "Test Signal Generator"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-testsignal-v[0-9.]*-arm64.tar.gz\|x42-testsignal-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -386,12 +277,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Delayline Artificial Latency"
-echo "##########################################################"
-echo
+titulo "Delayline Artificial Latency"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-nodelay-v[0-9.]*-arm64.tar.gz\|x42-nodelay-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -400,12 +286,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "##########################################################"
-echo "Balance"
-echo "##########################################################"
-echo
+titulo "Balance"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-balance-v[0-9.]*-arm64.tar.gz\|x42-balance-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -414,13 +295,7 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo
-echo "##########################################################"
-echo "Stereo Routing"
-echo "##########################################################"
-echo
+titulo "Stereo Routing"
 cd
 url="https://x42-plugins.com/x42/linux/"
 latest_version=$(curl -sSL ${url} | grep -o 'x42-stereoroute-v[0-9.]*-arm64.tar.gz\|x42-stereoroute-v[0-9.]*-[0-9]*-arm64.tar.gz' | grep -oP 'v\K[0-9.]*(-[0-9]+)?' | sort -V | tail -n 1)
@@ -429,109 +304,52 @@ tar -xzvf x42*.tar.gz
 cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
-cd
-echo
-echo "X42 Plugins Installed"
-echo
-echo
-echo "##########################################################"
-echo "##### Dependencies requiered by Stochas #####"
-echo "##########################################################"
+titulo "X42 Plugins Installed"
+titulo "Dependencies requiered by Stochas"
 sudo apt update
 sudo apt install -y libssl-dev
-echo
 sudo apt install -y cmake
-echo
-echo
-echo "########################################"
-echo "##### Compille and Install Stochas #####"
-echo "########################################"
-echo
-echo
+titulo "Compille and Install Stochas"
 cd
 sudo apt update
-echo
 sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
-echo
 git clone https://github.com/surge-synthesizer/stochas.git
-echo
 cd stochas/
-echo
 git submodule update --depth 1 --init --recursive
-echo
 export SVER=`cat VERSION`
 export GH=`git log -1 --format=%h`
 echo "Version ${SVER} hash ${GH}"
-echo
 sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
-echo
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
-echo
 cmake --build build --config Release
-echo
 cd build
-echo
 sudo make install
-echo
 mkdir $HOME/.clap
-echo
 mkdir $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
-echo
 cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
-echo
 sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
 rm -rf $HOME/stochas
-cd
-echo
-echo "Stochas Installed"
-echo
-echo
-echo "###############################"
-echo "##### Ninjas 2 Standalone #####"
-echo "###############################"
-echo
+titulo "Stochas Installed"
+titulo "Ninjas 2 Standalone"
 sudo apt install -y libjack-jackd2-dev
-echo
-echo
-echo "##########################################"
-echo "######## Compile Ninjas 2 Plugins ########"
-echo "##########################################"
-echo
+titulo "Compile Ninjas 2 Plugins"
 cd
 sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
-echo
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
-echo
 cd ninjas2
-echo
 make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
-echo
 sudo make install
-echo
 rm -rf ../ninjas2
-cd
-echo
-echo "Ninjas 2 Installed"
-echo
-echo
-echo "###################"
-echo "##### ReaPack #####"
-echo "###################"
-echo
+titulo "Ninjas 2 Installed"
+titulo "ReaPack"
 cd
 url="https://github.com/cfillion/reapack/releases/latest/" ; \
 latest_version=$(curl -sSL ${url} | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
 wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-aarch64.so"
 cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
 rm reaper_reapack*.so
-echo
-echo
-echo "#############################"
-echo "##### SWS S&M Extension #####"
-echo "#############################"
-echo
-echo
+titulo "SWS S&M Extension"
 cd $HOME/.config/REAPER/
 url="https://www.sws-extension.org/download/pre-release/" ; \
 html_content=$(curl -sSL "${url}") ; \
@@ -540,13 +358,8 @@ full_url="${url}${download}" ; \
 wget -c "${full_url}"
 tar -Jxvf sws*.tar.xz
 rm sws*
-cd
-echo
-echo "###################################"
-echo "##### DSP53600 Access Virus C #####"
-echo "###################################"
-echo
-echo "CLAP"
+titulo "DSP53600 Access Virus C"
+titulo "CLAP"
 cd
 URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
@@ -557,8 +370,7 @@ wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*CLAP.deb
 sudo dpkg -i DSP56300Emu*FX-CLAP.deb
 rm DSP*.deb
-echo
-echo "LV2"
+titulo "LV2"
 cd
 URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
@@ -569,8 +381,7 @@ wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*LV2.deb
 sudo dpkg -i DSP56300Emu*FX-LV2.deb
 rm DSP*.deb
-echo
-echo "VST2"
+titulo "VST2"
 cd
 URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
@@ -581,8 +392,7 @@ wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST2.deb
 sudo dpkg -i DSP56300Emu*FX-VST2.deb
 rm DSP*.deb
-echo
-echo "VST3"
+titulo "VST3"
 cd
 URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
@@ -593,28 +403,20 @@ wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
 rm DSP*.deb
-echo
 cd
-#wget -c "https://archive.org/download/access-virus-b-c-roms/Access%20Virus%20C%20%28am29f040b_6v6%29.zip/Access%20Virus%20C%20%28am29f040b_6v6%29.BIN"
 wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/Access Virus C (am29f040b_6v6).zip"
 unzip "Access Virus C (am29f040b_6v6).zip"
 rm "Access Virus C (am29f040b_6v6).zip"
 sudo cp "Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
+titulo "DSP53600 Emulator Installed"
+titulo "Getting Samplicity Samples and save to Music Folder. I will make one folder if you are not on English OS"
 cd
-echo
-echo "DSP53600 Emulator Installed"
-echo
-echo
-echo "####################################################################################################################"
-echo "##### Getting Samplicity Samples and save to Music Folder I will make one folder if you are not  in English OS #####"
-echo "####################################################################################################################"
 #mkdir Music
 #wget -c https://archive.org/download/Samplicity/Samplicity_M7_Main-02-Wave32bit-48Khz_v1.1.zip
 #unzip Sampli*.zip
 #rm Sampli*.zip
 #mv "Samplicity M7 Main - 02 - Wave, 32 bit, 48 Khz, v1.1"/ Music/
 curl -sSL https://raw.githubusercontent.com/PIBSAS/samp/main/get.sh | bash
-echo
 cd
 mkdir Music/
 mkdir Music/Bricasti
@@ -622,48 +424,28 @@ wget -c "https://cdn.samplicity.com/downloads/Samplicity%20-%20Bricasti%20IRs%20
 unzip Sampli*.zip
 rm Sampli*.zip
 mv "Samplicity - Bricasti IRs version 2023-10"*/ Music/Bricasti/
-echo
-echo "Samples Downloaded"
-echo
-echo "####################################################################################################################"
-echo "############################################### Renoise DAW Demo ###################################################"
-echo "####################################################################################################################"
-echo
+titulo "Samples Downloaded"
+titulo "Renoise DAW Demo"
 cd
 wget $(curl -s https://www.renoise.com/download | grep -o 'https://files.renoise.com/demo/Renoise_[^"]*_Demo_Linux_arm64.tar.gz' | head -n 1)
 tar -xvzf Renoise*arm64.tar.gz
 rm Reno*.tar.gz
 cd Renoise*arm64
 sudo ./install.sh
-echo
-echo "Renoise Demo installed"
-echo
-echo
-echo "###############################################"
-echo "############## Bespoke DAW ####################"
-echo "###############################################"
-echo
+titulo "Renoise Demo installed"
+titulo "Bespoke DAW"
 echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
 curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
 sudo apt update
 sudo apt install -y bespokesynth
-echo
-echo "###############################################"
-echo "############## SunVox #########################"
-echo "###############################################"
-echo
+titulo "SunVox"
 cd
 wget -c https://warmplace.ru/soft/sunvox/sunvox-${SUN}.zip
 unzip sunvox*.zip
 rm sunvox*.zip
 cd sunvox/sunvox/
 rm -rf wince macos linux_x* linux_arm_a* windows_x*
-echo "You still have to do a desktop shortcut"
-echo
-echo
-echo "Finished install on $ARCH bits OS, check tutorial for Tukan plugins"
-echo
-echo "Now Reboot your Pi to take effects changes"
-echo
+titulo "You still have to do a desktop shortcut"
+titulo "Finished install on $(uname -m) OS, check tutorial for Tukan plugins"
+titulo "Now Reboot your Pi to take effects changes"
 sudo reboot
-echo
