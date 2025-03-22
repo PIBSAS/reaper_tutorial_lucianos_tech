@@ -52,7 +52,7 @@ sudo apt update
 titulo "KXStudio Repo Added"
 titulo "Install Plugins"
 packages=(
-    wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev
+    wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev ninja-build
     libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor0 libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxcb-xinerama0
     libxrandr-dev libxinerama-dev libxinerama1 libxcursor-dev libasound2-dev libjack-jackd2-dev cmake libssl-dev clang 
     libgtk-3-dev libwebkit2gtk-4.1-0 libwebkit2gtk-4.1-dev libcurl4-openssl-dev alsa alsa-tools libfreetype6-dev  
@@ -375,37 +375,30 @@ rm Reno*.tar.gz
 cd Renoise*arm64
 sudo ./install.sh
 titulo "Renoise Demo installed"
-titulo "Surge XT This will take a lot of time"
+titulo "Surge XT and Surge XT Effects. This will take a lot of time"
 cd
-#git clone https://github.com/surge-synthesizer/surge.git
 git clone --depth=1 https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
-#cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-#cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
 cmake -Bignore/s13clang -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target all --parallel $(nproc)
-#cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
-#cmake --build ignore/s13clang --target surge-fx_Standalone --parallel $(nproc)
-#cmake --build ignore/s13clang --target surge-fx_CLAP --parallel $(nproc)
-#cd
-#cd surge
-#cd ignore
-#cd s13clang
-#sudo make install -j$(nproc)
 sudo cmake --install ignore/s13clang
 titulo "Surge XT Plugins installed"
 titulo "Compille and Install Stochas"
 cd
-git clone https://github.com/surge-synthesizer/stochas.git
+git clone --depth=1 https://github.com/surge-synthesizer/stochas.git
 cd stochas/
-git submodule update --depth 1 --init --recursive
+git submodule update --init --recursive --depth=1
 export SVER=`cat VERSION`
 export GH=`git log -1 --format=%h`
 echo "Version ${SVER} hash ${GH}"
-sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
-cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
-cmake --build build --config Release -- -j$(nproc)
+grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || \
+    sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+#sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+#cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release -GNinja
+cmake --build build
+#cmake --build build --config Release -- -j$(nproc)
 cd build
 sudo make install -j$(nproc)
 mkdir $HOME/.clap
@@ -420,7 +413,7 @@ titulo "Compile Ninjas 2 Plugins"
 cd
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
-make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
+make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-march=native'
 sudo make install -j$(nproc)
 rm -rf ../ninjas2
 cd
