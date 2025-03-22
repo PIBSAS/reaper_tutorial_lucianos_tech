@@ -377,16 +377,20 @@ sudo ./install.sh
 titulo "Renoise Demo installed"
 titulo "Surge XT This will take a lot of time"
 cd
-git clone https://github.com/surge-synthesizer/surge.git
+#git clone https://github.com/surge-synthesizer/surge.git
+git clone --depth=1 https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
-cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+#cmake -Bignore/s13clang -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+#cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
+cmake -Bignore/s13clang -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
-cd
-cd surge
-cd ignore
-cd s13clang
-sudo make install -j$(nproc)
+#cd
+#cd surge
+#cd ignore
+#cd s13clang
+#sudo make install -j$(nproc)
+sudo cmake --install ignore/s13clang
 titulo "Surge XT Plugins installed"
 titulo "Compille and Install Stochas"
 cd
