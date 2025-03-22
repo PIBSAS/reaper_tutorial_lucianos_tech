@@ -404,7 +404,7 @@ git submodule update --init --recursive --depth=1
 export SVER=$(<VERSION)
 export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
-grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+#grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 #sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 #cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
@@ -418,7 +418,8 @@ fi
 if [ ! -d "$HOME/.vst3" ]; then
     mkdir "$HOME/.vst3"
 fi
-cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+#cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+cp -rf $HOME/stochas/build/stochas_artefacts/VST3/* $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
 sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
 rm -rf $HOME/stochas
