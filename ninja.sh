@@ -44,7 +44,7 @@ git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
 make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-march=native'
 sudo make install -j$(nproc)
-rm -rf ../ninjas2
+rm -rf "$HOME/ninjas2"
 cd
 titulo "Ninjas 2 Installed"
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
