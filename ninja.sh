@@ -4,7 +4,7 @@
 #########################################################################################################################
 # Repositorio: Reaper Tutorial 2025
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
-# Script for Orange Pi 5 Pluss with Ubuntu
+# Script for Orange Pi 5 Pro with Ubuntu
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
@@ -37,6 +37,9 @@ titulo() {
 titulo "Adding temp sudoers so the script dont ask you for password again"
 titulo "Ninja 2"
 cd
+if [ -d "$HOME/ninjas2" ]; then
+    rm -rf "$HOME/ninjas2"
+fi
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
 make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-march=native'
