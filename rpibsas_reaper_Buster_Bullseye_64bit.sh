@@ -88,7 +88,15 @@ cd lsp-plugins-*/
 sudo cp -r VST2/* /usr/lib/vst/
 sudo cp -r VST3/* /usr/lib/vst3/
 sudo cp -r LV2/* /usr/lib/lv2/
-sudo mkdir /usr/lib/ladspa /usr/lib/clap
+if [ ! -d "/usr/lib/ladspa" ]; then
+    sudo mkdir "/usr/lib/ladspa"
+fi
+
+if [ ! -d "/usr/lib/clap" ]; then
+    sudo mkdir "/usr/lib/clap"
+fi
+
+#sudo mkdir /usr/lib/ladspa /usr/lib/clap
 sudo cp -r LADSPA/* /usr/lib/ladspa/
 sudo cp -r CLAP/* /usr/lib/clap/
 sudo cp -r JACK/* /
@@ -98,6 +106,9 @@ rm -rf lsp*
 titulo "LSP Plugins Installed"
 titulo "Surge XT This will take a lot of time"
 sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
+if [ -d "$HOME/surge" ]; then
+    rm -rf "$HOME/surge"
+fi
 git clone https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
@@ -109,6 +120,7 @@ cd surge
 cd ignore
 cd s13clang
 sudo cmake --install .
+rm -rf "$HOME/surge"
 titulo "Surge XT Plugins installed"
 titulo "X42 Plugins"
 titulo "X42 Compressor"
@@ -290,30 +302,54 @@ rm $HOME/cmake*.gz
 titulo "CMAKE compiled"
 titulo "Compille and Install Stochas"
 cd
+if [ -d "$HOME/stochas" ]; then
+    rm -rf "$HOME/stochas"
+fi
 sudo apt update
 sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
 git clone https://github.com/surge-synthesizer/stochas.git
 cd stochas/
-git submodule update --depth 1 --init --recursive
-export SVER=`cat VERSION`
-export GH=`git log -1 --format=%h`
+git submodule update --init --recursive --depth=1
+#git submodule update --depth 1 --init --recursive
+#export SVER=`cat VERSION`
+#export GH=`git log -1 --format=%h`
+export SVER=$(<VERSION)
+export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
-cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+#cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+#cmake --build build --config Release
+cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
-mkdir $HOME/.vst3
-cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+cd build
+sudo make install
+if [ ! -d "$HOME/.clap" ]; then
+    mkdir "$HOME/.clap"
+fi
+
+if [ ! -d "$HOME/.vst3" ]; then
+    mkdir "$HOME/.vst3"
+fi
+#mkdir $HOME/.vst3
+#cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+cp -rf $HOME/stochas/build/stochas_artefacts/VST3/* $HOME/.vst3
+cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
+sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
 rm -rf $HOME/stochas
 titulo "Stochas Installed"
 titulo "Ninjas 2 Standalone"
 sudo apt install -y libjack-jackd2-dev
 titulo "Compile Ninjas 2 Plugins"
 cd
+if [ -d "$HOME/ninjas2" ]; then
+    rm -rf "$HOME/ninjas2"
+fi
 sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
-make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
-sudo make install
-rm -rf ../ninjas2
+#make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
+make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-march=native'
+sudo make install -j$(nproc)
+rm -rf "$HOME/ninjas2"
 titulo "Ninjas 2 Installed"
 titulo "ReaPack"
 cd
@@ -335,17 +371,17 @@ titulo "DSP53600 Access Virus C"
 titulo "CLAP"
 cd
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*CLAP.deb
 sudo dpkg -i DSP56300Emu*FX-CLAP.deb
 rm DSP*.deb
 titulo "LV2"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-LV2.deb' | head -n 1) ; \
@@ -355,20 +391,20 @@ sudo dpkg -i DSP56300Emu*FX-LV2.deb
 rm DSP*.deb
 titulo "VST2"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST2.deb
 sudo dpkg -i DSP56300Emu*FX-VST2.deb
 rm DSP*.deb
 titulo "VST3"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
@@ -383,8 +419,10 @@ titulo "Getting Samplicity Samples and save to Music Folder. It will make one fo
 cd
 curl -sSL https://raw.githubusercontent.com/PIBSAS/samp/main/get.sh | bash
 cd
-mkdir Music/
-mkdir Music/Bricasti
+if [ ! -d "$HOME/Music/" ]; then
+    mkdir "$HOME/Music/"
+fi
+mkdir "$HOME/Music/Bricasti"
 wget -c "https://cdn.samplicity.com/downloads/Samplicity%20-%20Bricasti%20IRs%20version%202023-10.zip"
 unzip Sampli*.zip
 rm Sampli*.zip
