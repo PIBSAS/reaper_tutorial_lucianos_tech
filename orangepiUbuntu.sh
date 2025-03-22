@@ -50,7 +50,7 @@ sudo dpkg -i kxstudio*.deb
 rm kxstudio*.deb
 sudo apt update
 titulo "KXStudio Repo Added"
-titulo "Install Plugins"
+titulo "Install Plugins and Dependecies"
 echo "jackd jackd/tweak_rt_limits boolean true" | sudo debconf-set-selections
 packages=(
     wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev ninja-build
@@ -76,16 +76,11 @@ packages=(
     invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop 
     blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins 
     tap-plugins vco-plugins vlevel a2jmidid gmidimonitor klick radium-compressor rotter fst-dev foo-yc20 
-    freewheeling horgand muse nama gxtuner sox sweep terminatorx ghostess whysynth
+    freewheeling horgand muse nama gxtuner sox sweep terminatorx ghostess whysynth jack-tools jack-keyboard
+    jackd2 qjackrcd qmidiarp qtractor japa jconvolver jkmeter jmeters jnoise jackass libjack-jackd2-dev
 )
 sudo apt install -y "${packages[@]}"
 sudo apt-get install -y --fix-missing
-titulo "Fuc*ing window"
-garbage=(
-    jack-tools jack-keyboard jackd2 qjackrcd qmidiarp qtractor japa jconvolver jkmeter 
-    jmeters jnoise jackass libjack-jackd2-dev
-)
-sudo apt install -y "${garbage[@]}"
 titulo "Install Reaper DAW for $(uname -m)"
 cd
 rm reaper*
@@ -321,7 +316,6 @@ cd
 URL="https://dsp56300.com/builds/osirus/"
 latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1)
 wget "${URL}${latest_deb}"
-
 URL="https://dsp56300.com/builds/osirus/" ; \
 latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
@@ -367,8 +361,10 @@ titulo "Getting Samplicity Samples and save to Music Folder I will make one fold
 cd
 curl -sSL https://raw.githubusercontent.com/PIBSAS/samp/main/get.sh | bash
 cd
-mkdir Music/
-mkdir Music/Bricasti
+if [ ! -d "$HOME/Music/" ]; then
+    mkdir "$HOME/Music/"
+fi
+mkdir "$HOME/Music/Bricasti"
 wget -c "https://cdn.samplicity.com/downloads/Samplicity%20-%20Bricasti%20IRs%20version%202023-10.zip"
 unzip Sampli*.zip
 rm Sampli*.zip
@@ -384,15 +380,22 @@ sudo ./install.sh
 titulo "Renoise Demo installed"
 titulo "Surge XT and Surge XT Effects. This will take a lot of time"
 cd
+if [ -d "$HOME/surge" ]; then
+    rm -rf "$HOME/surge"
+fi
 git clone --depth=1 https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
 cmake -Bignore/s13clang -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target all --parallel $(nproc)
 sudo cmake --install ignore/s13clang
+rm -rf "$HOME/surge"
 titulo "Surge XT Plugins installed"
 titulo "Compille and Install Stochas"
 cd
+if [ -d "$HOME/stochas" ]; then
+    rm -rf "$HOME/stochas"
+fi
 git clone --depth=1 https://github.com/surge-synthesizer/stochas.git
 cd stochas/
 git submodule update --init --recursive --depth=1
@@ -401,16 +404,20 @@ git submodule update --init --recursive --depth=1
 export SVER=$(<VERSION)
 export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
-grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || \
-    sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 #sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 #cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release -- -j$(nproc)
+cmake --build build --config Release
 cd build
-sudo make install -j$(nproc)
-mkdir $HOME/.clap
-mkdir $HOME/.vst3
+sudo make install
+if [ ! -d "$HOME/.clap" ]; then
+    mkdir "$HOME/.clap"
+fi
+
+if [ ! -d "$HOME/.vst3" ]; then
+    mkdir "$HOME/.vst3"
+fi
 cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
 sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
@@ -419,15 +426,17 @@ titulo "Stochas Installed"
 titulo "Ninjas 2 Standalone"
 titulo "Compile Ninjas 2 Plugins"
 cd
+if [ -d "$HOME/ninjas2" ]; then
+    rm -rf "$HOME/ninjas2"
+fi
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
 make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-march=native'
 sudo make install -j$(nproc)
-rm -rf ../ninjas2
+rm -rf "$HOME/ninjas2"
 cd
 titulo "Ninjas 2 Installed"
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
 titulo "Reverting sudoers temp file, please make sure reboot..."
 sudo rm -f "$SUDOERS_TEMP_FILE"
 titulo "Now Reboot to take effects changes"
-reboot
