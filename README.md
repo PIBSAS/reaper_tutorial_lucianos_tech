@@ -33,6 +33,20 @@ curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
 
+# Just Surge XT compile:
+```
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/surgext.sh | bash
+```
+
+# Just Stochas compile:
+```
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/stochas.sh | bash
+```
+
+# Just Ninja 2 compile:
+```
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/ninja.sh | bash
+```
 <h1 align="center"> Invite a Coffee</h1>
 
 <p align="center">
