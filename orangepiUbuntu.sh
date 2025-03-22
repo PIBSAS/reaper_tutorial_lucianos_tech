@@ -385,6 +385,8 @@ git submodule update --init --recursive
 #cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
 cmake -Bignore/s13clang -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target surge-xt_Standalone --parallel $(nproc)
+cmake --build ignore/s13clang --target surge-fx_Standalone --parallel $(nproc)
+cmake --build ignore/s13clang --target surge-fx_CLAP --parallel $(nproc)
 #cd
 #cd surge
 #cd ignore
