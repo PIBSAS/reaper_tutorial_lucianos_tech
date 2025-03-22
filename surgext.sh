@@ -4,7 +4,7 @@
 #########################################################################################################################
 # Repositorio: Reaper Tutorial 2025
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
-# Script for Orange Pi 5 Pluss with Ubuntu
+# Script for Orange Pi 5 Pro with Ubuntu
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
@@ -37,12 +37,16 @@ titulo() {
 titulo "Adding temp sudoers so the script dont ask you for password again"
 titulo "Surge XT and Surge XT Effects. This will take a lot of time"
 cd
+if [ -d "$HOME/surge" ]; then
+    rm -rf "$HOME/surge"
+fi
 git clone --depth=1 https://github.com/surge-synthesizer/surge.git
 cd surge
 git submodule update --init --recursive
 cmake -Bignore/s13clang -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 cmake --build ignore/s13clang --target all --parallel $(nproc)
 sudo cmake --install ignore/s13clang
+rm -rf "$HOME/surge"
 titulo "Surge XT Plugins installed"
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
 titulo "Reverting sudoers temp file, please make sure reboot..."
