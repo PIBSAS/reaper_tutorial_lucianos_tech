@@ -51,19 +51,20 @@ rm kxstudio*.deb
 sudo apt update
 titulo "KXStudio Repo Added"
 titulo "Install Plugins"
+echo "jackd jackd/tweak_rt_limits boolean true" | sudo debconf-set-selections
 packages=(
     wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev ninja-build
     libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor0 libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxcb-xinerama0
-    libxrandr-dev libxinerama-dev libxinerama1 libxcursor-dev libasound2-dev libjack-jackd2-dev cmake libssl-dev clang 
+    libxrandr-dev libxinerama-dev libxinerama1 libxcursor-dev libasound2-dev cmake libssl-dev clang 
     libgtk-3-dev libwebkit2gtk-4.1-0 libwebkit2gtk-4.1-dev libcurl4-openssl-dev alsa alsa-tools libfreetype6-dev  
-    x11proto-xinerama-dev libgl1-mesa-dev qjackctl meterbridge jack-tools libxcursor1 libx11-dev libsndfile1-dev libsamplerate0-dev
+    x11proto-xinerama-dev libgl1-mesa-dev qjackctl meterbridge libxcursor1 libx11-dev libsndfile1-dev libsamplerate0-dev
     vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst
     wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi
     carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3
     phasex lmms adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2
     zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins
     tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter
-    linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp
+    linuxsampler-vst juced-plugins klangfalter juce-opl hybridreverb2 easyssp
     drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2
     dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1
     synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2
@@ -74,12 +75,17 @@ packages=(
     cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst avldrums.lv2 avldrums.lv2-data
     invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop 
     blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins 
-    tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter 
-    jmeters jnoise klick qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 
+    tap-plugins vco-plugins vlevel a2jmidid gmidimonitor klick radium-compressor rotter fst-dev foo-yc20 
     freewheeling horgand muse nama gxtuner sox sweep terminatorx ghostess whysynth
 )
 sudo apt install -y "${packages[@]}"
 sudo apt-get install -y --fix-missing
+titulo "Fuc*ing window"
+garbage=(
+    jack-tools jack-keyboard jackd2 qjackrcd qmidiarp qtractor japa jconvolver jkmeter 
+    jmeters jnoise jackass libjack-jackd2-dev
+)
+sudo apt install -y "${garbage[@]}"
 titulo "Install Reaper DAW for $(uname -m)"
 cd
 rm reaper*
@@ -312,41 +318,42 @@ rm sws*
 titulo "DSP53600 Access Virus C"
 titulo "CLAP"
 cd
-URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1) ; \
+URL="https://dsp56300.com/builds/osirus/"
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-CLAP.deb' | head -n 1)
 wget "${URL}${latest_deb}"
+
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-CLAP.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*CLAP.deb
 sudo dpkg -i DSP56300Emu*FX-CLAP.deb
 rm DSP*.deb
 titulo "LV2"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-LV2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-LV2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*LV2.deb
 sudo dpkg -i DSP56300Emu*FX-LV2.deb
 rm DSP*.deb
 titulo "VST2"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST2.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST2.deb
 sudo dpkg -i DSP56300Emu*FX-VST2.deb
 rm DSP*.deb
 titulo "VST3"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-Osirus-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 URL="https://dsp56300.com/builds/osirus/" ; \
-latest_deb=$(curl -s "${url}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
+latest_deb=$(curl -s "${URL}" | grep -o 'DSP56300Emu-[0-9.]*-Linux_aarch64-OsirusFX-VST3.deb' | head -n 1) ; \
 wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
