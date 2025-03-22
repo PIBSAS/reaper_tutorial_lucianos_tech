@@ -56,12 +56,17 @@ cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
 cd build
 sudo make install
-mkdir $HOME/.clap
-mkdir $HOME/.vst3
-cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+if [ ! -d "$HOME/.clap" ]; then
+    mkdir "$HOME/.clap"
+fi
+
+if [ ! -d "$HOME/.vst3" ]; then
+    mkdir "$HOME/.vst3"
+fi
+cp -rf $HOME/stochas/build/stochas_artefacts/VST3/* $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
 sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
-rm -rf $HOME/stochas
+rm -rf "$HOME/stochas"
 titulo "Stochas Installed"
 titulo "Finished install on $(uname -m) bits OS, check tutorial for Tukan plugins"
 titulo "Reverting sudoers temp file, please make sure reboot..."
