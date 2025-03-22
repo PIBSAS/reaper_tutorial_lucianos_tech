@@ -4,7 +4,7 @@
 #########################################################################################################################
 # Repositorio: Reaper Tutorial 2025
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
-# Script for Orange Pi 5 Pluss with Ubuntu
+# Script for Orange Pi 5 Pro with Ubuntu
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
 #########################################################################################################################
@@ -38,18 +38,22 @@ titulo "Adding temp sudoers so the script dont ask you for password again"
 titulo "Stochas Compile"
 cd
 rm -rf $HOME/stochas
+packages=(
+    build-essential cmake libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev
+    libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
+)
+sudo apt install -y "${packages[@]}"
 git clone --depth=1 https://github.com/surge-synthesizer/stochas.git
 cd stochas/
 git submodule update --init --recursive --depth=1
 export SVER=$(<VERSION)
 export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
-grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || \
-    sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
+grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release -- -j$(nproc)
+cmake --build build --config Release
 cd build
-sudo make install -j$(nproc)
+sudo make install
 mkdir $HOME/.clap
 mkdir $HOME/.vst3
 cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
