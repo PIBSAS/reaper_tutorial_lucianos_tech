@@ -86,7 +86,14 @@ cd lsp-plugins-*/
 sudo cp -r VST2/* /usr/lib/vst/
 sudo cp -r VST3/* /usr/lib/vst3/
 sudo cp -r LV2/* /usr/lib/lv2/
-sudo mkdir /usr/lib/ladspa /usr/lib/clap
+#sudo mkdir /usr/lib/ladspa /usr/lib/clap
+if [ ! -d "/usr/lib/ladspa" ]; then
+    sudo mkdir "/usr/lib/ladspa"
+fi
+
+if [ ! -d "/usr/lib/clap" ]; then
+    sudo mkdir "/usr/lib/clap"
+fi
 sudo cp -r LADSPA/* /usr/lib/ladspa/
 sudo cp -r CLAP/* /usr/lib/clap/
 sudo cp -r JACK/* /
@@ -97,6 +104,9 @@ titulo "LSP Plugins Installed"
 titulo "Surge 1.8.1"
 sudo apt remove surge
 sudo apt autoremove -y
+if [ -d "$HOME/surge" ]; then
+    rm -rf "$HOME/surge"
+fi
 git clone -b release/1.8.1 https://github.com/surge-synthesizer/surge
 cd surge
 git submodule update --init --recursive
@@ -126,7 +136,7 @@ cd
 cd surge
 ./build-linux.sh build
 sudo ./build-linux.sh install
-rm -rf ../surge
+rm -rf "$HOME/stochas"
 titulo "Surge Installed"
 titulo "X42 Plugins"
 titulo "X42 Compressor"
@@ -308,29 +318,41 @@ rm $HOME/cmake*.gz
 titulo "CMake compiled"
 titulo "Compile and Install Stochas"
 cd
+if [ -d "$HOME/stochas" ]; then
+    rm -rf "$HOME/stochas"
+fi
 sudo apt update
 sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
 git clone https://github.com/surge-synthesizer/stochas.git
 cd stochas/
-git submodule update --depth 1 --init --recursive
-export SVER=`cat VERSION`
-export GH=`git log -1 --format=%h`
+git submodule update --init --recursive --depth=1
+#git submodule update --depth 1 --init --recursive
+#export SVER=`cat VERSION`
+#export GH=`git log -1 --format=%h`
+export SVER=$(<VERSION)
+export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
-cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+#cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
+#cmake --build build --config Release
+cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
-cp -rf $HOME/stochas/build/stochas_artefacts/VST3/Stochas.vst3 $HOME/.vst3
+cp -rf $HOME/stochas/build/stochas_artefacts/VST3/* $HOME/.vst3
 rm -rf $HOME/stochas
 titulo "Stochas Installed"
 titulo "Ninjas 2 Standalone"
 sudo apt install -y libjack-dev
 titulo "Compile Ninjas 2 Plugins"
 cd
+if [ -d "$HOME/ninjas2" ]; then
+    rm -rf "$HOME/ninjas2"
+fi
 sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
 git clone --recursive https://github.com/rghvdberg/ninjas2.git
 cd ninjas2
-make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
-sudo make install
-rm -rf ../ninjas2
+#make all CXXFLAGS='-mtune=native' CFLAGS='-mtune=native' CPPFLAGS='-mtune=native'
+make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-march=native'
+sudo make install -j$(nproc)
+rm -rf "$HOME/ninjas2"
 titulo "Ninjas 2 Installed"
 titulo "ReaPack"
 cd
