@@ -389,8 +389,10 @@ cd
 git clone --depth=1 https://github.com/surge-synthesizer/stochas.git
 cd stochas/
 git submodule update --init --recursive --depth=1
-export SVER=`cat VERSION`
-export GH=`git log -1 --format=%h`
+#export SVER=`cat VERSION`
+#export GH=`git log -1 --format=%h`
+export SVER=$(<VERSION)
+export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
 grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHeader.h || \
     sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
