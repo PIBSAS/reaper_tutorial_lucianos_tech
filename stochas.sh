@@ -37,6 +37,7 @@ titulo() {
 titulo "Adding temp sudoers so the script dont ask you for password again"
 titulo "Stochas Compile"
 cd
+rm -rf $HOME/stochas
 git clone --depth=1 https://github.com/surge-synthesizer/stochas.git
 cd stochas/
 git submodule update --init --recursive --depth=1
