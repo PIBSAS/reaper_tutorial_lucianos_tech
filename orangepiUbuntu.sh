@@ -405,9 +405,8 @@ grep -q "#include <utility>" lib/JUCE/modules/juce_core/system/juce_StandardHead
     sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 #sed -i '66 a\#include <utility>' lib/JUCE/modules/juce_core/system/juce_StandardHeader.h
 #cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
-cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release -GNinja
-cmake --build build
-#cmake --build build --config Release -- -j$(nproc)
+cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release -- -j$(nproc)
 cd build
 sudo make install -j$(nproc)
 mkdir $HOME/.clap
