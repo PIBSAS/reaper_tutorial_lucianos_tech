@@ -37,7 +37,9 @@ titulo() {
 titulo "Adding temp sudoers so the script dont ask you for password again"
 titulo "Stochas Compile"
 cd
-rm -rf $HOME/stochas
+if [ -d "$HOME/stochas" ]; then
+    rm -rf "$HOME/stochas"
+fi
 packages=(
     build-essential cmake libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev
     libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
