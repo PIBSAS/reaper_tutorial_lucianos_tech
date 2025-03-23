@@ -7,14 +7,14 @@ An script shell for all the installations and compiles of the Reaper DAW Tutoria
 
 # How can i run it? On Pi OS Buster/Bullseye 64bit:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaper_Buster_Bullseye_64bit.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/reaper_Buster_Bullseye_64bit.sh | bash
 ```
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
 
 # How can i run it? On Pi OS 64bit Bookworm:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaper_bookworm.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/reaper_bookworm.sh | bash
 ```
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
@@ -22,30 +22,30 @@ Please connect Raspberry Pi to ethernet, for stability when you download and ins
 
 # How can i run it? On Pi OS 32bit:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/rpibsas_reaperarmhf.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/reaper_armhf.sh | bash
 ```
 
 # How can i run it? On Orange Pi 5 Pro, Ubuntu OS 64bit:
 ```
 sudo apt install -y curl
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/orangepiUbuntu.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/orangepiUbuntu.sh | bash
 ```
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
 
 # Just Surge XT compile:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/surgext.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/surgext.sh | bash
 ```
 
 # Just Stochas compile:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/stochas.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/stochas.sh | bash
 ```
 
 # Just Ninja 2 compile:
 ```
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/ninja.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/ninja.sh | bash
 ```
 <h1 align="center"> Invite a Coffee</h1>
 
