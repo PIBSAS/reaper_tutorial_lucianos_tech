@@ -35,9 +35,10 @@ titulo() {
     echo
 }
 titulo "Adding temp sudoers so the script dont ask you for password again"
+sudo apt remove --purge clang -y && sudo apt update
 paquetes=(
-     build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev
-     libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake clang ninja-build
+     build-essential cmake clang ninja-build llvm libstdc++-12-dev libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev
+     libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev
      libgtk-3-dev libwebkit2gtk-4.1 libwebkit2gtk-4.1-dev libcurl4-openssl-dev alsa alsa-tools libasound2-dev
      libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev
      libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0 qjackctl meterbridge jack-tools
