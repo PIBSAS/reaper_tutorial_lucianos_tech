@@ -108,7 +108,7 @@ echo
 sed -i '/^fxdenorm=1.*/i clap_path_linux-aarch64=/usr/local/lib/clap;/usr/lib/clap;$HOME/.clap;%CLAP_PATH%;/lib/clap;/usr/local/lib/clap;' $HOME/.config/REAPER/reaper.ini
 echo
 titulo "Sequencer Megababy Nandy's Mod"
-wget "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/sequencer_megababy_nandy_mod" -P $HOME/.config/REAPER/Effects/midi/
+wget "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod" -P $HOME/.config/REAPER/Effects/midi/
 titulo "Adding ZynthianOS Plugins"
 cd
 git clone https://github.com/zynthian/zynthian-plugins.git
@@ -354,7 +354,7 @@ wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
 rm DSP*.deb
-wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/Access Virus C (am29f040b_6v6).zip"
+wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/Access Virus C (am29f040b_6v6).zip"
 unzip "Access Virus C (am29f040b_6v6).zip"
 rm "Access Virus C (am29f040b_6v6).zip"
 sudo cp "Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
