@@ -43,7 +43,7 @@ paquetes=(
      libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev
      libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0 qjackctl meterbridge jack-tools
 )
-sudo apt install -y "${packages[@]}"
+sudo apt install -y "${paquetes[@]}"
 sudo apt-get install -y --fix-missing
 titulo "Surge XT and Surge XT Effects. This will take a lot of time"
 cd
