@@ -356,10 +356,15 @@ wget "${URL}${latest_deb}"
 sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
 rm DSP*.deb
+cd
+rm "$HOME/Access*zip"
 wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/Access Virus C (am29f040b_6v6).zip"
 unzip "Access Virus C (am29f040b_6v6).zip"
 rm "Access Virus C (am29f040b_6v6).zip"
-sudo cp "Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
+if [ ! -d "/usr/local/lib/vst/" ]; then
+    mkdir "/usr/local/lib/vst/"
+fi
+sudo cp "$HOME/Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
 titulo "DSP53600 Emulator Installed"
 titulo "Getting Samplicity Samples and save to Music Folder I will make one folder if you are not in English OS"
 cd
