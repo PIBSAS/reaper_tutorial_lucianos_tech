@@ -39,6 +39,8 @@ titulo "Start Reaper Tutorial Install from Luciano's tech this will take some ti
 RENO=Renoise_3_4_4
 SUN=2.1.1c
 titulo "First the common install for $(uname -m) bit"
+titulo "Deactivate docker repo conflictive"
+sudo sed -i '/^deb \[arch=arm64\] https:\/\/repo.huaweicloud.com\/docker-ce\/linux\/ubuntu jammy stable/s/^/#/' /etc/apt/sources.list.d/docker.list
 titulo "Adding KXStudio Repository to the OS"
 cd
 url="https://kx.studio/Repositories" ; \
