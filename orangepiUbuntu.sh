@@ -52,10 +52,12 @@ sudo apt update
 titulo "KXStudio Repo Added"
 titulo "Install Plugins and Dependecies"
 echo "jackd jackd/tweak_rt_limits boolean true" | sudo debconf-set-selections
+sudo apt remove --purge clang -y
+sudo apt update
 packages=(
     wget curl grep git xz-utils sed gawk p7zip-full unzip build-essential libcairo-dev libcairo2-dev ninja-build
     libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor0 libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxcb-xinerama0
-    libxrandr-dev libxinerama-dev libxinerama1 libxcursor-dev libasound2-dev cmake libssl-dev clang 
+    libxrandr-dev libxinerama-dev libxinerama1 libxcursor-dev libasound2-dev cmake libssl-dev clang libstdc++-12-dev llvm
     libgtk-3-dev libwebkit2gtk-4.1-0 libwebkit2gtk-4.1-dev libcurl4-openssl-dev alsa alsa-tools libfreetype6-dev  
     x11proto-xinerama-dev libgl1-mesa-dev qjackctl meterbridge libxcursor1 libx11-dev libsndfile1-dev libsamplerate0-dev
     vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst
