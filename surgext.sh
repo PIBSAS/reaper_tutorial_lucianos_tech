@@ -35,6 +35,8 @@ titulo() {
     echo
 }
 titulo "Adding temp sudoers so the script dont ask you for password again"
+titulo "Deactivate docker repo conflictive"
+sudo sed -i '/^deb \[arch=arm64\] https:\/\/repo.huaweicloud.com\/docker-ce\/linux\/ubuntu jammy stable/s/^/#/' /etc/apt/sources.list.d/docker.list
 sudo apt remove --purge clang -y && sudo apt update
 paquetes=(
      build-essential cmake clang ninja-build llvm libstdc++-12-dev libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev
