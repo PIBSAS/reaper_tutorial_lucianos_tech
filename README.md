@@ -28,7 +28,7 @@ curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech
 # How can i run it? On Orange Pi 5 Pro, Ubuntu OS 64bit:
 ```
 sudo apt install -y curl
-curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/orangepiUbuntu.sh | bash
+curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/orange.sh | bash
 ```
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
