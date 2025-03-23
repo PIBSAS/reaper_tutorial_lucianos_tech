@@ -79,7 +79,7 @@ sudo apt install -y pipewire-jack tuxguitar-synth-lv2
 sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
 sudo apt install -y ghostess whysynth
 titulo "Sequencer Megababy Nandy's Mod"
-wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
+wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
 titulo "Adding ZynthianOS Plugins"
 cd
 git clone https://github.com/zynthian/zynthian-plugins.git
@@ -420,7 +420,7 @@ sudo dpkg -i DSP56300Emu*VST3.deb
 sudo dpkg -i DSP56300Emu*FX-VST3.deb
 rm DSP*.deb
 cd
-wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_rpibsas/main/Access Virus C (am29f040b_6v6).zip"
+wget -c "https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/Access Virus C (am29f040b_6v6).zip"
 unzip "Access Virus C (am29f040b_6v6).zip"
 rm "Access Virus C (am29f040b_6v6).zip"
 sudo cp "Access Virus C (am29f040b_6v6).BIN" /usr/local/lib/vst/
