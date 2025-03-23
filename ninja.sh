@@ -36,6 +36,10 @@ titulo() {
 }
 titulo "Adding temp sudoers so the script dont ask you for password again"
 titulo "Ninja 2"
+paquetes=(
+    libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev libjack-jackd2-dev build-essential cmake clang libstdc++-12-dev llvm
+)
+sudo apt install -y "${paquetes[@]}"
 cd
 if [ -d "$HOME/ninjas2" ]; then
     rm -rf "$HOME/ninjas2"
