@@ -19,7 +19,7 @@ curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech
 
 Please connect Raspberry Pi to ethernet, for stability when you download and install, but you always can run from wifi, it´s just a recomendation.
 
-# How can i run it? On Pi OS 64bit Bookworm:
+# How can i run it? On Pi OS 64bit Trixie:
 ```
 curl -sSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/reaper_trixie.sh | bash
 ```
