@@ -78,7 +78,7 @@ sudo apt install -y avldrums.lv2-soundfont
 sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
 sudo apt install -y invada-studio-plugins-ladspa ir.lv2 amb-plugins autotalent blepvco blop blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard japa jconvolver jkmeter jmeters jnoise klick meterbridge qjackctl qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev freewheeling horgand muse nama gxtuner sox terminatorx
 sudo apt install -y pipewire-jack tuxguitar-synth-lv2
-sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
 sudo apt install -y ghostess whysynth
 titulo "Sequencer Megababy Nandy's Mod"
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
@@ -108,7 +108,7 @@ cd
 rm -rf lsp*
 titulo "LSP Plugins Installed"
 titulo "Surge XT. This will take a lot of time"
-sudo apt install -y build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
 sudo apt-get install -y libgtk-3-dev
 sudo apt-get install -y libwebkit2gtk-4.0
 sudo apt-get install -y libwebkit2gtk-4.0-dev
@@ -347,7 +347,7 @@ sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/
 rm -rf "$HOME/stochas"
 titulo "Stochas Installed"
 titulo "Ninjas 2 Standalone"
-sudo apt install -y libjack-jackd2-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libjack-jackd2-dev
 titulo "Compile Ninjas 2 Plugins"
 cd
 sudo apt install -y libgl1-mesa-dev libx11-dev libsndfile1-dev libsamplerate0-dev
