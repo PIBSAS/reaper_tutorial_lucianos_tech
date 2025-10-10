@@ -116,7 +116,7 @@ sudo apt-get install -y libcurl4-openssl-dev
 sudo apt-get install -y alsa
 sudo apt-get install -y alsa-tools
 sudo apt-get install -y libasound2-dev
-sudo apt-get install -y libjack-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libjack-dev
 sudo apt-get install -y libfreetype6-dev
 sudo apt-get install -y libxinerama-dev
 sudo apt-get install -y libxcb-xinerama0
@@ -314,7 +314,7 @@ sudo apt install -y cmake
 titulo "Compille and Install Stochas"
 cd
 sudo apt update
-sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev libcurl4-openssl-dev alsa-tools libasound2-dev libjack-dev libfreetype6-dev libxinerama-dev libxcb-xinerama0 libxinerama1 x11proto-xinerama-dev libxrandr-dev libgl1-mesa-dev libxcursor-dev libxcursor1 libxcb-cursor-dev libxcb-cursor0
 git clone https://github.com/surge-synthesizer/stochas.git
 cd stochas/
 git submodule update --init --recursive --depth=1
