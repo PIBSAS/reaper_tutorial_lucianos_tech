@@ -128,7 +128,8 @@ sudo apt-get install -y libxcursor-dev
 sudo apt-get install -y libxcursor1
 sudo apt-get install -y libxcb-cursor-dev
 sudo apt-get install -y libxcb-cursor0
-sudo apt-get install -y qjackctl meterbridge jack-tools
+sudo apt-get install -y qjackctl meterbridge 
+# jack-tools
 sudo apt-get install -y --fix-missing
 git clone https://github.com/surge-synthesizer/surge.git
 cd surge
