@@ -72,7 +72,7 @@ titulo "Install Plugins"
 # packages dead on trixie:
 # vocproc iem-plugin-suite-vst foo-yc20 amsynth calf-plugins invada-studio-plugins-lv2 kxstudio-recommended-audio-plugins-lv2
 sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms adlplug ams ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-ladspa rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 abgate fabla wolpertinger cv-lfo-blender-lv2 dragonfly-reverb-lv2 dragonfly-reverb-vst 
-sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install qjackctl qjackrcd qpwgraph jackd2 jackd
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install qjackctl qjackrcd qpwgraph jackd2 jackd libjack-jackd2-0 libjack0
 sudo apt install -y avldrums.lv2
 sudo apt install -y avldrums.lv2-soundfont
 sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.deb
