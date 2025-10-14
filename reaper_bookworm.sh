@@ -31,8 +31,8 @@ titulo() {
     echo
 }
 titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
-RENO=Renoise_3_4_4
-SUN=2.1.1c
+RENO=Renoise_3_5_2
+SUN=2.1.2b
 titulo "First the common install for Pi OS $(uname -m) bit"
 sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
 titulo "Install Reaper DAW for $(uname -m)"
