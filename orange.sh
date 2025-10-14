@@ -36,8 +36,8 @@ titulo() {
 }
 titulo "Adding temp sudoers so the script dont ask you for password again, when script ends, will revert this step"
 titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
-RENO=Renoise_3_4_4
-SUN=2.1.1c
+RENO=Renoise_3_5_2
+SUN=2.1.2b
 titulo "First the common install for $(uname -m) bit"
 titulo "Deactivate docker repo conflictive"
 sudo sed -i '/^deb \[arch=arm64\] https:\/\/repo.huaweicloud.com\/docker-ce\/linux\/ubuntu jammy stable/s/^/#/' /etc/apt/sources.list.d/docker.list
