@@ -7,8 +7,19 @@ REAPACK_INI="$HOME/.config/REAPER/reapack.ini"
 declare -a REPOS=(
   "Zaibuyidao Scripts|https://github.com/zaibuyidao/ReaScripts/raw/master/index.xml"
   "Suzuki Scripts|https://github.com/Suzuki-Re/Suzuki-Scripts/raw/master/index.xml"
-  "Yannick Rea Scripts|https://github.com/Yaunick/Yannick-ReaScripts/raw/master/index.xml"
+  "Yannick ReaScripts|https://github.com/Yaunick/Yannick-ReaScripts/raw/master/index.xml"
   "McArthur Scripts|https://github.com/Arthur-McArthur/ReaScripts/raw/master/index.xml"
+  "ACendan Scripts|https://acendan.github.io/reascripts/index.xml"
+  "AlbertoV5-ReaperTools|https://github.com/AlbertoV5/ReaperTools/raw/master/index.xml"
+  "AmelianceSkyMusic Scripts|https://github.com/AmelianceSkyMusic/ASM_Reaper_scripts/raw/master/index.xml"
+  "Archie ReaScripts|https://github.com/ArchieScript/Archie_ReaScripts/raw/master/index.xml"
+  "AudioKinetic Scripts|https://github.com/Audiokinetic/Reaper-Tools/raw/main/index.xml"
+  "Beaunus Scripts|https://github.com/beaunus/REAPER-ReaScripts/raw/master/index.xml"
+  "bfut Scripts|https://github.com/bfut/ReaScripts/raw/main/index.xml"
+  "BinbinHfr Scripts|https://github.com/DaveInDev/Binbinhfr-Scripts/raw/master/index.xml"
+  "BirdBird JSFX|https://github.com/Bird-Bird/JSFX/raw/main/index.xml"
+  "BirdBird Scripts|https://github.com/Bird-Bird/ReaScript/raw/master/index.xml"
+  "Tukan Studio Scripts|https://github.com/TukanStudios/TUKAN_STUDIOS_PLUGINS/raw/main/index2.xml"
 )
 
 # Función para agregar un repositorio
