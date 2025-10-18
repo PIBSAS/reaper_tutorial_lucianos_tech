@@ -31,8 +31,6 @@ titulo() {
     echo
 }
 titulo "Start Reaper Tutorial Install from Luciano's tech this will take some time, so connect Ethernet Cable!"
-RENO=Renoise_3_5_2
-SUN=2.1.2b
 titulo "First the common install for Pi OS $(uname -m) bit"
 sudo apt install -y wget curl grep git xz-utils sed gawk p7zip-full unzip
 titulo "Install Reaper DAW for $(uname -m)"
@@ -458,18 +456,18 @@ cd Renoise*arm64
 sudo ./install.sh
 titulo "Renoise Demo installed"
 titulo "Bespoke DAW"
-echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
-curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
+echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_12/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
+curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
 sudo apt update
 sudo apt install -y bespokesynth
 titulo "SunVox"
 cd
-wget -c https://warmplace.ru/soft/sunvox/sunvox-${SUN}.zip
+wget -c $(curl -A "Mozilla/5.0" -s https://warmplace.ru/soft/sunvox/ | grep -Eo 'sunvox-[0-9]+\.[0-9]+\.[0-9]+[a-z]?\.zip' | sort -V | tail -n1 | sed 's#^#https://warmplace.ru/soft/sunvox/#')
 unzip sunvox*.zip
 rm sunvox*.zip
 cd sunvox/sunvox/
 rm -rf wince macos linux_x* linux_arm_a* windows_x*
 titulo "You still have to do a desktop shortcut"
-titulo "Finished install on $(uname -m) OS, check tutorial for Tukan plugins"
+titulo "Finished install on $(uname -m) OS"
 titulo "Now Reboot your Pi to take effects changes"
 sudo reboot
