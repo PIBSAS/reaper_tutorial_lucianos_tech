@@ -437,6 +437,20 @@ tar -xvzf Renoise*arm64.tar.gz
 rm Reno*.tar.gz
 cd Renoise*arm64
 sudo ./install.sh
-titulo "Finished install on $(uname -m) OS, check tutorial for Tukan plugins"
+titulo "Renoise Demo installed"
+titulo "Bespoke DAW"
+echo 'deb http://download.opensuse.org/repositories/home:/bespokesynth/Raspbian_11/ /' | sudo tee /etc/apt/sources.list.d/home:bespokesynth.list
+curl -fsSL https://download.opensuse.org/repositories/home:bespokesynth/Raspbian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bespokesynth.gpg > /dev/null
+sudo apt update
+sudo apt install -y bespokesynth
+titulo "SunVox"
+cd
+wget -c $(curl -A "Mozilla/5.0" -s https://warmplace.ru/soft/sunvox/ | grep -Eo 'sunvox-[0-9]+\.[0-9]+\.[0-9]+[a-z]?\.zip' | sort -V | tail -n1 | sed 's#^#https://warmplace.ru/soft/sunvox/#')
+unzip sunvox*.zip
+rm sunvox*.zip
+cd sunvox/sunvox/
+rm -rf wince macos linux_x* linux_arm_a* windows_x*
+titulo "You still have to do a desktop shortcut"
+titulo "Finished install on $(uname -m) OS"
 titulo "Now Reboot your Pi"
 sudo reboot
