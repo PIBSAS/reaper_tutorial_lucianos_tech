@@ -95,7 +95,6 @@ cd lsp-plugins-*/
 sudo cp -r VST2/* /usr/lib/vst/
 sudo cp -r VST3/* /usr/lib/vst3/
 sudo cp -r LV2/* /usr/lib/lv2/
-#sudo mkdir /usr/lib/ladspa /usr/lib/clap
 if [ ! -d "/usr/lib/ladspa" ]; then
     sudo mkdir "/usr/lib/ladspa"
 fi
@@ -335,14 +334,9 @@ sudo apt-get install -y git build-essential libgtk-3-dev libwebkit2gtk-4.0 libwe
 git clone https://github.com/surge-synthesizer/stochas.git
 cd stochas/
 git submodule update --init --recursive --depth=1
-#git submodule update --depth 1 --init --recursive
-#export SVER=`cat VERSION`
-#export GH=`git log -1 --format=%h`
 export SVER=$(<VERSION)
 export GH=$(git rev-parse --short HEAD)
 echo "Version ${SVER} hash ${GH}"
-#cmake -Bbuild -DSTOCHAS_VERSION=${SVER}
-#cmake --build build --config Release
 cmake -Bbuild -DSTOCHAS_VERSION=${SVER} -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
 cp -rf $HOME/stochas/build/stochas_artefacts/VST3/* $HOME/.vst3
@@ -398,6 +392,14 @@ tar -xvzf Renoise*armhf.tar.gz
 rm Reno*.tar.gz
 cd Renoise*armhf
 sudo ./install.sh
-titulo "Finished install on $(uname -m) OS, check tutorial for Tukan plugins"
+titulo "SunVox"
+cd
+wget -c $(curl -A "Mozilla/5.0" -s https://warmplace.ru/soft/sunvox/ | grep -Eo 'sunvox-[0-9]+\.[0-9]+\.[0-9]+[a-z]?\.zip' | sort -V | tail -n1 | sed 's#^#https://warmplace.ru/soft/sunvox/#')
+unzip sunvox*.zip
+rm sunvox*.zip
+cd sunvox/sunvox/
+rm -rf wince macos linux_x* linux_arm_arme* windows_x* linux_arm64
+titulo "You still need to add a shortcut to SunVox"
+titulo "Finished install on $(uname -m) OS"
 titulo "Reboot the Pi"
 sudo reboot
