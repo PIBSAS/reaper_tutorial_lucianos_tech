@@ -360,13 +360,6 @@ make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-m
 sudo make install -j$(nproc)
 rm -rf "$HOME/ninjas2"
 titulo "Ninjas 2 Installed"
-titulo "ReaPack"
-cd
-url="https://github.com/cfillion/reapack/releases/latest/" ; \
-latest_version=$(curl -sSL ${url} | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
-wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-aarch64.so"
-cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
-rm reaper_reapack*.so
 titulo "SWS S&M Extension"
 cd $HOME/.config/REAPER/
 url="https://www.sws-extension.org/download/pre-release/" ; \
