@@ -58,7 +58,7 @@ titulo "ReaPack"
 cd
 url="https://github.com/cfillion/reapack/releases/latest/" ; \
 latest_version=$(curl -sSL ${url} | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d '/' -f 2 | sed 's/^v//') ; \
-wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-aarch64.so"
+wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-armv7l.so"
 cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
 rm reaper_reapack*.so
 titulo "ReaPack Repositories Setup from Luciano's Tech"
