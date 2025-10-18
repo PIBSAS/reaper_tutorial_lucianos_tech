@@ -64,10 +64,7 @@ latest_version=$(curl -sSL ${url} | grep -o 'tag/v[0-9.]*' | head -n 1 | cut -d 
 wget -c "https://github.com/cfillion/reapack/releases/download/v${latest_version}/reaper_reapack-aarch64.so"
 cp reaper_reapack*.so $HOME/.config/REAPER/UserPlugins/
 rm reaper_reapack*.so
-
 titulo "ReaPack Repositories Setup from Luciano's Tech"
-
-# Descargar y ejecutar el script remoto desde GitHub
 bash <(curl -fsSL https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/repos_reapack.sh)
 titulo "Adding KXStudio Repository to the OS"
 cd
