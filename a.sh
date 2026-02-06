@@ -1,5 +1,4 @@
 #! /bin/bash
-#!/usr/bin/env bash
 set -euo pipefail
 
 PAGE="https://www.houseofwhitetie.com/graphical_sends.html"
