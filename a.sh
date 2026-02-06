@@ -22,5 +22,5 @@ URL="${BASE}/${FILE}"
 echo "Versión detectada: $VERSION"
 echo "Descargando $URL"
 
-curl -L -o "$FILE" "$URL"
-unzip -o "$FILE"
+curl -L -o "$HOME/.config/REAPER/Scripts/$FILE" "$URL"
+unzip -o "$HOME/.config/REAPER/Scripts/$FILE" -d "$HOME/.config/REAPER/Scripts/"
