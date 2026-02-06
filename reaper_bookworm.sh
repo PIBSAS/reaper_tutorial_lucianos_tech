@@ -2,7 +2,7 @@
 #########################################################################################################################
 ############################################/////LUCIANO'S TECH/////#####################################################
 #########################################################################################################################
-# Repositorio: Reaper Tutorial 2025
+# Repositorio: Reaper Tutorial 2026
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
@@ -87,6 +87,19 @@ sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcomm
 sudo apt install -y ghostess whysynth
 titulo "Sequencer Megababy Nandy's Mod"
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
+titulo "White Tie Graphical Sends"
+PAGE="https://www.houseofwhitetie.com/graphical_sends.html"
+BASE="https://www.houseofwhitetie.com/reaper"
+VERSION=$(curl -s "$PAGE" | grep -oE 'WT_Graphical_Sends_[0-9]+\.zip' | head -n1 | sed -E 's/WT_Graphical_Sends_([0-9]+)\.zip/\1/')
+if [[ -z "$VERSION" ]]; then
+  echo "No se pudo detectar la versión"
+  exit 1
+fi
+FILE="WT_Graphical_Sends_${VERSION}.zip"
+URL="${BASE}/${FILE}"
+curl -L -o "$HOME/.config/REAPER/Scripts/$FILE" "$URL"
+unzip -o "$HOME/.config/REAPER/Scripts/$FILE" -d "$HOME/.config/REAPER/Scripts/"
+rm $HOME/.config/REAPER/Scripts/WT*.zip
 titulo "Adding ZynthianOS Plugins"
 cd
 git clone https://github.com/zynthian/zynthian-plugins.git
