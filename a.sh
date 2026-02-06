@@ -24,4 +24,4 @@ echo "Descargando $URL"
 
 curl -L -o "$HOME/.config/REAPER/Scripts/$FILE" "$URL"
 unzip -o "$HOME/.config/REAPER/Scripts/$FILE" -d "$HOME/.config/REAPER/Scripts/"
-rm "$HOME/.config/REAPER/Scripts/WT*.zip"
+rm $HOME/.config/REAPER/Scripts/WT*.zip
