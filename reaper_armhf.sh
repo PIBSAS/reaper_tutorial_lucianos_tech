@@ -2,7 +2,7 @@
 #########################################################################################################################
 #################################/////LUCIANO'S TECH/////#####################################################
 #########################################################################################################################
-# Repositorio: Reaper Tutorial 2025
+# Repositorio: Reaper Tutorial 2026
 # Por: Raspberry Pi Buenos Aires ("https://sites.google.com/view/lucianostech/)
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
@@ -78,6 +78,19 @@ titulo "Install Plugins"
 sudo apt install -y vitalium zynaddsubfx zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst wah-plugins swh-lv2 swankyamp swankyamp-lv2 swankyamp-vst sorcer yoshimi carla carla-lv2 helm airwindows cardinal cardinal-lv2 cardinal-vst2 cardinal-vst3 phasex lmms petri-foo adlplug ams amsynth ardour drumkv1-lv2 fomp hydrogen padthv1-lv2 zam-plugins wolf-spectrum wolf-shaper teragonaudio-plugins temper shiro-plugins tal-plugins pizmidi-plugins pitcheddelay oxefmsynth obxd mda-lv2 luftikus lufsmeter linuxsampler-vst juced-plugins klangfalter juce-opl jackass hybridreverb2 easyssp drumgizmo drowaudio-plugins dpf-plugins dpf-plugins-common dpf-plugins-dssi dpf-plugins-lv2 dpf-plugins-vst distrho-plugin-ports dexed arctican-plugins vocproc tap-lv2 synthv1 synthv1-lv2 zlfo so-synth-lv2 sherlock.lv2 samplv1 samplv1-lv2 rubberband-lv2 noise-repellent moony.lv2 mod-pitchshifter mod-distortion melmatcheq.lv2 lv2vocoder kxstudio-recommended-audio-plugins-lv2 infamous-plugins gxvoxtonebender gxplugins guitarix geonkick eq10q drmr caps-lv2 calf-plugins calf-ladspa bshapr bsequencer blop-lv2 bjumblr beatslash-lv2 avldrums.lv2 abgate fabla wolpertinger
 titulo "Sequencer Megababy Nandy's Mod"
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
+titulo "White Tie Graphical Sends"
+PAGE="https://www.houseofwhitetie.com/graphical_sends.html"
+BASE="https://www.houseofwhitetie.com/reaper"
+VERSION=$(curl -s "$PAGE" | grep -oE 'WT_Graphical_Sends_[0-9]+\.zip' | head -n1 | sed -E 's/WT_Graphical_Sends_([0-9]+)\.zip/\1/')
+if [[ -z "$VERSION" ]]; then
+  echo "No se pudo detectar la versión"
+  exit 1
+fi
+FILE="WT_Graphical_Sends_${VERSION}.zip"
+URL="${BASE}/${FILE}"
+curl -L -o "$HOME/.config/REAPER/Scripts/$FILE" "$URL"
+unzip -o "$HOME/.config/REAPER/Scripts/$FILE" -d "$HOME/.config/REAPER/Scripts/"
+rm $HOME/.config/REAPER/Scripts/WT*.zip
 titulo "Adding ZynthianOS Plugins"
 cd
 git clone https://github.com/zynthian/zynthian-plugins.git
