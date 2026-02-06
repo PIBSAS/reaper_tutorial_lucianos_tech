@@ -2,7 +2,7 @@
 #########################################################################################################################
 ############################################/////LUCIANO'S TECH/////#####################################################
 #########################################################################################################################
-# Repositorio: Reaper Tutorial 2025
+# Repositorio: Reaper Tutorial 2026
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
 # Script for Orange Pi 5 Pro with Ubuntu
 # License: http://creativecommons.org/licenses/by-sa/4.0/
