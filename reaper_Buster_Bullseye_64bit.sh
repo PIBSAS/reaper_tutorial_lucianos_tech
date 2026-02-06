@@ -2,7 +2,7 @@
 #########################################################################################################################
 #################################/////LUCIANO'S TECH/////#####################################################
 #########################################################################################################################
-# Repositorio: Reaper Tutorial 2025
+# Repositorio: Reaper Tutorial 2026
 # Por: Luciano's Tech ("https://sites.google.com/view/lucianostech/)
 # License: http://creativecommons.org/licenses/by-sa/4.0/
 #########################################################################################################################
@@ -80,6 +80,19 @@ sudo dpkg -i --force-overwrite /var/cache/apt/archives/avldrums.lv2-soundfont*.d
 sudo apt install -y invada-studio-plugins-ladspa invada-studio-plugins-lv2 ir.lv2 amb-plugins autotalent blepvco blop blop-lv2 bs2b-ladspa cmt csladspa fil-plugins mcp-plugins omins rev-plugins ste-plugins swh-plugins tap-plugins vco-plugins vlevel a2jmidid gmidimonitor jack-keyboard jackd jackd2 japa jconvolver jkmeter jmeters jnoise klick meterbridge qjackctl qjackrcd qmidiarp qtractor radium-compressor rotter fst-dev foo-yc20 freewheeling horgand muse nama gxtuner sox sweep terminatorx
 sudo apt install -y build-essential libcairo-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
+titulo "White Tie Graphical Sends"
+PAGE="https://www.houseofwhitetie.com/graphical_sends.html"
+BASE="https://www.houseofwhitetie.com/reaper"
+VERSION=$(curl -s "$PAGE" | grep -oE 'WT_Graphical_Sends_[0-9]+\.zip' | head -n1 | sed -E 's/WT_Graphical_Sends_([0-9]+)\.zip/\1/')
+if [[ -z "$VERSION" ]]; then
+  echo "No se pudo detectar la versión"
+  exit 1
+fi
+FILE="WT_Graphical_Sends_${VERSION}.zip"
+URL="${BASE}/${FILE}"
+curl -L -o "$HOME/.config/REAPER/Scripts/$FILE" "$URL"
+unzip -o "$HOME/.config/REAPER/Scripts/$FILE" -d "$HOME/.config/REAPER/Scripts/"
+rm $HOME/.config/REAPER/Scripts/WT*.zip
 titulo "Adding ZynthianOS Plugins"
 cd
 git clone https://github.com/zynthian/zynthian-plugins.git
