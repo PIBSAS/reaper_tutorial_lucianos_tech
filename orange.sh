@@ -52,6 +52,11 @@ sudo dpkg -i kxstudio*.deb
 rm kxstudio*.deb
 sudo apt update
 titulo "KXStudio Repo Added"
+titulo "Fire plugin"
+fire="https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/fire/FirePluginPackageV1.5.0-rpi5.deb"
+wget -O FirePluginPackageV1.5.0-rpi5.deb ${fire}
+sudo dpkg -i Fire*.deb
+titulo "Fire plugin installed"
 titulo "Install Plugins and Dependecies"
 echo "jackd jackd/tweak_rt_limits boolean true" | sudo debconf-set-selections
 sudo apt remove --purge clang -y
