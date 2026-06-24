@@ -75,6 +75,11 @@ sudo dpkg -i kxstudio*.deb
 rm kxstudio*.deb
 sudo apt update
 titulo "KXStudio Repo Added"
+titulo "Fire plugin"
+fire=""
+wget -c "${fire}"
+sudo dpkg -i Fire*.deb
+titulo "Fire plugin installed"
 titulo "Install Plugins"
 # packages dead on trixie:
 # vocproc iem-plugin-suite-vst foo-yc20 amsynth calf-plugins invada-studio-plugins-lv2 kxstudio-recommended-audio-plugins-lv2
