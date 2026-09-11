@@ -333,7 +333,14 @@ cd x42*/
 yes | ./install-lv2.sh
 rm -rf ../x42*
 titulo "X42 Plugins Installed"
-titulo "Dependencies requiered by Stochas"
+titulo "Dependencies required byTetraOP"
+sudo apt intall -y libfreetype-dev libfontconfig1-dev
+git clone --recurse-submodules https://github.com/tiagolr/tetraop.git
+cd tetraop
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+titulo "TetraOP Compiled and installed"
+titulo "Dependencies required by Stochas"
 sudo apt update
 sudo apt install -y libssl-dev
 sudo apt install -y cmake
