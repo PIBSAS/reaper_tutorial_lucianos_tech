@@ -133,7 +133,7 @@ cd
 rm -rf lsp*
 titulo "LSP Plugins Installed"
 titulo "Surge XT. This will take a lot of time"
-sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libcairo2-dev libxkbcommon-x11-dev libxkbcommon-dev libxcb-cursor-dev libxcb-keysyms1-dev libxcb-util-dev libxrandr-dev libxinerama-dev libxcursor-dev libasound2-dev libjack-jackd2-dev cmake ninja-build git pkg-config libpulse-dev
 sudo apt-get install -y libgtk-3-dev
 sudo apt-get install -y libwebkit2gtk-4.1-0
 sudo apt-get install -y libwebkit2gtk-4.1-dev
@@ -378,6 +378,28 @@ cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
 sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
 rm -rf "$HOME/stochas"
 titulo "Stochas Installed"
+titulo "Yamaha FSVR"
+cd
+sudo apt update
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential cmake ninja-build git pkg-config libx11-dev libasound2-dev libjack-jackd2-dev libpulse-dev
+git clone https://github.com/musicastudio/FSVR.git
+cd FSVR
+cmake -B build/cmake -S . -DCMAKE_BUILD_TYPE=Release
+cmake --build build/cmake --parallel 4
+cmake -B build/plugin -S . -DCMAKE_BUILD_TYPE=Release -DFSVR_BUILD_PLUGIN=ON
+cmake --build build/plugin --parallel 4
+if [ ! -d "$HOME/.clap" ]; then
+    mkdir "$HOME/.clap"
+fi
+
+if [ ! -d "$HOME/.vst3" ]; then
+    mkdir "$HOME/.vst3"
+fi
+cp -rf $HOME/FSVR/build/plugin/out/FSVR.vst3 $HOME/.vst3
+cp -rf $HOME/FSVR/build/plugin/out/VST2 $HOME/.vst3
+cp -rf $HOME/FSVR/build/plugin/out/FSVR.clap $HOME/.clap
+sudo cp -rf $HOME/FSVR/build/plugin/out/FSVR /usr/local/bin
+titulo "Yamaha FSVR installed"
 titulo "Ninjas 2 Standalone"
 sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libjack-jackd2-dev
 titulo "Compile Ninjas 2 Plugins"
@@ -393,7 +415,6 @@ make -j$(nproc) all CXXFLAGS='-march=native' CFLAGS='-march=native' CPPFLAGS='-m
 sudo make install -j$(nproc)
 rm -rf "$HOME/ninjas2"
 titulo "Ninjas 2 Installed"
-
 titulo "SWS S&M Extension"
 cd $HOME/.config/REAPER/
 url="https://www.sws-extension.org/download/pre-release/" ; \
