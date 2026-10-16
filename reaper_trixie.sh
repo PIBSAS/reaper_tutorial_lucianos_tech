@@ -178,6 +178,28 @@ cd ignore
 cd s13clang
 sudo make install
 titulo "Surge XT Plugins installed"
+titulo "Yamaha FSVR"
+cd
+sudo apt update
+sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential cmake ninja-build git pkg-config libx11-dev libasound2-dev libjack-jackd2-dev libpulse-dev
+git clone https://github.com/musicastudio/FSVR.git
+cd FSVR
+cmake -B build/cmake -S . -DCMAKE_BUILD_TYPE=Release
+cmake --build build/cmake --parallel 4
+cmake -B build/plugin -S . -DCMAKE_BUILD_TYPE=Release -DFSVR_BUILD_PLUGIN=ON
+cmake --build build/plugin --parallel 4
+if [ ! -d "$HOME/.clap" ]; then
+    mkdir "$HOME/.clap"
+fi
+
+if [ ! -d "$HOME/.vst3" ]; then
+    mkdir "$HOME/.vst3"
+fi
+cp -rf $HOME/FSVR/build/plugin/out/FSVR.vst3 $HOME/.vst3
+cp -rf $HOME/FSVR/build/plugin/out/VST2 $HOME/.vst3
+cp -rf $HOME/FSVR/build/plugin/out/FSVR.clap $HOME/.clap
+sudo cp -rf $HOME/FSVR/build/plugin/out/FSVR /usr/local/bin
+titulo "Yamaha FSVR installed"
 titulo "X42 Plugins"
 titulo "X42 Compressor"
 cd
@@ -387,28 +409,6 @@ cp -rf $HOME/stochas/build/stochas_artefacts/CLAP/Stochas.clap $HOME/.clap
 sudo cp -rf $HOME/stochas/build/stochas_artefacts/Standalone/Stochas /usr/local/bin
 rm -rf "$HOME/stochas"
 titulo "Stochas Installed"
-titulo "Yamaha FSVR"
-cd
-sudo apt update
-sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential cmake ninja-build git pkg-config libx11-dev libasound2-dev libjack-jackd2-dev libpulse-dev
-git clone https://github.com/musicastudio/FSVR.git
-cd FSVR
-cmake -B build/cmake -S . -DCMAKE_BUILD_TYPE=Release
-cmake --build build/cmake --parallel 4
-cmake -B build/plugin -S . -DCMAKE_BUILD_TYPE=Release -DFSVR_BUILD_PLUGIN=ON
-cmake --build build/plugin --parallel 4
-if [ ! -d "$HOME/.clap" ]; then
-    mkdir "$HOME/.clap"
-fi
-
-if [ ! -d "$HOME/.vst3" ]; then
-    mkdir "$HOME/.vst3"
-fi
-cp -rf $HOME/FSVR/build/plugin/out/FSVR.vst3 $HOME/.vst3
-cp -rf $HOME/FSVR/build/plugin/out/VST2 $HOME/.vst3
-cp -rf $HOME/FSVR/build/plugin/out/FSVR.clap $HOME/.clap
-sudo cp -rf $HOME/FSVR/build/plugin/out/FSVR /usr/local/bin
-titulo "Yamaha FSVR installed"
 titulo "Ninjas 2 Standalone"
 sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libjack-jackd2-dev
 titulo "Compile Ninjas 2 Plugins"
