@@ -95,14 +95,14 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install build-essential libcairo
 sudo apt install -y ghostess whysynth
 titulo "Sequencer Megababy Nandy's Mod"
 wget https://raw.githubusercontent.com/PIBSAS/reaper_tutorial_lucianos_tech/main/sequencer_megababy_nandy_mod -P $HOME/.config/REAPER/Effects/midi/
-titulo "White Tie Graphical Sends"
+#titulo "White Tie Graphical Sends"
 #wget "https://www.houseofwhitetie.com/reaper/WT_Graphical_Annex_061026.zip"
-wget -O "$HOME/.config/REAPER/Scripts/WT_Graphical_Annex_061026.zip" \
-  "https://www.houseofwhitetie.com/reaper/WT_Graphical_Annex_061026.zip"
+#wget -O "$HOME/.config/REAPER/Scripts/WT_Graphical_Annex_061026.zip" \
+#  "https://www.houseofwhitetie.com/reaper/WT_Graphical_Annex_061026.zip"
 
-unzip -o "$HOME/.config/REAPER/Scripts/WT_Graphical_Annex_061026.zip" \
-  -d "$HOME/.config/REAPER/Scripts/"
-rm "$HOME/.config/REAPER/Scripts/WT_Graphical_Annex_061026.zip"
+#unzip -o "$HOME/.config/REAPER/Scripts/WT_Graphical_Annex_061026.zip" \
+#  -d "$HOME/.config/REAPER/Scripts/"
+#rm "$HOME/.config/REAPER/Scripts/WT_Graphical_Annex_061026.zip"
 #VERSION=061026
 #PAGE="https://www.houseofwhitetie.com/graphical_annex.html"
 #BASE="https://www.houseofwhitetie.com/reaper"
